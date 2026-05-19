@@ -1,0 +1,190 @@
+{
+    "key": "group_landing_page",
+    "title": "Landing Page",
+    "fields": [
+        { "key": "field_lp_tab_hero", "label": "Hero", "name": "", "type": "tab", "placement": "top" },
+        { "key": "field_lp_hero_eyebrow", "label": "Eyebrow", "name": "hero_eyebrow", "type": "text", "default_value": "Perth Residential Specialists" },
+        { "key": "field_lp_hero_headline", "label": "Headline (HTML allowed)", "name": "hero_headline", "type": "wysiwyg", "tabs": "visual", "toolbar": "basic", "media_upload": 0, "instructions": "You can wrap colour accents in <span class=\"blue-mark\">…</span>, <span class=\"yellow-mark\">…</span>, or <span class=\"highlight\">…</span>." },
+        { "key": "field_lp_hero_subhead", "label": "Sub-headline", "name": "hero_subhead", "type": "textarea", "rows": 4 },
+        { "key": "field_lp_hero_trust_points", "label": "Trust points (under headline)", "name": "hero_trust_points", "type": "repeater", "min": 0, "max": 5, "layout": "table", "button_label": "Add point", "sub_fields": [
+            { "key": "field_lp_hero_trust_point_label", "label": "Label", "name": "label", "type": "text", "required": 1 }
+        ]},
+        { "key": "field_lp_hero_primary_cta", "label": "Primary CTA", "name": "hero_primary_cta", "type": "link", "return_format": "array" },
+        { "key": "field_lp_hero_show_phone", "label": "Show phone button next to CTA?", "name": "hero_show_phone", "type": "true_false", "ui": 1, "default_value": 1 },
+        { "key": "field_lp_hero_image", "label": "Background image", "name": "hero_image", "type": "image", "return_format": "array", "preview_size": "medium", "instructions": "Wide landscape, 1920×1080+ recommended. Will be preloaded." },
+        { "key": "field_lp_hero_form_title", "label": "Form panel title", "name": "hero_form_title", "type": "text", "default_value": "Get a free quote in under 60 seconds." },
+        { "key": "field_lp_hero_form_subtitle", "label": "Form panel subtitle", "name": "hero_form_subtitle", "type": "text", "default_value": "No call-out fees. No pressure. Straight answers." },
+        { "key": "field_lp_hero_form_id", "label": "Gravity Form ID (hero)", "name": "hero_form_id", "type": "number", "instructions": "Numeric ID of the Gravity Form to embed.", "min": 1 },
+        { "key": "field_lp_hero_form_footnote", "label": "Form panel footnote", "name": "hero_form_footnote", "type": "text", "default_value": "We respond within the hour during business hours." },
+
+        { "key": "field_lp_tab_trustbar", "label": "Trust bar", "name": "", "type": "tab", "placement": "top" },
+        { "key": "field_lp_trust_bar_items", "label": "Trust bar items", "name": "trust_bar_items", "type": "repeater", "min": 0, "max": 6, "layout": "block", "button_label": "Add item", "sub_fields": [
+            { "key": "field_lp_trust_bar_icon", "label": "Icon", "name": "icon", "type": "select", "choices": {
+                "shield": "Shield",
+                "shield-check": "Shield with check",
+                "badge": "Badge with check",
+                "clock": "Clock",
+                "star": "Star",
+                "phone": "Phone",
+                "mail": "Mail",
+                "pin": "Pin",
+                "home": "Home",
+                "panel": "Switchboard"
+            }, "default_value": "shield", "ui": 1 },
+            { "key": "field_lp_trust_bar_line_one", "label": "Line 1", "name": "line_one", "type": "text", "required": 1 },
+            { "key": "field_lp_trust_bar_line_two", "label": "Line 2", "name": "line_two", "type": "text" }
+        ]},
+
+        { "key": "field_lp_tab_services", "label": "Services", "name": "", "type": "tab", "placement": "top" },
+        { "key": "field_lp_services_eyebrow", "label": "Eyebrow", "name": "services_eyebrow", "type": "text", "default_value": "Our services" },
+        { "key": "field_lp_services_headline", "label": "Headline (HTML allowed)", "name": "services_headline", "type": "wysiwyg", "tabs": "visual", "toolbar": "basic", "media_upload": 0 },
+        { "key": "field_lp_services_intro", "label": "Intro paragraph", "name": "services_intro", "type": "textarea", "rows": 3 },
+        { "key": "field_lp_contact_anchor_url", "label": "Service card link target", "name": "contact_anchor_url", "type": "text", "default_value": "#contact", "instructions": "Where service card buttons link to. Use #contact for in-page anchor." },
+        { "key": "field_lp_services_items", "label": "Services", "name": "services_items", "type": "repeater", "min": 0, "max": 12, "layout": "block", "button_label": "Add service", "sub_fields": [
+            { "key": "field_lp_service_title", "label": "Title", "name": "title", "type": "text", "required": 1 },
+            { "key": "field_lp_service_copy", "label": "Copy", "name": "copy", "type": "textarea", "rows": 3 },
+            { "key": "field_lp_service_tag", "label": "Image tag label", "name": "tag", "type": "text" },
+            { "key": "field_lp_service_tag_tone", "label": "Image tag tone", "name": "tag_tone", "type": "select", "choices": { "yellow": "Yellow", "blue": "Blue", "dark": "Dark" }, "default_value": "yellow", "ui": 1 },
+            { "key": "field_lp_service_image", "label": "Image", "name": "image", "type": "image", "return_format": "array", "preview_size": "medium" },
+            { "key": "field_lp_service_cta_text", "label": "CTA link text", "name": "cta_text", "type": "text", "default_value": "Get a quote" }
+        ]},
+
+        { "key": "field_lp_tab_cta_blue", "label": "CTA — Blue band", "name": "", "type": "tab", "placement": "top" },
+        { "key": "field_lp_cta_blue_headline", "label": "Headline (HTML allowed)", "name": "cta_blue_headline", "type": "wysiwyg", "tabs": "visual", "toolbar": "basic", "media_upload": 0 },
+        { "key": "field_lp_cta_blue_copy", "label": "Copy", "name": "cta_blue_copy", "type": "textarea", "rows": 3 },
+        { "key": "field_lp_cta_blue_cta", "label": "CTA button", "name": "cta_blue_cta", "type": "link", "return_format": "array" },
+        { "key": "field_lp_cta_blue_photo", "label": "Background photo", "name": "cta_blue_photo", "type": "image", "return_format": "array", "preview_size": "medium" },
+
+        { "key": "field_lp_tab_about", "label": "About founder", "name": "", "type": "tab", "placement": "top" },
+        { "key": "field_lp_about_photo", "label": "Founder photo", "name": "about_photo", "type": "image", "return_format": "array", "preview_size": "medium" },
+        { "key": "field_lp_about_photo_badge", "label": "Photo badge text", "name": "about_photo_badge", "type": "text", "default_value": "On the tools every day" },
+        { "key": "field_lp_about_eyebrow", "label": "Eyebrow", "name": "about_eyebrow", "type": "text", "default_value": "About the founder" },
+        { "key": "field_lp_about_headline", "label": "Headline (HTML allowed)", "name": "about_headline", "type": "wysiwyg", "tabs": "visual", "toolbar": "basic", "media_upload": 0 },
+        { "key": "field_lp_about_copy", "label": "Body copy", "name": "about_copy", "type": "wysiwyg", "tabs": "visual", "toolbar": "basic", "media_upload": 0 },
+        { "key": "field_lp_about_sig_name", "label": "Signature name", "name": "about_sig_name", "type": "text", "default_value": "Stephen Dent" },
+        { "key": "field_lp_about_sig_role", "label": "Signature role", "name": "about_sig_role", "type": "text", "default_value": "Owner & Lead Tradesman" },
+        { "key": "field_lp_about_stats", "label": "Stats", "name": "about_stats", "type": "repeater", "min": 0, "max": 3, "layout": "table", "button_label": "Add stat", "sub_fields": [
+            { "key": "field_lp_about_stat_number", "label": "Number", "name": "number", "type": "text", "required": 1 },
+            { "key": "field_lp_about_stat_label", "label": "Label", "name": "label", "type": "text", "required": 1 },
+            { "key": "field_lp_about_stat_tone", "label": "Tone", "name": "tone", "type": "select", "choices": { "default": "Default", "blue": "Blue", "yellow": "Yellow" }, "default_value": "default", "ui": 1 }
+        ]},
+
+        { "key": "field_lp_tab_why", "label": "Why us", "name": "", "type": "tab", "placement": "top" },
+        { "key": "field_lp_why_eyebrow", "label": "Eyebrow", "name": "why_eyebrow", "type": "text", "default_value": "Why Dent" },
+        { "key": "field_lp_why_headline", "label": "Headline (HTML allowed)", "name": "why_headline", "type": "wysiwyg", "tabs": "visual", "toolbar": "basic", "media_upload": 0 },
+        { "key": "field_lp_why_intro", "label": "Intro paragraph", "name": "why_intro", "type": "textarea", "rows": 3 },
+        { "key": "field_lp_why_items", "label": "Reasons", "name": "why_items", "type": "repeater", "min": 0, "max": 9, "layout": "block", "button_label": "Add reason", "sub_fields": [
+            { "key": "field_lp_why_item_icon", "label": "Icon", "name": "icon", "type": "select", "choices": {
+                "shield": "Shield",
+                "shield-check": "Shield with check",
+                "badge": "Badge with check",
+                "clock": "Clock",
+                "star": "Star",
+                "home": "Home",
+                "panel": "Switchboard",
+                "pin": "Pin",
+                "mail": "Mail",
+                "phone": "Phone"
+            }, "default_value": "badge", "ui": 1 },
+            { "key": "field_lp_why_item_title", "label": "Title", "name": "title", "type": "text", "required": 1 },
+            { "key": "field_lp_why_item_copy", "label": "Copy", "name": "copy", "type": "textarea", "rows": 3 }
+        ]},
+
+        { "key": "field_lp_tab_compliance", "label": "Feature — Compliance", "name": "", "type": "tab", "placement": "top" },
+        { "key": "field_lp_compliance_image", "label": "Image", "name": "compliance_image", "type": "image", "return_format": "array", "preview_size": "medium" },
+        { "key": "field_lp_compliance_image_tag", "label": "Image tag label", "name": "compliance_image_tag", "type": "text", "default_value": "Compliance" },
+        { "key": "field_lp_compliance_image_tag_tone", "label": "Image tag tone", "name": "compliance_image_tag_tone", "type": "select", "choices": { "yellow": "Yellow", "blue": "Blue", "dark": "Dark" }, "default_value": "yellow", "ui": 1 },
+        { "key": "field_lp_compliance_eyebrow", "label": "Eyebrow", "name": "compliance_eyebrow", "type": "text", "default_value": "Compliance" },
+        { "key": "field_lp_compliance_headline", "label": "Headline (HTML allowed)", "name": "compliance_headline", "type": "wysiwyg", "tabs": "visual", "toolbar": "basic", "media_upload": 0 },
+        { "key": "field_lp_compliance_copy", "label": "Copy", "name": "compliance_copy", "type": "textarea", "rows": 4 },
+        { "key": "field_lp_compliance_bullets", "label": "Bullets", "name": "compliance_bullets", "type": "repeater", "min": 0, "max": 8, "layout": "table", "button_label": "Add bullet", "sub_fields": [
+            { "key": "field_lp_compliance_bullet_text", "label": "Text (HTML allowed)", "name": "text", "type": "text", "required": 1 }
+        ]},
+        { "key": "field_lp_compliance_primary_cta", "label": "Primary CTA", "name": "compliance_primary_cta", "type": "link", "return_format": "array" },
+        { "key": "field_lp_compliance_secondary_cta", "label": "Secondary CTA", "name": "compliance_secondary_cta", "type": "link", "return_format": "array" },
+
+        { "key": "field_lp_tab_inspections", "label": "Feature — Inspections", "name": "", "type": "tab", "placement": "top" },
+        { "key": "field_lp_inspections_image", "label": "Image", "name": "inspections_image", "type": "image", "return_format": "array", "preview_size": "medium" },
+        { "key": "field_lp_inspections_image_tag", "label": "Image tag label", "name": "inspections_image_tag", "type": "text", "default_value": "Inspections" },
+        { "key": "field_lp_inspections_image_tag_tone", "label": "Image tag tone", "name": "inspections_image_tag_tone", "type": "select", "choices": { "yellow": "Yellow", "blue": "Blue", "dark": "Dark" }, "default_value": "blue", "ui": 1 },
+        { "key": "field_lp_inspections_eyebrow", "label": "Eyebrow", "name": "inspections_eyebrow", "type": "text", "default_value": "Property inspections" },
+        { "key": "field_lp_inspections_headline", "label": "Headline (HTML allowed)", "name": "inspections_headline", "type": "wysiwyg", "tabs": "visual", "toolbar": "basic", "media_upload": 0 },
+        { "key": "field_lp_inspections_copy", "label": "Copy", "name": "inspections_copy", "type": "textarea", "rows": 4 },
+        { "key": "field_lp_inspections_bullets", "label": "Bullets", "name": "inspections_bullets", "type": "repeater", "min": 0, "max": 8, "layout": "table", "button_label": "Add bullet", "sub_fields": [
+            { "key": "field_lp_inspections_bullet_text", "label": "Text (HTML allowed)", "name": "text", "type": "text", "required": 1 }
+        ]},
+        { "key": "field_lp_inspections_primary_cta", "label": "Primary CTA", "name": "inspections_primary_cta", "type": "link", "return_format": "array" },
+        { "key": "field_lp_inspections_secondary_cta", "label": "Secondary CTA", "name": "inspections_secondary_cta", "type": "link", "return_format": "array" },
+
+        { "key": "field_lp_tab_process", "label": "Feature — Process", "name": "", "type": "tab", "placement": "top" },
+        { "key": "field_lp_process_image", "label": "Image", "name": "process_image", "type": "image", "return_format": "array", "preview_size": "medium" },
+        { "key": "field_lp_process_image_tag", "label": "Image tag label", "name": "process_image_tag", "type": "text", "default_value": "Process" },
+        { "key": "field_lp_process_image_tag_tone", "label": "Image tag tone", "name": "process_image_tag_tone", "type": "select", "choices": { "yellow": "Yellow", "blue": "Blue", "dark": "Dark" }, "default_value": "yellow", "ui": 1 },
+        { "key": "field_lp_process_eyebrow", "label": "Eyebrow", "name": "process_eyebrow", "type": "text", "default_value": "How it works" },
+        { "key": "field_lp_process_headline", "label": "Headline (HTML allowed)", "name": "process_headline", "type": "wysiwyg", "tabs": "visual", "toolbar": "basic", "media_upload": 0 },
+        { "key": "field_lp_process_copy", "label": "Copy", "name": "process_copy", "type": "textarea", "rows": 4 },
+        { "key": "field_lp_process_bullets", "label": "Steps", "name": "process_bullets", "type": "repeater", "min": 0, "max": 8, "layout": "table", "button_label": "Add step", "sub_fields": [
+            { "key": "field_lp_process_bullet_text", "label": "Text (HTML allowed)", "name": "text", "type": "text", "required": 1 }
+        ]},
+        { "key": "field_lp_process_primary_cta", "label": "Primary CTA", "name": "process_primary_cta", "type": "link", "return_format": "array" },
+        { "key": "field_lp_process_secondary_cta", "label": "Secondary CTA", "name": "process_secondary_cta", "type": "link", "return_format": "array" },
+
+        { "key": "field_lp_tab_cta_yellow", "label": "CTA — Yellow band", "name": "", "type": "tab", "placement": "top" },
+        { "key": "field_lp_cta_yellow_headline", "label": "Headline (HTML allowed)", "name": "cta_yellow_headline", "type": "wysiwyg", "tabs": "visual", "toolbar": "basic", "media_upload": 0 },
+        { "key": "field_lp_cta_yellow_copy", "label": "Copy", "name": "cta_yellow_copy", "type": "textarea", "rows": 3 },
+        { "key": "field_lp_cta_yellow_cta", "label": "CTA button", "name": "cta_yellow_cta", "type": "link", "return_format": "array" },
+
+        { "key": "field_lp_tab_reviews", "label": "Reviews", "name": "", "type": "tab", "placement": "top" },
+        { "key": "field_lp_reviews_eyebrow", "label": "Eyebrow", "name": "reviews_eyebrow", "type": "text", "default_value": "What Perth says" },
+        { "key": "field_lp_reviews_headline", "label": "Headline (HTML allowed)", "name": "reviews_headline", "type": "wysiwyg", "tabs": "visual", "toolbar": "basic", "media_upload": 0 },
+        { "key": "field_lp_reviews_intro", "label": "Intro paragraph", "name": "reviews_intro", "type": "textarea", "rows": 3 },
+        { "key": "field_lp_reviews_items", "label": "Reviews", "name": "reviews_items", "type": "repeater", "min": 0, "max": 12, "layout": "block", "button_label": "Add review", "sub_fields": [
+            { "key": "field_lp_review_quote", "label": "Quote", "name": "quote", "type": "textarea", "rows": 4, "required": 1 },
+            { "key": "field_lp_review_name", "label": "Name", "name": "name", "type": "text", "required": 1 },
+            { "key": "field_lp_review_location", "label": "Location/suburb", "name": "location", "type": "text" },
+            { "key": "field_lp_review_rating", "label": "Rating (1–5)", "name": "rating", "type": "number", "default_value": 5, "min": 1, "max": 5 }
+        ]},
+
+        { "key": "field_lp_tab_contact", "label": "Contact", "name": "", "type": "tab", "placement": "top" },
+        { "key": "field_lp_contact_eyebrow", "label": "Eyebrow", "name": "contact_eyebrow", "type": "text", "default_value": "Get in touch" },
+        { "key": "field_lp_contact_headline", "label": "Headline (HTML allowed)", "name": "contact_headline", "type": "wysiwyg", "tabs": "visual", "toolbar": "basic", "media_upload": 0 },
+        { "key": "field_lp_contact_form_title", "label": "Form panel title", "name": "contact_form_title", "type": "text", "default_value": "Send us a message." },
+        { "key": "field_lp_contact_form_subtitle", "label": "Form panel subtitle", "name": "contact_form_subtitle", "type": "text", "default_value": "No spam. No call-out fees. We respond within the hour during business hours." },
+        { "key": "field_lp_contact_form_id", "label": "Gravity Form ID (contact)", "name": "contact_form_id", "type": "number", "min": 1, "instructions": "Numeric ID of the Gravity Form to embed." },
+        { "key": "field_lp_contact_service_area", "label": "Service area text", "name": "contact_service_area", "type": "text", "default_value": "Perth metro, WA" },
+        { "key": "field_lp_contact_hours_text", "label": "Hours text", "name": "contact_hours_text", "type": "text", "default_value": "Mon to Sat, 7am to 6pm" },
+        { "key": "field_lp_contact_hours_extra", "label": "Hours extra note", "name": "contact_hours_extra", "type": "text", "instructions": "Optional second line, eg after-hours availability." },
+
+        { "key": "field_lp_tab_final_cta", "label": "Final CTA", "name": "", "type": "tab", "placement": "top" },
+        { "key": "field_lp_final_cta_headline", "label": "Headline (HTML allowed)", "name": "final_cta_headline", "type": "wysiwyg", "tabs": "visual", "toolbar": "basic", "media_upload": 0 },
+        { "key": "field_lp_final_cta_copy", "label": "Copy", "name": "final_cta_copy", "type": "textarea", "rows": 3 },
+        { "key": "field_lp_final_cta_cta", "label": "CTA button", "name": "final_cta_cta", "type": "link", "return_format": "array" },
+        { "key": "field_lp_final_cta_show_phone", "label": "Show phone button next to CTA?", "name": "final_cta_show_phone", "type": "true_false", "ui": 1, "default_value": 1 },
+        { "key": "field_lp_final_cta_photo", "label": "Background photo", "name": "final_cta_photo", "type": "image", "return_format": "array", "preview_size": "medium" }
+    ],
+    "location": [
+        [
+            { "param": "page_template", "operator": "==", "value": "page-templates/landing-page.php" }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": [
+        "the_content",
+        "discussion",
+        "comments",
+        "slug",
+        "author",
+        "format",
+        "page_attributes",
+        "send-trackbacks",
+        "categories",
+        "tags"
+    ],
+    "active": true,
+    "description": "All content for the Landing Page template, organised by section.",
+    "show_in_rest": 0
+}

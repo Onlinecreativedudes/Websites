@@ -1,0 +1,41 @@
+{
+    "key": "group_page_seo",
+    "title": "Page SEO",
+    "fields": [
+        {
+            "key": "field_seo_meta_description",
+            "label": "Meta description",
+            "name": "meta_description",
+            "type": "textarea",
+            "instructions": "Aim for 150–160 characters. Shown in search results.",
+            "rows": 3,
+            "maxlength": 200
+        },
+        {
+            "key": "field_seo_og_image",
+            "label": "Social share image (OG)",
+            "name": "og_image",
+            "type": "image",
+            "return_format": "array",
+            "preview_size": "medium",
+            "instructions": "1200×630 recommended."
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "page"
+            }
+        ]
+    ],
+    "menu_order": 100,
+    "position": "side",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true,
+    "description": "Per-page SEO overrides.",
+    "show_in_rest": 0
+}

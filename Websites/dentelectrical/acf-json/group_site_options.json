@@ -1,0 +1,194 @@
+{
+    "key": "group_site_options",
+    "title": "Site Options",
+    "fields": [
+        {
+            "key": "field_so_tab_contact",
+            "label": "Contact",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_so_business_phone",
+            "label": "Business phone (dialable)",
+            "name": "business_phone",
+            "type": "text",
+            "instructions": "Digits only, eg 0487810565. Used for tel: links.",
+            "required": 1
+        },
+        {
+            "key": "field_so_display_phone",
+            "label": "Display phone (human-readable)",
+            "name": "display_phone",
+            "type": "text",
+            "instructions": "Formatted version shown to visitors, eg 0487 810 565.",
+            "required": 1
+        },
+        {
+            "key": "field_so_business_email",
+            "label": "Business email",
+            "name": "business_email",
+            "type": "email",
+            "required": 1
+        },
+        {
+            "key": "field_so_business_address",
+            "label": "Business address (full)",
+            "name": "business_address",
+            "type": "text"
+        },
+        {
+            "key": "field_so_address_short",
+            "label": "Address (short — footer/contact)",
+            "name": "address_short",
+            "type": "text",
+            "default_value": "Perth, WA"
+        },
+        {
+            "key": "field_so_tab_branding",
+            "label": "Branding",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_so_site_logo",
+            "label": "Site logo (header)",
+            "name": "site_logo",
+            "type": "image",
+            "return_format": "array",
+            "preview_size": "medium"
+        },
+        {
+            "key": "field_so_footer_logo",
+            "label": "Footer logo",
+            "name": "footer_logo",
+            "type": "image",
+            "return_format": "array",
+            "preview_size": "medium"
+        },
+        {
+            "key": "field_so_footer_blurb",
+            "label": "Footer blurb",
+            "name": "footer_blurb",
+            "type": "textarea",
+            "rows": 3,
+            "default_value": "Perth's trusted residential electrician. Licensed, insured, owner-operated, and on call when you need us."
+        },
+        {
+            "key": "field_so_footer_disclaimer",
+            "label": "Footer copyright line",
+            "name": "footer_disclaimer",
+            "type": "text",
+            "instructions": "Use {year} for the current year.",
+            "default_value": "© {year} Dent Electrical & Air. All rights reserved."
+        },
+        {
+            "key": "field_so_ec_number",
+            "label": "EC number",
+            "name": "ec_number",
+            "type": "text",
+            "instructions": "WA electrical contractor licence number, eg EC123456."
+        },
+        {
+            "key": "field_so_tab_promo",
+            "label": "Promo bar & nav",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_so_promo_pills",
+            "label": "Promo pills (top yellow bar)",
+            "name": "promo_pills",
+            "type": "repeater",
+            "min": 0,
+            "max": 4,
+            "layout": "table",
+            "button_label": "Add pill",
+            "sub_fields": [
+                {
+                    "key": "field_so_promo_pill_label",
+                    "label": "Label",
+                    "name": "label",
+                    "type": "text",
+                    "required": 1
+                }
+            ]
+        },
+        {
+            "key": "field_so_nav_cta",
+            "label": "Nav CTA button",
+            "name": "nav_cta",
+            "type": "link",
+            "return_format": "array"
+        },
+        {
+            "key": "field_so_mobile_bar_quote_url",
+            "label": "Mobile sticky bar — Quote URL",
+            "name": "mobile_bar_quote_url",
+            "type": "url",
+            "instructions": "Leave blank to default to homepage #contact."
+        },
+        {
+            "key": "field_so_tab_schema",
+            "label": "Schema / SEO",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_so_schema_business_type",
+            "label": "Schema business type",
+            "name": "schema_business_type",
+            "type": "text",
+            "default_value": "Electrician",
+            "instructions": "Schema.org type, eg LocalBusiness, Electrician, HomeAndConstructionBusiness."
+        },
+        {
+            "key": "field_so_schema_suburb",
+            "label": "Schema suburb",
+            "name": "schema_suburb",
+            "type": "text",
+            "default_value": "Perth"
+        },
+        {
+            "key": "field_so_schema_state",
+            "label": "Schema state",
+            "name": "schema_state",
+            "type": "text",
+            "default_value": "WA"
+        },
+        {
+            "key": "field_so_schema_postcode",
+            "label": "Schema postcode",
+            "name": "schema_postcode",
+            "type": "text"
+        },
+        {
+            "key": "field_so_schema_abn",
+            "label": "ABN (optional)",
+            "name": "schema_abn",
+            "type": "text"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "site-options"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Site-wide content that appears on every page (contact info, branding, schema).",
+    "show_in_rest": 0
+}

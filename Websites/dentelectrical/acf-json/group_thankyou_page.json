@@ -1,0 +1,58 @@
+{
+    "key": "group_thankyou_page",
+    "title": "Thank You Page",
+    "fields": [
+        {
+            "key": "field_ty_headline",
+            "label": "Headline",
+            "name": "ty_headline",
+            "type": "text",
+            "default_value": "Thanks, we got your message.",
+            "instructions": "Falls back to default if left empty."
+        },
+        {
+            "key": "field_ty_body",
+            "label": "Body copy",
+            "name": "ty_body",
+            "type": "wysiwyg",
+            "tabs": "visual",
+            "toolbar": "basic",
+            "media_upload": 0
+        },
+        {
+            "key": "field_ty_cta",
+            "label": "CTA button (back to site)",
+            "name": "ty_cta",
+            "type": "link",
+            "return_format": "array",
+            "instructions": "Typically points to homepage."
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-templates/thank-you.php"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": [
+        "the_content",
+        "discussion",
+        "comments",
+        "slug",
+        "author",
+        "format",
+        "page_attributes",
+        "send-trackbacks"
+    ],
+    "active": true,
+    "description": "Thank You page content. This page must be set as the redirect target for every Gravity Form on the site.",
+    "show_in_rest": 0
+}
