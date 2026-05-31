@@ -180,7 +180,7 @@ nav.main li:hover > .mega {transform:translateX(0) translateY(0)}
 
 /* ---------- hero ---------- */
 .hero {position:relative;color:#eaf4fc;overflow:hidden;
-  background:#072a44 url('images-small/sidewalk-clean.jpg') center/cover no-repeat;
+  background:#072a44 url('../images/sidewalk-clean.jpg') center/cover no-repeat;
   background-attachment:scroll;}
 
 .hero::before {content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
@@ -500,7 +500,7 @@ section {position:relative}
 
 /* ---------- big cta ---------- */
 .cta-band {position:relative;overflow:hidden;color:#fff;text-align:center;
-  background:#0a3a5e url('images-small/concrete-spray.jpg') center/cover no-repeat;
+  background:#0a3a5e url('../images/concrete-spray.jpg') center/cover no-repeat;
   background-attachment:scroll;}
 
 .cta-band::before {content:"";position:absolute;inset:0;
@@ -562,7 +562,7 @@ footer::before {
   height:var(--torn);pointer-events:none;
   background:
     linear-gradient(180deg,rgba(4,25,43,0) 80%,#04192b 100%),
-    url('brand/footer-torn.png') no-repeat bottom center;
+    url('../brand/footer-torn.png') no-repeat bottom center;
   background-size:100% 100%,100% 100%;}
 
 .foot-grid {display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;padding-bottom:48px}
@@ -1126,21 +1126,21 @@ footer::before {content:"";position:absolute;left:0;right:0;bottom:100%;margin-b
 
 /* ---------- hero ---------- */
 .hero {position:relative;color:#eaf4fc;overflow:hidden;
-  background:#072a44 url('images/sidewalk-clean.jpg') center/cover no-repeat;
+  background:#072a44 url('../images/sidewalk-clean.jpg') center/cover no-repeat;
   background-attachment:scroll;}
 
 /* ---------- big cta ---------- */
 .cta-band {position:relative;overflow:hidden;color:#fff;text-align:center;
-  background:#0a3a5e url('images/concrete-spray.jpg') center/cover no-repeat;
+  background:#0a3a5e url('../images/concrete-spray.jpg') center/cover no-repeat;
   background-attachment:scroll;}
 
-footer::before {content:"";position:absolute;left:0;right:0;bottom:100%;margin-bottom:-1px;height:var(--torn);pointer-events:none;background:linear-gradient(180deg,rgba(4,25,43,0) 82%,#04192b 100%),url('brand/footer-torn.png') no-repeat bottom center;background-size:100% 100%,100% 100%}
+footer::before {content:"";position:absolute;left:0;right:0;bottom:100%;margin-bottom:-1px;height:var(--torn);pointer-events:none;background:linear-gradient(180deg,rgba(4,25,43,0) 82%,#04192b 100%),url('../brand/footer-torn.png') no-repeat bottom center;background-size:100% 100%,100% 100%}
 
 /* ---------- service-page specific ---------- */
 /* thin hero (~700px), centered, no inline form */
 .hero-svc {
   min-height:700px;height:700px;
-  background:#072a44 url('images/roof-washing-action.jpg') center/cover no-repeat;
+  background:#072a44 url('../images/roof-washing-action.jpg') center/cover no-repeat;
   display:flex;align-items:center;}
 
 /* why us hero */

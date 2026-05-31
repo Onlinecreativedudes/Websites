@@ -66,6 +66,13 @@
             ]
         },
         {
+            "key": "field_pcp_service_hero_rating_text",
+            "label": "Hero rating line",
+            "name": "hero_rating_text",
+            "type": "text",
+            "instructions": "The trust line next to the stars, eg \"Rated 5.0 across 60+ Google reviews\"."
+        },
+        {
             "key": "field_pcp_service_tab_quote",
             "label": "Quote band",
             "name": "",
@@ -344,6 +351,93 @@
             ]
         },
         {
+            "key": "field_pcp_service_tab_process",
+            "label": "Process",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_pcp_service_process_kicker",
+            "label": "Kicker",
+            "name": "process_kicker",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_service_process_heading",
+            "label": "Heading",
+            "name": "process_heading",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_service_process_intro",
+            "label": "Intro",
+            "name": "process_intro",
+            "type": "textarea",
+            "rows": 2
+        },
+        {
+            "key": "field_pcp_service_process_steps",
+            "label": "Steps",
+            "name": "process_steps",
+            "type": "repeater",
+            "layout": "block",
+            "button_label": "Add step",
+            "sub_fields": [
+                {
+                    "key": "field_pcp_service_process_steps_title",
+                    "label": "Title",
+                    "name": "process_steps_title",
+                    "type": "text"
+                },
+                {
+                    "key": "field_pcp_service_process_steps_body",
+                    "label": "Body",
+                    "name": "process_steps_body",
+                    "type": "textarea",
+                    "rows": 2
+                }
+            ],
+            "instructions": "Numbered automatically. Three steps work best."
+        },
+        {
+            "key": "field_pcp_service_tab_midcta",
+            "label": "Mid CTA",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_pcp_service_midcta_image",
+            "label": "Background image",
+            "name": "midcta_image",
+            "type": "image",
+            "return_format": "array",
+            "preview_size": "medium",
+            "instructions": "Image behind the mid-page call to action. Falls back to the hero image, then a theme image."
+        },
+        {
+            "key": "field_pcp_service_midcta_kicker",
+            "label": "Kicker",
+            "name": "midcta_kicker",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_service_midcta_heading",
+            "label": "Heading",
+            "name": "midcta_heading",
+            "type": "textarea",
+            "rows": 2,
+            "instructions": "Basic HTML allowed. Wrap the handwritten part in <span class=\"script\">...</span>."
+        },
+        {
+            "key": "field_pcp_service_midcta_body",
+            "label": "Body",
+            "name": "midcta_body",
+            "type": "textarea",
+            "rows": 2
+        },
+        {
             "key": "field_pcp_service_tab_faqs",
             "label": "FAQs",
             "name": "",
@@ -453,6 +547,18 @@
                     "maxlength": 3
                 }
             ]
+        },
+        {
+            "key": "field_pcp_service_reviews_rating_big",
+            "label": "Rating headline",
+            "name": "reviews_rating_big",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_service_reviews_rating_sub",
+            "label": "Rating subline",
+            "name": "reviews_rating_sub",
+            "type": "text"
         },
         {
             "key": "field_pcp_service_tab_gallery",

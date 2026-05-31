@@ -65,11 +65,20 @@ function pcp_image($img, $size = 'pcp-card', $class = '', $extra = [], $fallback
         return wp_get_attachment_image((int) $img['ID'], $size, false, $attrs);
     }
     if ($fallback) {
+        $rel = ltrim($fallback, '/');
         $w = $extra['width'] ?? '';
         $h = $extra['height'] ?? '';
+        // Auto-detect dimensions from the bundled file so every img has width/height (no CLS).
+        if (!$w || !$h) {
+            $path = PCP_THEME_PATH . '/' . $rel;
+            if (is_readable($path) && ($size = @getimagesize($path))) {
+                $w = $w ?: $size[0];
+                $h = $h ?: $size[1];
+            }
+        }
         return sprintf(
             '<img src="%s" alt="%s" class="%s"%s%s loading="%s" decoding="async">',
-            esc_url(PCP_THEME_URI . '/' . ltrim($fallback, '/')),
+            esc_url(PCP_THEME_URI . '/' . $rel),
             esc_attr($fallback_alt),
             esc_attr($class),
             $w ? ' width="' . esc_attr($w) . '"' : '',
