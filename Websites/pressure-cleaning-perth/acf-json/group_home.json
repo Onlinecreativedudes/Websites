@@ -1,0 +1,628 @@
+{
+    "key": "group_pcp_home",
+    "title": "Home Page",
+    "fields": [
+        {
+            "key": "field_pcp_home_tab_hero",
+            "label": "Hero",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_pcp_home_mobile_hero_image",
+            "label": "Mobile hero image",
+            "name": "mobile_hero_image",
+            "type": "image",
+            "return_format": "array",
+            "preview_size": "medium",
+            "instructions": "Shown above the headline on mobile only (hidden on desktop). Added for Google Ads conversion. Set the alt text on the image."
+        },
+        {
+            "key": "field_pcp_home_hero_eyebrow",
+            "label": "Hero eyebrow",
+            "name": "hero_eyebrow",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_home_hero_heading",
+            "label": "Hero headline (H1)",
+            "name": "hero_heading",
+            "type": "textarea",
+            "instructions": "Basic HTML allowed (eg <br>, <span class=\"hl\">highlight</span>, <em>).",
+            "rows": 2
+        },
+        {
+            "key": "field_pcp_home_hero_sub",
+            "label": "Hero subheading",
+            "name": "hero_sub",
+            "type": "textarea",
+            "rows": 3
+        },
+        {
+            "key": "field_pcp_home_hero_bullets",
+            "label": "Hero bullets",
+            "name": "hero_bullets",
+            "type": "repeater",
+            "layout": "block",
+            "button_label": "Add bullet",
+            "sub_fields": [
+                {
+                    "key": "field_pcp_home_hero_bullets_text",
+                    "label": "Bullet",
+                    "name": "text",
+                    "type": "text"
+                }
+            ]
+        },
+        {
+            "key": "field_pcp_home_hero_rating_text",
+            "label": "Hero rating line",
+            "name": "hero_rating_text",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_home_hero_form_id",
+            "label": "Hero quote form (Gravity Forms ID)",
+            "name": "hero_form_id",
+            "type": "number",
+            "instructions": "Leave blank to use the site default quote form."
+        },
+        {
+            "key": "field_pcp_home_tab_trust",
+            "label": "Trust strip",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_pcp_home_trust_items",
+            "label": "Trust items",
+            "name": "trust_items",
+            "type": "repeater",
+            "layout": "block",
+            "button_label": "Add row",
+            "sub_fields": [
+                {
+                    "key": "field_pcp_home_trust_items_title",
+                    "label": "Title",
+                    "name": "title",
+                    "type": "text"
+                },
+                {
+                    "key": "field_pcp_home_trust_items_subtitle",
+                    "label": "Subtitle",
+                    "name": "subtitle",
+                    "type": "text"
+                }
+            ],
+            "max": 4
+        },
+        {
+            "key": "field_pcp_home_tab_intro",
+            "label": "Intro",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_pcp_home_intro_kicker",
+            "label": "Kicker",
+            "name": "intro_kicker",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_home_intro_heading",
+            "label": "Heading",
+            "name": "intro_heading",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_home_intro_body",
+            "label": "Body",
+            "name": "intro_body",
+            "type": "wysiwyg",
+            "media_upload": 0
+        },
+        {
+            "key": "field_pcp_home_tab_services",
+            "label": "Services",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_pcp_home_services_kicker",
+            "label": "Kicker",
+            "name": "services_kicker",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_home_services_heading",
+            "label": "Heading",
+            "name": "services_heading",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_home_services_intro",
+            "label": "Intro",
+            "name": "services_intro",
+            "type": "textarea",
+            "rows": 2
+        },
+        {
+            "key": "field_pcp_home_services",
+            "label": "Service cards",
+            "name": "services",
+            "type": "repeater",
+            "layout": "block",
+            "button_label": "Add row",
+            "sub_fields": [
+                {
+                    "key": "field_pcp_home_services_image",
+                    "label": "Image",
+                    "name": "image",
+                    "type": "image",
+                    "return_format": "array",
+                    "preview_size": "medium"
+                },
+                {
+                    "key": "field_pcp_home_services_title",
+                    "label": "Title",
+                    "name": "title",
+                    "type": "text"
+                },
+                {
+                    "key": "field_pcp_home_services_body",
+                    "label": "Body",
+                    "name": "body",
+                    "type": "textarea",
+                    "rows": 3
+                }
+            ],
+            "instructions": "Leave empty to show the six default cards from the design."
+        },
+        {
+            "key": "field_pcp_home_services_more_label",
+            "label": "\"View all\" button label",
+            "name": "services_more_label",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_home_tab_sealing",
+            "label": "Sealing",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_pcp_home_sealing_kicker",
+            "label": "Kicker",
+            "name": "sealing_kicker",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_home_sealing_heading",
+            "label": "Heading",
+            "name": "sealing_heading",
+            "type": "text",
+            "instructions": "Basic HTML allowed (eg <br>, <span class=\"hl\">highlight</span>, <em>)."
+        },
+        {
+            "key": "field_pcp_home_sealing_body",
+            "label": "Body",
+            "name": "sealing_body",
+            "type": "textarea",
+            "instructions": "Basic HTML allowed (eg <br>, <span class=\"hl\">highlight</span>, <em>).",
+            "rows": 3
+        },
+        {
+            "key": "field_pcp_home_sealing_points",
+            "label": "Points",
+            "name": "sealing_points",
+            "type": "repeater",
+            "layout": "block",
+            "button_label": "Add row",
+            "sub_fields": [
+                {
+                    "key": "field_pcp_home_sealing_points_text",
+                    "label": "Point (HTML allowed)",
+                    "name": "text",
+                    "type": "text",
+                    "instructions": "Basic HTML allowed (eg <br>, <span class=\"hl\">highlight</span>, <em>)."
+                }
+            ]
+        },
+        {
+            "key": "field_pcp_home_sealing_image",
+            "label": "Image",
+            "name": "sealing_image",
+            "type": "image",
+            "return_format": "array",
+            "preview_size": "medium"
+        },
+        {
+            "key": "field_pcp_home_sealing_badge",
+            "label": "Image badge",
+            "name": "sealing_badge",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_home_tab_why",
+            "label": "Why us",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_pcp_home_why_kicker",
+            "label": "Kicker",
+            "name": "why_kicker",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_home_why_heading",
+            "label": "Heading",
+            "name": "why_heading",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_home_why_intro",
+            "label": "Intro",
+            "name": "why_intro",
+            "type": "textarea",
+            "rows": 2
+        },
+        {
+            "key": "field_pcp_home_why_cells",
+            "label": "Why cells",
+            "name": "why_cells",
+            "type": "repeater",
+            "layout": "block",
+            "button_label": "Add row",
+            "sub_fields": [
+                {
+                    "key": "field_pcp_home_why_cells_title",
+                    "label": "Title",
+                    "name": "title",
+                    "type": "text"
+                },
+                {
+                    "key": "field_pcp_home_why_cells_body",
+                    "label": "Body",
+                    "name": "body",
+                    "type": "textarea",
+                    "rows": 2
+                }
+            ]
+        },
+        {
+            "key": "field_pcp_home_tab_about",
+            "label": "About",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_pcp_home_about_kicker",
+            "label": "Kicker",
+            "name": "about_kicker",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_home_about_heading",
+            "label": "Heading",
+            "name": "about_heading",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_home_about_points",
+            "label": "Points",
+            "name": "about_points",
+            "type": "repeater",
+            "layout": "block",
+            "button_label": "Add row",
+            "sub_fields": [
+                {
+                    "key": "field_pcp_home_about_points_text",
+                    "label": "Point",
+                    "name": "text",
+                    "type": "text"
+                }
+            ]
+        },
+        {
+            "key": "field_pcp_home_about_quote",
+            "label": "Owner quote",
+            "name": "about_quote",
+            "type": "wysiwyg",
+            "media_upload": 0
+        },
+        {
+            "key": "field_pcp_home_about_image",
+            "label": "Owner / mascot image",
+            "name": "about_image",
+            "type": "image",
+            "return_format": "array",
+            "preview_size": "medium"
+        },
+        {
+            "key": "field_pcp_home_about_stat_number",
+            "label": "Stat number",
+            "name": "about_stat_number",
+            "type": "text",
+            "instructions": "Animated count-up, eg 100%."
+        },
+        {
+            "key": "field_pcp_home_about_stat_label",
+            "label": "Stat label",
+            "name": "about_stat_label",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_home_about_insurance_pill",
+            "label": "Insurance pill",
+            "name": "about_insurance_pill",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_home_tab_process",
+            "label": "Process",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_pcp_home_process_kicker",
+            "label": "Kicker",
+            "name": "process_kicker",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_home_process_heading",
+            "label": "Heading",
+            "name": "process_heading",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_home_process_steps",
+            "label": "Steps",
+            "name": "process_steps",
+            "type": "repeater",
+            "layout": "block",
+            "button_label": "Add row",
+            "sub_fields": [
+                {
+                    "key": "field_pcp_home_process_steps_title",
+                    "label": "Title",
+                    "name": "title",
+                    "type": "text"
+                },
+                {
+                    "key": "field_pcp_home_process_steps_body",
+                    "label": "Body",
+                    "name": "body",
+                    "type": "textarea",
+                    "rows": 2
+                }
+            ],
+            "max": 3
+        },
+        {
+            "key": "field_pcp_home_tab_local",
+            "label": "Local",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_pcp_home_local_kicker",
+            "label": "Kicker",
+            "name": "local_kicker",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_home_local_heading",
+            "label": "Heading",
+            "name": "local_heading",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_home_local_body",
+            "label": "Body",
+            "name": "local_body",
+            "type": "textarea",
+            "rows": 4
+        },
+        {
+            "key": "field_pcp_home_local_points",
+            "label": "Points",
+            "name": "local_points",
+            "type": "repeater",
+            "layout": "block",
+            "button_label": "Add row",
+            "sub_fields": [
+                {
+                    "key": "field_pcp_home_local_points_text",
+                    "label": "Point",
+                    "name": "text",
+                    "type": "text"
+                }
+            ]
+        },
+        {
+            "key": "field_pcp_home_local_image",
+            "label": "Image",
+            "name": "local_image",
+            "type": "image",
+            "return_format": "array",
+            "preview_size": "medium"
+        },
+        {
+            "key": "field_pcp_home_tab_reviews",
+            "label": "Reviews",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_pcp_home_reviews_kicker",
+            "label": "Kicker",
+            "name": "reviews_kicker",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_home_reviews_heading",
+            "label": "Heading",
+            "name": "reviews_heading",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_home_reviews_intro",
+            "label": "Intro",
+            "name": "reviews_intro",
+            "type": "textarea",
+            "rows": 2
+        },
+        {
+            "key": "field_pcp_home_reviews",
+            "label": "Review cards",
+            "name": "reviews",
+            "type": "repeater",
+            "layout": "block",
+            "button_label": "Add row",
+            "sub_fields": [
+                {
+                    "key": "field_pcp_home_reviews_quote",
+                    "label": "Quote",
+                    "name": "quote",
+                    "type": "textarea",
+                    "rows": 3
+                },
+                {
+                    "key": "field_pcp_home_reviews_name",
+                    "label": "Name",
+                    "name": "name",
+                    "type": "text"
+                },
+                {
+                    "key": "field_pcp_home_reviews_location",
+                    "label": "Location / role",
+                    "name": "location",
+                    "type": "text"
+                },
+                {
+                    "key": "field_pcp_home_reviews_initials",
+                    "label": "Avatar initials",
+                    "name": "initials",
+                    "type": "text",
+                    "maxlength": 3
+                }
+            ]
+        },
+        {
+            "key": "field_pcp_home_reviews_rating_big",
+            "label": "Rating headline",
+            "name": "reviews_rating_big",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_home_reviews_rating_sub",
+            "label": "Rating subline",
+            "name": "reviews_rating_sub",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_home_tab_gallery",
+            "label": "Gallery",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_pcp_home_gallery_kicker",
+            "label": "Kicker",
+            "name": "gallery_kicker",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_home_gallery_heading",
+            "label": "Heading",
+            "name": "gallery_heading",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_home_gallery_images",
+            "label": "Gallery images",
+            "name": "gallery_images",
+            "type": "gallery",
+            "instructions": "First and last images render wide. Leave empty to use the design defaults."
+        },
+        {
+            "key": "field_pcp_home_tab_faqs",
+            "label": "FAQs",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_pcp_home_faqs_kicker",
+            "label": "Kicker",
+            "name": "faqs_kicker",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_home_faqs_heading",
+            "label": "Heading",
+            "name": "faqs_heading",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_home_faqs_intro",
+            "label": "Intro",
+            "name": "faqs_intro",
+            "type": "textarea",
+            "rows": 2
+        },
+        {
+            "key": "field_pcp_home_faqs",
+            "label": "FAQ items",
+            "name": "faqs",
+            "type": "repeater",
+            "layout": "block",
+            "button_label": "Add row",
+            "sub_fields": [
+                {
+                    "key": "field_pcp_home_faqs_question",
+                    "label": "Question",
+                    "name": "question",
+                    "type": "text"
+                },
+                {
+                    "key": "field_pcp_home_faqs_answer",
+                    "label": "Answer",
+                    "name": "answer",
+                    "type": "textarea",
+                    "rows": 3
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_type",
+                "operator": "==",
+                "value": "front_page"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true,
+    "description": "Home page sections. Fields left blank fall back to the design copy.",
+    "show_in_rest": 0
+}

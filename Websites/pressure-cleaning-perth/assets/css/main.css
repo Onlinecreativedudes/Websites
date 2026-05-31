@@ -2017,3 +2017,16 @@ footer::before {content:"";position:absolute;left:0;right:0;bottom:100%;margin-b
   .mbar{display:flex}
   body{padding-bottom:74px}
   .why-grid{border-radius:14px}}
+
+/* ============================================================
+   Mobile hero image (standing requirement, added by build).
+   Shows above the hero title on mobile only; hidden on desktop
+   where the hero background shows. Desktop <source> serves a
+   blank pixel so the real file never downloads on desktop.
+   ============================================================ */
+.hero-mobile-img{display:none}
+@media (max-width:768px){
+  .hero-mobile-img{display:block;width:100%;margin:0 0 18px;border-radius:var(--r,16px);overflow:hidden;line-height:0}
+  .hero-mobile-img img{width:100%;height:auto;display:block;object-fit:cover}
+  .hero .hero-mobile-img{order:-1}
+}
