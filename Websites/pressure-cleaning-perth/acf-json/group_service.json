@@ -1,0 +1,539 @@
+{
+    "key": "group_pcp_service",
+    "title": "Service",
+    "fields": [
+        {
+            "key": "field_pcp_service_tab_hero",
+            "label": "Hero",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_pcp_service_hero_image",
+            "label": "Hero background image",
+            "name": "hero_image",
+            "type": "image",
+            "return_format": "array",
+            "preview_size": "medium",
+            "instructions": "Wide background photo behind the hero. Falls back to a theme image if empty."
+        },
+        {
+            "key": "field_pcp_service_mobile_hero_image",
+            "label": "Mobile hero image",
+            "name": "mobile_hero_image",
+            "type": "image",
+            "return_format": "array",
+            "preview_size": "medium",
+            "instructions": "Shown above the headline on mobile only (hidden on desktop). Added for Google Ads conversion. Set the alt text on the image."
+        },
+        {
+            "key": "field_pcp_service_hero_eyebrow",
+            "label": "Hero eyebrow",
+            "name": "hero_eyebrow",
+            "type": "text",
+            "instructions": "Small pill label above the H1, eg \"Soft Wash & Pressure Roof Cleaning\"."
+        },
+        {
+            "key": "field_pcp_service_hero_heading",
+            "label": "Hero headline (H1)",
+            "name": "hero_heading",
+            "type": "textarea",
+            "rows": 2,
+            "instructions": "Leave blank to use the service title. Basic HTML allowed (eg <br>, <span class=\"hl\">highlight</span>)."
+        },
+        {
+            "key": "field_pcp_service_hero_sub",
+            "label": "Hero subheading",
+            "name": "hero_sub",
+            "type": "textarea",
+            "rows": 3
+        },
+        {
+            "key": "field_pcp_service_hero_bullets",
+            "label": "Hero bullets",
+            "name": "hero_bullets",
+            "type": "repeater",
+            "layout": "block",
+            "button_label": "Add bullet",
+            "sub_fields": [
+                {
+                    "key": "field_pcp_service_hero_bullets_text",
+                    "label": "Bullet",
+                    "name": "hero_bullets_text",
+                    "type": "text"
+                }
+            ]
+        },
+        {
+            "key": "field_pcp_service_tab_quote",
+            "label": "Quote band",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_pcp_service_quote_kicker",
+            "label": "Kicker",
+            "name": "quote_kicker",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_service_quote_heading",
+            "label": "Heading",
+            "name": "quote_heading",
+            "type": "textarea",
+            "rows": 2,
+            "instructions": "Basic HTML allowed. Wrap the highlighted part in <span>...</span>."
+        },
+        {
+            "key": "field_pcp_service_quote_body",
+            "label": "Body",
+            "name": "quote_body",
+            "type": "textarea",
+            "rows": 3
+        },
+        {
+            "key": "field_pcp_service_quote_points",
+            "label": "Points",
+            "name": "quote_points",
+            "type": "repeater",
+            "layout": "block",
+            "button_label": "Add point",
+            "sub_fields": [
+                {
+                    "key": "field_pcp_service_quote_points_text",
+                    "label": "Point",
+                    "name": "quote_points_text",
+                    "type": "text"
+                }
+            ]
+        },
+        {
+            "key": "field_pcp_service_quote_form_id",
+            "label": "Quote form (Gravity Forms ID)",
+            "name": "quote_form_id",
+            "type": "number",
+            "instructions": "Leave blank to use the site default quote form."
+        },
+        {
+            "key": "field_pcp_service_tab_intro",
+            "label": "Intro",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_pcp_service_intro_kicker",
+            "label": "Kicker",
+            "name": "intro_kicker",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_service_intro_heading",
+            "label": "Heading",
+            "name": "intro_heading",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_service_intro_body",
+            "label": "Body",
+            "name": "intro_body",
+            "type": "wysiwyg",
+            "media_upload": 0,
+            "instructions": "Intro paragraphs. Leave blank to use the page editor content, then the design default."
+        },
+        {
+            "key": "field_pcp_service_tab_problem",
+            "label": "The problem",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_pcp_service_problem_image",
+            "label": "Problem image",
+            "name": "problem_image",
+            "type": "image",
+            "return_format": "array",
+            "preview_size": "medium",
+            "instructions": "Photo for the dark problem band. Falls back to a theme image if empty."
+        },
+        {
+            "key": "field_pcp_service_problem_badge",
+            "label": "Image badge",
+            "name": "problem_badge",
+            "type": "text",
+            "instructions": "Red pill on the image, eg \"The Problem\"."
+        },
+        {
+            "key": "field_pcp_service_problem_kicker",
+            "label": "Kicker",
+            "name": "problem_kicker",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_service_problem_heading",
+            "label": "Heading",
+            "name": "problem_heading",
+            "type": "textarea",
+            "rows": 2,
+            "instructions": "Basic HTML allowed. Wrap the highlighted part in <span class=\"hl\">...</span>."
+        },
+        {
+            "key": "field_pcp_service_problem_body",
+            "label": "Body",
+            "name": "problem_body",
+            "type": "textarea",
+            "rows": 4,
+            "instructions": "One or two paragraphs. Separate paragraphs with a blank line."
+        },
+        {
+            "key": "field_pcp_service_problem_points",
+            "label": "Damage points",
+            "name": "problem_points",
+            "type": "repeater",
+            "layout": "block",
+            "button_label": "Add point",
+            "sub_fields": [
+                {
+                    "key": "field_pcp_service_problem_points_text",
+                    "label": "Point (HTML allowed)",
+                    "name": "problem_points_text",
+                    "type": "text",
+                    "instructions": "Bold the key phrase with <b>...</b>."
+                }
+            ]
+        },
+        {
+            "key": "field_pcp_service_tab_methods",
+            "label": "Methods",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_pcp_service_methods_kicker",
+            "label": "Kicker",
+            "name": "methods_kicker",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_service_methods_heading",
+            "label": "Heading",
+            "name": "methods_heading",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_service_methods_intro",
+            "label": "Intro",
+            "name": "methods_intro",
+            "type": "textarea",
+            "rows": 2
+        },
+        {
+            "key": "field_pcp_service_methods",
+            "label": "Method cards",
+            "name": "methods",
+            "type": "repeater",
+            "layout": "block",
+            "button_label": "Add method",
+            "sub_fields": [
+                {
+                    "key": "field_pcp_service_methods_title",
+                    "label": "Title",
+                    "name": "methods_title",
+                    "type": "text"
+                },
+                {
+                    "key": "field_pcp_service_methods_tag",
+                    "label": "Tag (optional)",
+                    "name": "methods_tag",
+                    "type": "text",
+                    "instructions": "Small pill, eg \"Most Popular\". Leave blank for none."
+                },
+                {
+                    "key": "field_pcp_service_methods_body",
+                    "label": "Body",
+                    "name": "methods_body",
+                    "type": "textarea",
+                    "rows": 3
+                },
+                {
+                    "key": "field_pcp_service_methods_image",
+                    "label": "Image (optional)",
+                    "name": "methods_image",
+                    "type": "image",
+                    "return_format": "array",
+                    "preview_size": "medium",
+                    "instructions": "Optional supporting image for the method."
+                },
+                {
+                    "key": "field_pcp_service_methods_features",
+                    "label": "Feature list",
+                    "name": "methods_features",
+                    "type": "repeater",
+                    "layout": "block",
+                    "button_label": "Add feature",
+                    "sub_fields": [
+                        {
+                            "key": "field_pcp_service_methods_features_text",
+                            "label": "Feature",
+                            "name": "methods_features_text",
+                            "type": "text"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "key": "field_pcp_service_methods_note",
+            "label": "Method note",
+            "name": "methods_note",
+            "type": "textarea",
+            "rows": 3,
+            "instructions": "Reassurance line shown below the method cards."
+        },
+        {
+            "key": "field_pcp_service_tab_why",
+            "label": "Why us",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_pcp_service_why_kicker",
+            "label": "Kicker",
+            "name": "why_kicker",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_service_why_heading",
+            "label": "Heading",
+            "name": "why_heading",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_service_why_intro",
+            "label": "Intro",
+            "name": "why_intro",
+            "type": "textarea",
+            "rows": 2
+        },
+        {
+            "key": "field_pcp_service_why_cells",
+            "label": "Why cells",
+            "name": "why_cells",
+            "type": "repeater",
+            "layout": "block",
+            "button_label": "Add cell",
+            "sub_fields": [
+                {
+                    "key": "field_pcp_service_why_cells_title",
+                    "label": "Title",
+                    "name": "why_cells_title",
+                    "type": "text"
+                },
+                {
+                    "key": "field_pcp_service_why_cells_body",
+                    "label": "Body",
+                    "name": "why_cells_body",
+                    "type": "textarea",
+                    "rows": 2
+                }
+            ]
+        },
+        {
+            "key": "field_pcp_service_tab_faqs",
+            "label": "FAQs",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_pcp_service_faqs_kicker",
+            "label": "Kicker",
+            "name": "faqs_kicker",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_service_faqs_heading",
+            "label": "Heading",
+            "name": "faqs_heading",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_service_faqs_intro",
+            "label": "Intro",
+            "name": "faqs_intro",
+            "type": "textarea",
+            "rows": 2
+        },
+        {
+            "key": "field_pcp_service_faqs",
+            "label": "FAQ items",
+            "name": "faqs",
+            "type": "repeater",
+            "layout": "block",
+            "button_label": "Add FAQ",
+            "sub_fields": [
+                {
+                    "key": "field_pcp_service_faqs_question",
+                    "label": "Question",
+                    "name": "faqs_question",
+                    "type": "text"
+                },
+                {
+                    "key": "field_pcp_service_faqs_answer",
+                    "label": "Answer",
+                    "name": "faqs_answer",
+                    "type": "textarea",
+                    "rows": 3
+                }
+            ]
+        },
+        {
+            "key": "field_pcp_service_tab_reviews",
+            "label": "Reviews",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_pcp_service_reviews_kicker",
+            "label": "Kicker",
+            "name": "reviews_kicker",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_service_reviews_heading",
+            "label": "Heading",
+            "name": "reviews_heading",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_service_reviews_intro",
+            "label": "Intro",
+            "name": "reviews_intro",
+            "type": "textarea",
+            "rows": 2
+        },
+        {
+            "key": "field_pcp_service_reviews",
+            "label": "Review cards",
+            "name": "reviews",
+            "type": "repeater",
+            "layout": "block",
+            "button_label": "Add review",
+            "sub_fields": [
+                {
+                    "key": "field_pcp_service_reviews_quote",
+                    "label": "Quote",
+                    "name": "reviews_quote",
+                    "type": "textarea",
+                    "rows": 3
+                },
+                {
+                    "key": "field_pcp_service_reviews_name",
+                    "label": "Name",
+                    "name": "reviews_name",
+                    "type": "text"
+                },
+                {
+                    "key": "field_pcp_service_reviews_location",
+                    "label": "Location / role",
+                    "name": "reviews_location",
+                    "type": "text"
+                },
+                {
+                    "key": "field_pcp_service_reviews_initials",
+                    "label": "Avatar initials",
+                    "name": "initials",
+                    "type": "text",
+                    "maxlength": 3
+                }
+            ]
+        },
+        {
+            "key": "field_pcp_service_tab_gallery",
+            "label": "Gallery",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_pcp_service_gallery_kicker",
+            "label": "Kicker",
+            "name": "gallery_kicker",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_service_gallery_heading",
+            "label": "Heading",
+            "name": "gallery_heading",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_service_gallery_images",
+            "label": "Gallery images",
+            "name": "gallery_images",
+            "type": "gallery",
+            "instructions": "First and last images render wide. Leave empty to use the design defaults."
+        },
+        {
+            "key": "field_pcp_service_tab_areas",
+            "label": "Areas serviced",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_pcp_service_areas_heading",
+            "label": "Heading",
+            "name": "areas_heading",
+            "type": "textarea",
+            "rows": 1,
+            "instructions": "Basic HTML allowed. Wrap the highlighted word in <span>...</span>."
+        },
+        {
+            "key": "field_pcp_service_areas_intro",
+            "label": "Intro",
+            "name": "areas_intro",
+            "type": "textarea",
+            "rows": 2
+        },
+        {
+            "key": "field_pcp_service_areas",
+            "label": "Area chips",
+            "name": "areas",
+            "type": "repeater",
+            "layout": "block",
+            "button_label": "Add area",
+            "sub_fields": [
+                {
+                    "key": "field_pcp_service_areas_name",
+                    "label": "Suburb / area",
+                    "name": "areas_name",
+                    "type": "text"
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "service"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true,
+    "description": "Single service page sections. Fields left blank fall back to the design copy.",
+    "show_in_rest": 0
+}

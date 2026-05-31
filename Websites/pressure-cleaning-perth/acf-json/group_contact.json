@@ -1,0 +1,161 @@
+{
+    "key": "group_pcp_contact",
+    "title": "Contact Page",
+    "fields": [
+        {
+            "key": "field_pcp_contact_tab_hero",
+            "label": "Hero",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_pcp_contact_mobile_hero_image",
+            "label": "Mobile hero image",
+            "name": "mobile_hero_image",
+            "type": "image",
+            "return_format": "array",
+            "preview_size": "medium",
+            "instructions": "Shown above the headline on mobile only (hidden on desktop). Added for Google Ads conversion. Set the alt text on the image."
+        },
+        {
+            "key": "field_pcp_contact_hero_eyebrow",
+            "label": "Hero eyebrow",
+            "name": "hero_eyebrow",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_contact_hero_heading",
+            "label": "Hero headline (H1)",
+            "name": "hero_heading",
+            "type": "textarea",
+            "rows": 2,
+            "instructions": "Basic HTML allowed (eg <br>, <span class=\"hl\">highlight</span>)."
+        },
+        {
+            "key": "field_pcp_contact_hero_sub",
+            "label": "Hero subheading",
+            "name": "hero_sub",
+            "type": "textarea",
+            "rows": 3
+        },
+        {
+            "key": "field_pcp_contact_tab_info",
+            "label": "Contact info",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_pcp_contact_info_kicker",
+            "label": "Kicker",
+            "name": "info_kicker",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_contact_info_heading",
+            "label": "Heading",
+            "name": "info_heading",
+            "type": "text",
+            "instructions": "Basic HTML allowed (eg <span class=\"hl-green\">highlight</span>)."
+        },
+        {
+            "key": "field_pcp_contact_info_intro",
+            "label": "Intro",
+            "name": "info_intro",
+            "type": "textarea",
+            "rows": 2
+        },
+        {
+            "key": "field_pcp_contact_hours_weekday",
+            "label": "Hours: Mon - Fri",
+            "name": "hours_weekday",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_contact_hours_saturday",
+            "label": "Hours: Saturday",
+            "name": "hours_saturday",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_contact_hours_sunday",
+            "label": "Hours: Sunday",
+            "name": "hours_sunday",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_contact_hours_note",
+            "label": "Hours note",
+            "name": "hours_note",
+            "type": "textarea",
+            "rows": 2,
+            "instructions": "Small italic line under the office hours."
+        },
+        {
+            "key": "field_pcp_contact_tab_form",
+            "label": "Form",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_pcp_contact_form_kicker",
+            "label": "Form kicker",
+            "name": "form_kicker",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_contact_form_heading",
+            "label": "Form heading",
+            "name": "form_heading",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_contact_form_sub",
+            "label": "Form subheading",
+            "name": "form_sub",
+            "type": "textarea",
+            "rows": 2
+        },
+        {
+            "key": "field_pcp_contact_contact_form_id",
+            "label": "Contact form (Gravity Forms ID)",
+            "name": "contact_form_id",
+            "type": "number",
+            "instructions": "The Gravity Forms ID to render in the contact form card. Leave blank to use the site default quote form."
+        },
+        {
+            "key": "field_pcp_contact_tab_map",
+            "label": "Map",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_pcp_contact_map_embed",
+            "label": "Map embed",
+            "name": "map_embed",
+            "type": "textarea",
+            "rows": 5,
+            "instructions": "Paste the Google Maps embed iframe. Leave blank to hide the map section."
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-templates/contact.php"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true,
+    "description": "Contact page sections. Fields left blank fall back to the design copy and Site Options.",
+    "show_in_rest": 0
+}

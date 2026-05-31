@@ -111,6 +111,37 @@
             "name": "default_quote_form_id",
             "type": "number",
             "instructions": "The Gravity Forms form ID used for hero / contact quote forms when a page has none set."
+        },
+        {
+            "key": "field_pcp_so_cta_band_heading",
+            "label": "CTA band — heading (start)",
+            "name": "cta_band_heading",
+            "type": "text",
+            "instructions": "Shown in the big call-to-action band on every page, before the script highlight.",
+            "default_value": "Ready to"
+        },
+        {
+            "key": "field_pcp_so_cta_band_script",
+            "label": "CTA band — script highlight",
+            "name": "cta_band_script",
+            "type": "text",
+            "default_value": "see the difference?"
+        },
+        {
+            "key": "field_pcp_so_cta_band_body",
+            "label": "CTA band — body",
+            "name": "cta_band_body",
+            "type": "textarea",
+            "rows": 2,
+            "default_value": "From driveways to rooftops, Pressure Cleaning Perth brings the results. Quick response, honest pricing, and work backed by our Iron Clad Guarantee."
+        },
+        {
+            "key": "field_pcp_so_contact_lead",
+            "label": "Contact section — lead paragraph",
+            "name": "contact_lead",
+            "type": "textarea",
+            "rows": 3,
+            "default_value": "Not sure what your property needs? Get in touch and we will tell you honestly. Whether it is a quick driveway clean or a full commercial wash-down, we will scope the job properly and give you a clear price before we start."
         }
     ],
     "location": [

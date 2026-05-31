@@ -1,0 +1,368 @@
+{
+    "key": "group_pcp_why_us",
+    "title": "Why Us Page",
+    "fields": [
+        {
+            "key": "field_pcp_why_us_tab_hero",
+            "label": "Hero",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_pcp_why_us_mobile_hero_image",
+            "label": "Mobile hero image",
+            "name": "mobile_hero_image",
+            "type": "image",
+            "return_format": "array",
+            "preview_size": "medium",
+            "instructions": "Shown above the headline on mobile only (hidden on desktop). Added for Google Ads conversion. Set the alt text on the image."
+        },
+        {
+            "key": "field_pcp_why_us_hero_image",
+            "label": "Hero background image",
+            "name": "hero_image",
+            "type": "image",
+            "return_format": "array",
+            "preview_size": "medium",
+            "instructions": "Background photo behind the hero. Leave blank to use the design default."
+        },
+        {
+            "key": "field_pcp_why_us_hero_crumb",
+            "label": "Breadcrumb label",
+            "name": "hero_crumb",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_why_us_hero_eyebrow",
+            "label": "Hero eyebrow",
+            "name": "hero_eyebrow",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_why_us_hero_heading",
+            "label": "Hero headline (H1)",
+            "name": "hero_heading",
+            "type": "textarea",
+            "rows": 2,
+            "instructions": "Basic HTML allowed (eg <br>, <span class=\"hl\">highlight</span>)."
+        },
+        {
+            "key": "field_pcp_why_us_hero_sub",
+            "label": "Hero subheading",
+            "name": "hero_sub",
+            "type": "textarea",
+            "rows": 3
+        },
+        {
+            "key": "field_pcp_why_us_tab_about",
+            "label": "Meet the Owner",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_pcp_why_us_about_kicker",
+            "label": "Kicker",
+            "name": "about_kicker",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_why_us_about_heading",
+            "label": "Heading",
+            "name": "about_heading",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_why_us_about_body",
+            "label": "Body",
+            "name": "about_body",
+            "type": "wysiwyg",
+            "media_upload": 0
+        },
+        {
+            "key": "field_pcp_why_us_about_creds",
+            "label": "Credentials",
+            "name": "about_creds",
+            "type": "repeater",
+            "layout": "block",
+            "button_label": "Add row",
+            "sub_fields": [
+                {
+                    "key": "field_pcp_why_us_about_creds_text",
+                    "label": "Credential",
+                    "name": "text",
+                    "type": "text"
+                }
+            ],
+            "instructions": "Leave empty to show the design defaults."
+        },
+        {
+            "key": "field_pcp_why_us_about_image",
+            "label": "Portrait image",
+            "name": "about_image",
+            "type": "image",
+            "return_format": "array",
+            "preview_size": "medium",
+            "instructions": "Director portrait. Leave blank to use the sitting mascot."
+        },
+        {
+            "key": "field_pcp_why_us_about_image_alt",
+            "label": "Portrait alt text",
+            "name": "about_image_alt",
+            "type": "text",
+            "instructions": "Used only when no portrait image is set (the mascot fallback)."
+        },
+        {
+            "key": "field_pcp_why_us_about_exp_number",
+            "label": "Experience number",
+            "name": "about_exp_number",
+            "type": "text",
+            "instructions": "Big number on the badge, eg 25."
+        },
+        {
+            "key": "field_pcp_why_us_about_exp_label",
+            "label": "Experience label",
+            "name": "about_exp_label",
+            "type": "text",
+            "instructions": "Basic HTML allowed (eg <br>)."
+        },
+        {
+            "key": "field_pcp_why_us_about_sig_line",
+            "label": "Signature line",
+            "name": "about_sig_line",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_why_us_about_sig_name",
+            "label": "Signature name",
+            "name": "about_sig_name",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_why_us_about_sig_role",
+            "label": "Signature role",
+            "name": "about_sig_role",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_why_us_tab_reasons",
+            "label": "Reasons",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_pcp_why_us_reasons_kicker",
+            "label": "Kicker",
+            "name": "reasons_kicker",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_why_us_reasons_heading",
+            "label": "Heading",
+            "name": "reasons_heading",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_why_us_reasons_intro",
+            "label": "Intro",
+            "name": "reasons_intro",
+            "type": "textarea",
+            "rows": 2
+        },
+        {
+            "key": "field_pcp_why_us_reasons",
+            "label": "Reasons",
+            "name": "reasons",
+            "type": "repeater",
+            "layout": "block",
+            "button_label": "Add row",
+            "sub_fields": [
+                {
+                    "key": "field_pcp_why_us_reasons_title",
+                    "label": "Title",
+                    "name": "title",
+                    "type": "text"
+                },
+                {
+                    "key": "field_pcp_why_us_reasons_body",
+                    "label": "Body",
+                    "name": "body",
+                    "type": "textarea",
+                    "rows": 3
+                }
+            ],
+            "instructions": "Numbered automatically. Leave empty to show the five design defaults."
+        },
+        {
+            "key": "field_pcp_why_us_tab_howwework",
+            "label": "How We Work",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_pcp_why_us_howwework_kicker",
+            "label": "Kicker",
+            "name": "howwework_kicker",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_why_us_howwework_heading",
+            "label": "Heading",
+            "name": "howwework_heading",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_why_us_howwework_intro",
+            "label": "Intro",
+            "name": "howwework_intro",
+            "type": "textarea",
+            "rows": 2
+        },
+        {
+            "key": "field_pcp_why_us_howwework_steps",
+            "label": "Steps",
+            "name": "howwework_steps",
+            "type": "repeater",
+            "layout": "block",
+            "button_label": "Add row",
+            "sub_fields": [
+                {
+                    "key": "field_pcp_why_us_howwework_steps_title",
+                    "label": "Title",
+                    "name": "title",
+                    "type": "text"
+                },
+                {
+                    "key": "field_pcp_why_us_howwework_steps_body",
+                    "label": "Body",
+                    "name": "body",
+                    "type": "textarea",
+                    "rows": 2
+                }
+            ],
+            "instructions": "Numbered automatically. Leave empty to show the design defaults."
+        },
+        {
+            "key": "field_pcp_why_us_tab_guarantee",
+            "label": "Guarantee",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_pcp_why_us_guarantee_kicker",
+            "label": "Kicker",
+            "name": "guarantee_kicker",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_why_us_guarantee_heading",
+            "label": "Heading",
+            "name": "guarantee_heading",
+            "type": "text",
+            "instructions": "Basic HTML allowed (eg <span class=\"hl\">highlight</span>)."
+        },
+        {
+            "key": "field_pcp_why_us_guarantee_body",
+            "label": "Body",
+            "name": "guarantee_body",
+            "type": "textarea",
+            "rows": 3
+        },
+        {
+            "key": "field_pcp_why_us_guarantee_points",
+            "label": "Code of conduct points",
+            "name": "guarantee_points",
+            "type": "repeater",
+            "layout": "block",
+            "button_label": "Add row",
+            "sub_fields": [
+                {
+                    "key": "field_pcp_why_us_guarantee_points_text",
+                    "label": "Point",
+                    "name": "text",
+                    "type": "text"
+                }
+            ],
+            "instructions": "Numbered automatically. Leave empty to show the eight design defaults."
+        },
+        {
+            "key": "field_pcp_why_us_guarantee_image",
+            "label": "Guarantee image",
+            "name": "guarantee_image",
+            "type": "image",
+            "return_format": "array",
+            "preview_size": "medium",
+            "instructions": "Leave blank to use the sitting mascot."
+        },
+        {
+            "key": "field_pcp_why_us_tab_testimonials",
+            "label": "Testimonials",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_pcp_why_us_testimonials_kicker",
+            "label": "Kicker",
+            "name": "testimonials_kicker",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_why_us_testimonials_heading",
+            "label": "Heading",
+            "name": "testimonials_heading",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_why_us_testimonials",
+            "label": "Testimonials",
+            "name": "testimonials",
+            "type": "repeater",
+            "layout": "block",
+            "button_label": "Add row",
+            "sub_fields": [
+                {
+                    "key": "field_pcp_why_us_testimonials_quote",
+                    "label": "Quote",
+                    "name": "quote",
+                    "type": "textarea",
+                    "rows": 4
+                },
+                {
+                    "key": "field_pcp_why_us_testimonials_name",
+                    "label": "Name",
+                    "name": "name",
+                    "type": "text"
+                },
+                {
+                    "key": "field_pcp_why_us_testimonials_location",
+                    "label": "Location / role",
+                    "name": "location",
+                    "type": "text"
+                }
+            ],
+            "instructions": "Leave empty to show the design defaults. All show a 5-star rating."
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-templates/why-us.php"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true,
+    "description": "Why Us page sections. Fields left blank fall back to the design copy.",
+    "show_in_rest": 0
+}
