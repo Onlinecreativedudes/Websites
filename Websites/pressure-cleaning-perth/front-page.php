@@ -230,7 +230,7 @@ $mobile_hero = pcp_field('mobile_hero_image', '', false);
         <?php endforeach; ?>
       </ul>
       <div class="owner-quote">
-        <p><?php echo wp_kses_post(pcp_field('about_quote', "<b>G'day, I'm Jamie</b> — We started Pressure Cleaning Perth because too many people were being let down by general cleaners using the wrong gear on the wrong surfaces. We do one thing, we do it properly, and we stand behind every job.")); ?></p>
+        <p><?php echo wp_kses_post(pcp_field('about_quote', "<b>G'day, I'm Jamie</b> — Placeholder bio. Add the owner's introduction here from the Home page editor (About tab). Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")); ?></p>
       </div>
     </div>
     <div class="reveal owner-media">
