@@ -2031,3 +2031,78 @@ footer ul a:hover {color:var(--green-bright)}
 .svc-cover:focus-visible{outline:3px solid var(--blue);outline-offset:3px;text-indent:0}
 .svc .svc-body,.svc .ph{position:relative;z-index:1}
 .svc .svc-link{pointer-events:none}
+
+/* ============================================================
+   Gravity Forms — brand styling to match the quote lead-card.
+   Maps GF markup (.gform_wrapper/.gfield/.gform_button) onto the
+   design's .field tokens. Targeted !important overrides win against
+   the Gravity Forms framework theme.
+   ============================================================ */
+.gform_wrapper { margin: 0; }
+.lead-card .gform_wrapper, .qb-form .gform_wrapper { margin: 0; }
+
+.gform_wrapper .gform_required_legend { display: none; }
+
+.gform_wrapper .gfield_label {
+  display: block; font-size: .78rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .05em; color: var(--navy); margin-bottom: 5px;
+}
+.gform_wrapper .gfield_required { color: var(--green-deep); margin-left: 4px; font-weight: 700; }
+
+.gform_wrapper .gfield { margin-bottom: 13px !important; }
+.gform_wrapper .ginput_container { margin-top: 0 !important; }
+
+.gform_wrapper input[type="text"],
+.gform_wrapper input[type="email"],
+.gform_wrapper input[type="tel"],
+.gform_wrapper input[type="url"],
+.gform_wrapper input[type="number"],
+.gform_wrapper select,
+.gform_wrapper textarea {
+  width: 100%; padding: 13px 15px;
+  border: 1.5px solid var(--line) !important; border-radius: 11px !important;
+  font: inherit; font-size: .96rem;
+  background: var(--paper) !important; color: var(--ink) !important;
+  box-shadow: none !important; transition: border .15s, box-shadow .15s;
+}
+.gform_wrapper textarea { min-height: 120px; }
+
+.gform_wrapper input:focus,
+.gform_wrapper select:focus,
+.gform_wrapper textarea:focus {
+  outline: 0; border-color: var(--blue-bright) !important;
+  box-shadow: 0 0 0 4px rgba(95,181,227,.15) !important; background: #fff !important;
+}
+
+.gform_wrapper .gfield_description { font-size: .8rem; color: var(--muted); margin-top: 6px; }
+
+/* checkboxes & radios */
+.gform_wrapper .gfield_checkbox .gchoice,
+.gform_wrapper .gfield_radio .gchoice { display: flex; align-items: center; gap: 10px; margin: 7px 0; }
+.gform_wrapper .gfield_checkbox input[type="checkbox"],
+.gform_wrapper .gfield_radio input[type="radio"] { width: 18px; height: 18px; accent-color: var(--green); margin: 0; }
+.gform_wrapper .gchoice label { margin: 0; color: var(--ink); font-size: .95rem; }
+
+/* submit button -> green pill, full width */
+.gform_wrapper .gform_footer { margin: 8px 0 0 !important; padding: 0 !important; }
+.gform_wrapper .gform_footer input[type="submit"],
+.gform_wrapper .gform_footer button,
+.gform_wrapper .gform_button {
+  width: 100%; display: inline-flex; align-items: center; justify-content: center;
+  font-family: 'Archivo'; font-weight: 800; font-size: 1rem; cursor: pointer;
+  padding: 15px 26px; border: 0 !important; border-radius: 999px !important;
+  background: linear-gradient(135deg, var(--green-bright), var(--green-deep)) !important;
+  color: #06270a !important; box-shadow: 0 12px 26px -10px rgba(58,138,24,.7);
+  transition: transform .15s, box-shadow .15s;
+}
+.gform_wrapper .gform_footer input[type="submit"]:hover,
+.gform_wrapper .gform_footer button:hover,
+.gform_wrapper .gform_button:hover { transform: translateY(-2px); }
+
+/* validation + confirmation */
+.gform_wrapper .gfield_error input,
+.gform_wrapper .gfield_error select,
+.gform_wrapper .gfield_error textarea { border-color: #e3563f !important; }
+.gform_wrapper .validation_message { color: #c5371f; font-size: .82rem; margin-top: 5px; }
+.gform_wrapper .gform_validation_errors { border-radius: 12px; }
+.gform_confirmation_message { color: var(--ink); font-weight: 600; }
