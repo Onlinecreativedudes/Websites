@@ -555,7 +555,7 @@ section {position:relative}
 /* ---------- footer ---------- */
 
 footer {position:relative;background:#04192b;color:#9fc0d8;padding:calc(var(--torn) + 56px) 0 0;--torn:clamp(46px,6vw,88px)}
-footer::before {content:"";position:absolute;left:0;right:0;top:0;height:var(--torn);background:#04192b url('../brand/footer-torn.png') no-repeat top center;background-size:100% 100%;pointer-events:none}
+footer::before {content:"";position:absolute;left:0;right:0;top:0;height:var(--torn);background:#0e233b url('../brand/footer-torn.png') no-repeat top center;background-size:100% 100%;pointer-events:none}
 
 
 .foot-grid {display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;padding-bottom:48px}
