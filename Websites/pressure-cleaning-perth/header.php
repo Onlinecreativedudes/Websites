@@ -47,7 +47,6 @@ $commercial_url = pcp_archive_url('commercial', '/commercial/');
 
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
-<a class="skip-link screen-reader-text" href="#main">Skip to content</a>
 
 <header class="head" id="head">
   <div class="wrap">

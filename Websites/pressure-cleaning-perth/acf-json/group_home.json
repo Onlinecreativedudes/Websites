@@ -178,6 +178,14 @@
                     "name": "body",
                     "type": "textarea",
                     "rows": 3
+                },
+                {
+                    "key": "field_pcp_home_services_link",
+                    "label": "Tile link (whole tile is clickable)",
+                    "name": "link",
+                    "type": "link",
+                    "instructions": "Where this tile navigates when clicked. Leave empty to fall back to the Services archive.",
+                    "return_format": "array"
                 }
             ],
             "instructions": "Leave empty to show the six default cards from the design."

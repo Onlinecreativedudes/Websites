@@ -141,14 +141,21 @@ $mobile_hero = pcp_field('mobile_hero_image', '', false);
       <?php
       $svc_rows = $rows('services');
       if ($svc_rows) {
-          foreach ($svc_rows as $s) : ?>
+          foreach ($svc_rows as $s) :
+              $link = $s['link'] ?? '';
+              $url  = is_array($link) ? ($link['url'] ?? '') : (string) $link;
+              if (!$url) { $url = $services_url; }
+              $target = (is_array($link) && !empty($link['target'])) ? ' target="_blank" rel="noopener"' : '';
+              $aria = (is_array($link) && !empty($link['title'])) ? $link['title'] : ($s['title'] ?? 'View service');
+          ?>
             <article class="svc reveal">
               <div class="ph"><?php echo pcp_image($s['image'] ?? null, 'pcp-card', '', ['loading' => 'lazy'], '', ''); ?></div>
               <div class="svc-body">
                 <h3><?php echo esc_html($s['title'] ?? ''); ?></h3>
                 <p><?php echo esc_html($s['body'] ?? ''); ?></p>
-                <a href="<?php echo esc_url($quote_url); ?>" class="svc-link">Get a Quote <?php echo pcp_icon('arrow'); ?></a>
+                <span class="svc-link">Get a Quote <?php echo pcp_icon('arrow'); ?></span>
               </div>
+              <a class="svc-cover" href="<?php echo esc_url($url); ?>"<?php echo $target; ?> aria-label="<?php echo esc_attr($aria); ?>"></a>
             </article>
           <?php endforeach;
       } else {
@@ -158,8 +165,9 @@ $mobile_hero = pcp_field('mobile_hero_image', '', false);
               <div class="svc-body">
                 <h3><?php echo esc_html($s[2]); ?></h3>
                 <p><?php echo esc_html($s[3]); ?></p>
-                <a href="<?php echo esc_url($quote_url); ?>" class="svc-link">Get a Quote <?php echo pcp_icon('arrow'); ?></a>
+                <span class="svc-link">Get a Quote <?php echo pcp_icon('arrow'); ?></span>
               </div>
+              <a class="svc-cover" href="<?php echo esc_url($services_url); ?>" aria-label="<?php echo esc_attr($s[2]); ?>"></a>
             </article>
           <?php endforeach;
       }

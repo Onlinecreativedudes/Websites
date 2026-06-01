@@ -2030,3 +2030,14 @@ footer::before {content:"";position:absolute;left:0;right:0;bottom:100%;margin-b
   .hero-mobile-img img{width:100%;height:auto;display:block;object-fit:cover}
   .hero .hero-mobile-img{order:-1}
 }
+
+/* ============================================================
+   Clickable service tiles (whole card navigates).
+   Stretched-link overlay over each .svc; the visible .svc-link
+   is a span, so there are no nested anchors. URL set per tile in ACF.
+   ============================================================ */
+.svc{position:relative}
+.svc-cover{position:absolute;inset:0;z-index:3;border-radius:var(--r);text-indent:-9999px;overflow:hidden;white-space:nowrap}
+.svc-cover:focus-visible{outline:3px solid var(--blue);outline-offset:3px;text-indent:0}
+.svc .svc-body,.svc .ph{position:relative;z-index:1}
+.svc .svc-link{pointer-events:none}
