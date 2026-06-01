@@ -139,6 +139,7 @@ $title = get_the_title();
   </div>
 </section>
 
+<?php $intro = pcp_field('intro_body', ''); if ($intro || trim(get_the_content()) !== '') : ?>
 <section class="pad-sm">
   <div class="wrap">
     <div class="sec-head reveal" style="max-width:880px">
@@ -147,19 +148,16 @@ $title = get_the_title();
     </div>
     <div class="reveal" style="max-width:880px;margin:0 auto;color:var(--muted);font-size:1.06rem;line-height:1.78;display:grid;gap:16px">
       <?php
-      $intro = pcp_field('intro_body', '');
       if ($intro) {
-          echo wp_kses_post($intro);
-      } elseif (trim(get_the_content()) !== '') {
-          the_content();
+          echo wp_kses_post(wpautop($intro));
       } else {
-          echo '<p>Pressure Cleaning Perth is a family-owned specialist serving the full Perth metro. We clean across residential, strata and commercial properties — safely, thoroughly, and with no risk to your surfaces.</p>';
-          echo '<p>Every job starts with a free on-site inspection. We pick the right method, give you a clear itemised price up front, and back the work with our Iron Clad Guarantee. Call <a href="' . esc_url($phone_t) . '" style="color:var(--blue);font-weight:700">' . esc_html($phone_d) . '</a> and we\'ll get straight back to you.</p>';
+          the_content();
       }
       ?>
     </div>
   </div>
 </section>
+<?php endif; ?>
 
 <section class="problem">
   <div class="problem-img reveal r-left">
@@ -178,11 +176,13 @@ $title = get_the_title();
         echo '<p>Left alone, that means porous materials, blocked drainage and a surface that ages years before it should. A proper clean removes the growth, restores the look and buys you a lot more life out of what you have already paid for.</p>';
     }
     ?>
+    <?php if ($pp = $rows('problem_points')) : ?>
     <ul class="dmg-list">
-      <?php foreach (($rows('problem_points') ?: array_map(fn($t) => ['text' => $t], $d_problem_points)) as $p) : ?>
-        <li><?php echo $alert_svg; ?> <span><?php echo wp_kses_post(is_array($p) ? ($p['text'] ?? '') : $p); ?></span></li>
+      <?php foreach ($pp as $p) : ?>
+        <li><?php echo $alert_svg; ?> <span><?php echo wp_kses_post($p['text'] ?? ''); ?></span></li>
       <?php endforeach; ?>
     </ul>
+    <?php endif; ?>
   </div>
 </section>
 
@@ -215,29 +215,15 @@ $title = get_the_title();
           <?php endif; ?>
         </article>
       <?php endforeach;
-      } else {
-          $i = 0;
-          foreach ($d_methods as $m) :
-              $i++;
-      ?>
-        <article class="method reveal">
-          <div class="method-num"><span><?php echo esc_html(sprintf('%02d', $i)); ?></span><?php if ($m[1]) : ?><b class="method-tag"><?php echo esc_html($m[1]); ?></b><?php endif; ?></div>
-          <h3><?php echo esc_html($m[0]); ?></h3>
-          <p><?php echo esc_html($m[2]); ?></p>
-          <ul>
-            <?php foreach ($m[3] as $feat) : ?>
-              <li><?php echo pcp_icon('check'); ?> <?php echo wp_kses_post($feat); ?></li>
-            <?php endforeach; ?>
-          </ul>
-        </article>
-      <?php endforeach;
       }
       ?>
     </div>
+    <?php $methods_note = pcp_field('methods_note', ''); if ($methods_note) : ?>
     <div class="method-note reveal">
       <?php echo $shield_svg; ?>
-      <span><?php echo esc_html(pcp_field('methods_note', "We work to WorkSafe guidelines and our own strict height-safety standards, so you never have to get on the roof yourself. Full clean-up around your home and your neighbours' if needed.")); ?></span>
+      <span><?php echo esc_html($methods_note); ?></span>
     </div>
+    <?php endif; ?>
   </div>
 </section>
 

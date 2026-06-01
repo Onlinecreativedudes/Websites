@@ -21,8 +21,13 @@ are installed on the target, not committed here.
 7. **Seed content** (optional, recommended):
    ```
    wp eval-file wp-content/themes/pressure-cleaning-perth/deploy/seed.php
+   wp eval-file wp-content/themes/pressure-cleaning-perth/deploy/seed-services.php
    ```
-   Then flush permalinks: `wp rewrite flush` (the seed also flushes).
+   The first creates the page tree, front/blog pages, Commercial entries and the
+   primary menu. The second creates the 13 Service pages with their full content
+   (hero, problem, methods, why, process, FAQs, areas) plus Yoast title/meta.
+   Both are idempotent (match by slug, update in place). Then flush permalinks:
+   `wp rewrite flush` (the seeds also flush).
 8. **Gravity Forms** — create/import the quote form. Set its ID in
    **Site Options → CTA & Forms → Default quote form**, and per-page form IDs where wanted.
 9. **Site Options** — upload the logo (or it falls back to the bundled brand asset),

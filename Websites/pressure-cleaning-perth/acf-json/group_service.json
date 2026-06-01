@@ -60,7 +60,7 @@
                 {
                     "key": "field_pcp_service_hero_bullets_text",
                     "label": "Bullet",
-                    "name": "hero_bullets_text",
+                    "name": "text",
                     "type": "text"
                 }
             ]
@@ -111,7 +111,7 @@
                 {
                     "key": "field_pcp_service_quote_points_text",
                     "label": "Point",
-                    "name": "quote_points_text",
+                    "name": "text",
                     "type": "text"
                 }
             ]
@@ -206,7 +206,7 @@
                 {
                     "key": "field_pcp_service_problem_points_text",
                     "label": "Point (HTML allowed)",
-                    "name": "problem_points_text",
+                    "name": "text",
                     "type": "text",
                     "instructions": "Bold the key phrase with <b>...</b>."
                 }
@@ -249,20 +249,20 @@
                 {
                     "key": "field_pcp_service_methods_title",
                     "label": "Title",
-                    "name": "methods_title",
+                    "name": "title",
                     "type": "text"
                 },
                 {
                     "key": "field_pcp_service_methods_tag",
                     "label": "Tag (optional)",
-                    "name": "methods_tag",
+                    "name": "tag",
                     "type": "text",
                     "instructions": "Small pill, eg \"Most Popular\". Leave blank for none."
                 },
                 {
                     "key": "field_pcp_service_methods_body",
                     "label": "Body",
-                    "name": "methods_body",
+                    "name": "body",
                     "type": "textarea",
                     "rows": 3
                 },
@@ -286,7 +286,7 @@
                         {
                             "key": "field_pcp_service_methods_features_text",
                             "label": "Feature",
-                            "name": "methods_features_text",
+                            "name": "text",
                             "type": "text"
                         }
                     ]
@@ -338,13 +338,13 @@
                 {
                     "key": "field_pcp_service_why_cells_title",
                     "label": "Title",
-                    "name": "why_cells_title",
+                    "name": "title",
                     "type": "text"
                 },
                 {
                     "key": "field_pcp_service_why_cells_body",
                     "label": "Body",
-                    "name": "why_cells_body",
+                    "name": "body",
                     "type": "textarea",
                     "rows": 2
                 }
@@ -387,13 +387,13 @@
                 {
                     "key": "field_pcp_service_process_steps_title",
                     "label": "Title",
-                    "name": "process_steps_title",
+                    "name": "title",
                     "type": "text"
                 },
                 {
                     "key": "field_pcp_service_process_steps_body",
                     "label": "Body",
-                    "name": "process_steps_body",
+                    "name": "body",
                     "type": "textarea",
                     "rows": 2
                 }
@@ -474,13 +474,13 @@
                 {
                     "key": "field_pcp_service_faqs_question",
                     "label": "Question",
-                    "name": "faqs_question",
+                    "name": "question",
                     "type": "text"
                 },
                 {
                     "key": "field_pcp_service_faqs_answer",
                     "label": "Answer",
-                    "name": "faqs_answer",
+                    "name": "answer",
                     "type": "textarea",
                     "rows": 3
                 }
@@ -523,20 +523,20 @@
                 {
                     "key": "field_pcp_service_reviews_quote",
                     "label": "Quote",
-                    "name": "reviews_quote",
+                    "name": "quote",
                     "type": "textarea",
                     "rows": 3
                 },
                 {
                     "key": "field_pcp_service_reviews_name",
                     "label": "Name",
-                    "name": "reviews_name",
+                    "name": "name",
                     "type": "text"
                 },
                 {
                     "key": "field_pcp_service_reviews_location",
                     "label": "Location / role",
-                    "name": "reviews_location",
+                    "name": "location",
                     "type": "text"
                 },
                 {

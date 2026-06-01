@@ -57,30 +57,9 @@ function pcp_seed_content() {
         $report[] = 'posts page set to Blog';
     }
 
-    // -- Service CPT entries (the six from the homepage) --
-    $services = [
-        ['Driveway Cleaning', 'Perth driveways cop a beating from dust, oil, moss and tyre marks. We restore concrete, limestone, exposed aggregate and brick paving.'],
-        ['Roof Cleaning & Restoration', 'Lichen, algae and built-up debris age your roof faster and trap heat. A thorough clean and treatment restores and protects it.'],
-        ['Patio & Paver Cleaning', 'We clean and restore paved surfaces, including delicate limestone, without causing damage, and can seal them to keep them cleaner for longer.'],
-        ['House Washing', 'A professional exterior house wash removes mould, grime and oxidisation from rendered, brick and cladded surfaces and restores street appeal.'],
-        ['Commercial Pressure Cleaning', 'Shopping centres, hospitals, schools, factory floors, car parks and cool rooms, scheduled to minimise disruption and meeting site compliance.'],
-        ['Soft Wash & Specialised', 'Controlled low pressure for surfaces that cannot take high pressure. We also handle graffiti removal and vacuum recovery.'],
-    ];
-    if (post_type_exists('service')) {
-        foreach ($services as $i => $s) {
-            $slug = sanitize_title($s[0]);
-            if (get_page_by_path($slug, OBJECT, 'service')) { continue; }
-            $sid = wp_insert_post([
-                'post_type'    => 'service',
-                'post_status'  => 'publish',
-                'post_title'   => $s[0],
-                'post_name'    => $slug,
-                'post_excerpt' => $s[1],
-                'menu_order'   => $i,
-            ]);
-            if ($sid && !is_wp_error($sid)) { $report[] = "service created: {$s[0]} (#$sid)"; }
-        }
-    }
+    // -- Service CPT entries come from deploy/seed-services.php (the 13 real --
+    //    service pages parsed from the supplied content). Run that separately:
+    //    wp eval-file wp-content/themes/pressure-cleaning-perth/deploy/seed-services.php
 
     // -- Commercial CPT entries --
     $commercial = [
