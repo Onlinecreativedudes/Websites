@@ -553,17 +553,10 @@ section {position:relative}
 .guar-badge span {font-size:.9rem;color:#bcd6e9}
 
 /* ---------- footer ---------- */
-*:has(+ footer) {padding-bottom:calc(clamp(55px,7.5vw,105px) + 28px)!important}
 
-footer {position:relative;background:#04192b;color:#9fc0d8;padding:64px 0 0;--torn:clamp(55px,7.5vw,105px)}
+footer {position:relative;background:#04192b;color:#9fc0d8;padding:calc(var(--torn) + 56px) 0 0;--torn:clamp(46px,6vw,88px)}
+footer::before {content:"";position:absolute;left:0;right:0;top:0;height:var(--torn);background:#04192b url('../brand/footer-torn.png') no-repeat top center;background-size:100% 100%;pointer-events:none}
 
-footer::before {
-  content:"";position:absolute;left:0;right:0;bottom:100%;margin-bottom:-1px;
-  height:var(--torn);pointer-events:none;
-  background:
-    linear-gradient(180deg,rgba(4,25,43,0) 80%,#04192b 100%),
-    url('../brand/footer-torn.png') no-repeat bottom center;
-  background-size:100% 100%,100% 100%;}
 
 .foot-grid {display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;padding-bottom:48px}
 
@@ -703,7 +696,6 @@ footer ul a:hover {color:var(--green-bright)}
   background:#0a3a5e url("ca555bc8-2414-48ea-ad61-248652004bdf") center/cover no-repeat;
   background-attachment:scroll;}
 
-footer::before {content:"";position:absolute;left:0;right:0;bottom:100%;margin-bottom:-1px;height:var(--torn);pointer-events:none;background:linear-gradient(180deg,rgba(4,25,43,0) 82%,#04192b 100%),url("5499d734-1122-4a94-816d-3e5d77b2d501") no-repeat bottom center;background-size:100% 100%,100% 100%}
 
 /* ---------- service-page specific ---------- */
 /* archive variant: tile grid + archive hero */
@@ -980,7 +972,6 @@ footer::before {content:"";position:absolute;left:0;right:0;bottom:100%;margin-b
   background:#0a3a5e url("e9fafff4-4514-444d-8d8f-c7a6ec45ed2a") center/cover no-repeat;
   background-attachment:scroll;}
 
-footer::before {content:"";position:absolute;left:0;right:0;bottom:100%;margin-bottom:-1px;height:var(--torn);pointer-events:none;background:linear-gradient(180deg,rgba(4,25,43,0) 82%,#04192b 100%),url("ef1820e7-e77d-45f7-a3fe-a7f84dc2769a") no-repeat bottom center;background-size:100% 100%,100% 100%}
 
 /* ---------- service-page specific ---------- */
 /* thin hero (~700px), centered, no inline form */
@@ -1134,7 +1125,6 @@ footer::before {content:"";position:absolute;left:0;right:0;bottom:100%;margin-b
   background:#0a3a5e url('../images/concrete-spray.jpg') center/cover no-repeat;
   background-attachment:scroll;}
 
-footer::before {content:"";position:absolute;left:0;right:0;bottom:100%;margin-bottom:-1px;height:var(--torn);pointer-events:none;background:linear-gradient(180deg,rgba(4,25,43,0) 82%,#04192b 100%),url('../brand/footer-torn.png') no-repeat bottom center;background-size:100% 100%,100% 100%}
 
 /* ---------- service-page specific ---------- */
 /* thin hero (~700px), centered, no inline form */
