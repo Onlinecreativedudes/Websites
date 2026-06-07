@@ -2049,7 +2049,8 @@ footer ul a:hover {color:var(--green-bright)}
 }
 .gform_wrapper .gfield_required { color: var(--green-deep); margin-left: 4px; font-weight: 700; }
 
-.gform_wrapper .gfield { margin-bottom: 13px !important; }
+.gform_wrapper .gform_fields { grid-row-gap: 0 !important; row-gap: 0 !important; }
+.gform_wrapper .gfield { margin-bottom: 10px !important; margin-top: 0 !important; padding-top: 0 !important; }
 .gform_wrapper .ginput_container { margin-top: 0 !important; }
 
 .gform_wrapper input[type="text"],
