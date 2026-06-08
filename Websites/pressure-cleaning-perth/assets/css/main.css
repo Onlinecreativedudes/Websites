@@ -40,7 +40,7 @@
   --shadow-lg:0 40px 90px -30px rgba(6,36,61,.45);
   --r:18px;
   --r-sm:12px;
-  --maxw:1240px;}
+  --maxw:1500px;}
 
 * {margin:0;padding:0;box-sizing:border-box}
 
@@ -681,7 +681,7 @@ footer ul a:hover {color:var(--green-bright)}
   --shadow-lg:0 40px 90px -30px rgba(6,36,61,.45);
   --r:18px;
   --r-sm:12px;
-  --maxw:1240px;}
+  --maxw:1500px;}
 
 /* ---------- hero ---------- */
 .hero {position:relative;color:#eaf4fc;overflow:hidden;
