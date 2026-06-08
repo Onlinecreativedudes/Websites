@@ -1,0 +1,163 @@
+{
+    "key": "group_pcp_gallery",
+    "title": "Gallery Page",
+    "fields": [
+        {
+            "key": "field_pcp_gallery_tab_hero",
+            "label": "Hero",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_pcp_gallery_mobile_hero_image",
+            "label": "Mobile hero image",
+            "name": "mobile_hero_image",
+            "type": "image",
+            "return_format": "array",
+            "preview_size": "medium",
+            "instructions": "Shown above the headline on mobile only (hidden on desktop). Added for Google Ads conversion. Set the alt text on the image."
+        },
+        {
+            "key": "field_pcp_gallery_hero_image",
+            "label": "Hero background image",
+            "name": "hero_image",
+            "type": "image",
+            "return_format": "array",
+            "preview_size": "medium",
+            "instructions": "Background photo behind the hero. Leave blank to use the design default."
+        },
+        {
+            "key": "field_pcp_gallery_hero_crumb",
+            "label": "Breadcrumb label",
+            "name": "hero_crumb",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_gallery_hero_eyebrow",
+            "label": "Hero eyebrow",
+            "name": "hero_eyebrow",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_gallery_hero_heading",
+            "label": "Hero headline (H1)",
+            "name": "hero_heading",
+            "type": "textarea",
+            "rows": 2,
+            "instructions": "Basic HTML allowed (eg <span class=\"hl\">highlight</span>)."
+        },
+        {
+            "key": "field_pcp_gallery_hero_sub",
+            "label": "Hero subheading",
+            "name": "hero_sub",
+            "type": "textarea",
+            "rows": 3
+        },
+        {
+            "key": "field_pcp_gallery_tab_ba",
+            "label": "Before & After",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_pcp_gallery_ba_kicker",
+            "label": "Kicker",
+            "name": "ba_kicker",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_gallery_ba_heading",
+            "label": "Heading",
+            "name": "ba_heading",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_gallery_ba_intro",
+            "label": "Intro",
+            "name": "ba_intro",
+            "type": "textarea",
+            "rows": 2
+        },
+        {
+            "key": "field_pcp_gallery_ba_cards",
+            "label": "Before & after cards",
+            "name": "ba_cards",
+            "type": "repeater",
+            "layout": "block",
+            "button_label": "Add card",
+            "instructions": "Each card shows a before image and an after image side by side. Leave empty to show the design defaults.",
+            "sub_fields": [
+                {
+                    "name": "before_image",
+                    "key": "field_pcp_gallery_ba_cards_before_image",
+                    "label": "Before image",
+                    "type": "image",
+                    "return_format": "array",
+                    "preview_size": "medium"
+                },
+                {
+                    "name": "after_image",
+                    "key": "field_pcp_gallery_ba_cards_after_image",
+                    "label": "After image",
+                    "type": "image",
+                    "return_format": "array",
+                    "preview_size": "medium"
+                },
+                {
+                    "name": "label",
+                    "key": "field_pcp_gallery_ba_cards_label",
+                    "label": "Label",
+                    "type": "text",
+                    "instructions": "Caption shown under the split, eg \"Tile Roof Restoration\"."
+                }
+            ]
+        },
+        {
+            "key": "field_pcp_gallery_tab_portfolio",
+            "label": "Portfolio Grid",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_pcp_gallery_portfolio_kicker",
+            "label": "Kicker",
+            "name": "portfolio_kicker",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_gallery_portfolio_heading",
+            "label": "Heading",
+            "name": "portfolio_heading",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_gallery_portfolio_images",
+            "label": "Portfolio images",
+            "name": "portfolio_images",
+            "type": "gallery",
+            "return_format": "array",
+            "preview_size": "medium",
+            "instructions": "Grid of project photos. Tile sizes cycle automatically (wide / tall / standard). Leave empty to use the design defaults."
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-templates/gallery.php"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true,
+    "description": "Gallery / Portfolio page sections. Fields left blank fall back to the design copy and photos.",
+    "show_in_rest": 0
+}

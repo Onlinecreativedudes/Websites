@@ -1,0 +1,18 @@
+# Design export working directory (Claude Design source, not part of the build)
+design-source/
+
+# Failed-download / scratch
+_incoming/
+
+# Credentials and config (never committed; supplied at deploy via host)
+wp-config.php
+.env
+.env.*
+*.pem
+*.key
+
+# OS and editor junk
+.DS_Store
+Thumbs.db
+*.swp
+node_modules/

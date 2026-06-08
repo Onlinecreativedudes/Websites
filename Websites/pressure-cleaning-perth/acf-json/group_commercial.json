@@ -1,0 +1,164 @@
+{
+    "key": "group_pcp_commercial",
+    "title": "Commercial / Industry",
+    "fields": [
+        {
+            "key": "field_pcp_commercial_tab_hero",
+            "label": "Hero",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_pcp_commercial_mobile_hero_image",
+            "label": "Mobile hero image",
+            "name": "mobile_hero_image",
+            "type": "image",
+            "return_format": "array",
+            "preview_size": "medium",
+            "instructions": "Shown above the headline on mobile only (hidden on desktop). Added for Google Ads conversion. Set the alt text on the image."
+        },
+        {
+            "key": "field_pcp_commercial_hero_image",
+            "label": "Hero background image",
+            "name": "hero_image",
+            "type": "image",
+            "return_format": "array",
+            "preview_size": "medium",
+            "instructions": "Background for the hero band. Falls back to the featured image, then a theme default."
+        },
+        {
+            "key": "field_pcp_commercial_hero_eyebrow",
+            "label": "Hero eyebrow",
+            "name": "hero_eyebrow",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_commercial_hero_intro",
+            "label": "Hero intro",
+            "name": "hero_intro",
+            "type": "textarea",
+            "instructions": "Sits under the H1 (the page title) in the hero.",
+            "rows": 3
+        },
+        {
+            "key": "field_pcp_commercial_tab_intro",
+            "label": "Intro",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_pcp_commercial_intro_kicker",
+            "label": "Kicker",
+            "name": "intro_kicker",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_commercial_intro_heading",
+            "label": "Heading",
+            "name": "intro_heading",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_commercial_intro_body",
+            "label": "Body",
+            "name": "intro_body",
+            "type": "wysiwyg",
+            "media_upload": 0
+        },
+        {
+            "key": "field_pcp_commercial_intro_bullets",
+            "label": "Bullets",
+            "name": "intro_bullets",
+            "type": "repeater",
+            "layout": "block",
+            "button_label": "Add bullet",
+            "instructions": "Leave empty to show the design defaults.",
+            "sub_fields": [
+                {
+                    "key": "field_pcp_commercial_intro_bullets_text",
+                    "label": "Bullet (HTML allowed)",
+                    "name": "text",
+                    "type": "text",
+                    "instructions": "Basic HTML allowed (eg <b>lead-in</b> followed by detail)."
+                }
+            ]
+        },
+        {
+            "key": "field_pcp_commercial_tab_services",
+            "label": "Services",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_pcp_commercial_services_kicker",
+            "label": "Kicker",
+            "name": "services_kicker",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_commercial_services_heading",
+            "label": "Heading",
+            "name": "services_heading",
+            "type": "text"
+        },
+        {
+            "key": "field_pcp_commercial_industry_services",
+            "label": "Services we clean",
+            "name": "industry_services",
+            "type": "repeater",
+            "layout": "block",
+            "button_label": "Add row",
+            "instructions": "Leave empty to show the default surface list from the design.",
+            "sub_fields": [
+                {
+                    "key": "field_pcp_commercial_industry_services_title",
+                    "label": "Title",
+                    "name": "title",
+                    "type": "text"
+                },
+                {
+                    "key": "field_pcp_commercial_industry_services_body",
+                    "label": "Body",
+                    "name": "body",
+                    "type": "textarea",
+                    "rows": 2
+                },
+                {
+                    "key": "field_pcp_commercial_industry_services_image",
+                    "label": "Icon / image",
+                    "name": "image",
+                    "type": "image",
+                    "return_format": "array",
+                    "preview_size": "medium",
+                    "instructions": "Optional. Shown in place of the default icon."
+                }
+            ]
+        },
+        {
+            "key": "field_pcp_commercial_services_note",
+            "label": "Footnote",
+            "name": "services_note",
+            "type": "text"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "commercial"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true,
+    "description": "Commercial / industry single sections. Fields left blank fall back to the design copy.",
+    "show_in_rest": 0
+}

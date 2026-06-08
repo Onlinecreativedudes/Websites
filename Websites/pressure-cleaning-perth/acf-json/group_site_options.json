@@ -1,0 +1,164 @@
+{
+    "key": "group_pcp_site_options",
+    "title": "Site Options",
+    "fields": [
+        {
+            "key": "field_pcp_so_tab_contact",
+            "label": "Contact",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_pcp_so_business_phone",
+            "label": "Business phone (dialable)",
+            "name": "business_phone",
+            "type": "text",
+            "instructions": "Digits only, eg 1300667818. Used for tel: links.",
+            "default_value": "1300667818",
+            "required": 1
+        },
+        {
+            "key": "field_pcp_so_display_phone",
+            "label": "Display phone (human-readable)",
+            "name": "display_phone",
+            "type": "text",
+            "instructions": "Formatted version shown to visitors, eg 1300 667 818.",
+            "default_value": "1300 667 818",
+            "required": 1
+        },
+        {
+            "key": "field_pcp_so_business_email",
+            "label": "Business email",
+            "name": "business_email",
+            "type": "email"
+        },
+        {
+            "key": "field_pcp_so_address_short",
+            "label": "Service area / address (short)",
+            "name": "address_short",
+            "type": "text",
+            "default_value": "Perth, WA"
+        },
+        {
+            "key": "field_pcp_so_tab_branding",
+            "label": "Branding",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_pcp_so_site_logo",
+            "label": "Site logo (header & footer)",
+            "name": "site_logo",
+            "type": "image",
+            "instructions": "The Pressure Cleaning Perth logo. Falls back to the bundled brand asset if empty.",
+            "return_format": "array",
+            "preview_size": "medium"
+        },
+        {
+            "key": "field_pcp_so_tab_footer",
+            "label": "Footer",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_pcp_so_footer_blurb",
+            "label": "Footer blurb",
+            "name": "footer_blurb",
+            "type": "textarea",
+            "rows": 4,
+            "default_value": "A family-owned Perth business providing specialist pressure washing and soft wash services to residential, strata and commercial properties across the Perth metro area. Fully insured. 5-star rated. Perth's pressure cleaning specialists."
+        },
+        {
+            "key": "field_pcp_so_facebook_url",
+            "label": "Facebook URL",
+            "name": "facebook_url",
+            "type": "url",
+            "default_value": "https://www.facebook.com/pressurecleaningperth/"
+        },
+        {
+            "key": "field_pcp_so_youtube_url",
+            "label": "YouTube URL",
+            "name": "youtube_url",
+            "type": "url"
+        },
+        {
+            "key": "field_pcp_so_footer_copyright",
+            "label": "Footer copyright text",
+            "name": "footer_copyright",
+            "type": "text",
+            "instructions": "Shown after the year. Leave blank for \"{Site name}. All rights reserved.\""
+        },
+        {
+            "key": "field_pcp_so_tab_cta",
+            "label": "CTA & Forms",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_pcp_so_nav_quote_url",
+            "label": "\"Get a Free Quote\" button URL",
+            "name": "nav_quote_url",
+            "type": "url",
+            "instructions": "Where the header / mega-menu quote buttons link. Defaults to the Contact page."
+        },
+        {
+            "key": "field_pcp_so_default_quote_form_id",
+            "label": "Default quote form (Gravity Forms ID)",
+            "name": "default_quote_form_id",
+            "type": "number",
+            "instructions": "The Gravity Forms form ID used for hero / contact quote forms when a page has none set."
+        },
+        {
+            "key": "field_pcp_so_cta_band_heading",
+            "label": "CTA band — heading (start)",
+            "name": "cta_band_heading",
+            "type": "text",
+            "instructions": "Shown in the big call-to-action band on every page, before the script highlight.",
+            "default_value": "Ready to"
+        },
+        {
+            "key": "field_pcp_so_cta_band_script",
+            "label": "CTA band — script highlight",
+            "name": "cta_band_script",
+            "type": "text",
+            "default_value": "see the difference?"
+        },
+        {
+            "key": "field_pcp_so_cta_band_body",
+            "label": "CTA band — body",
+            "name": "cta_band_body",
+            "type": "textarea",
+            "rows": 2,
+            "default_value": "From driveways to rooftops, Pressure Cleaning Perth brings the results. Quick response, honest pricing, and work backed by our Iron Clad Guarantee."
+        },
+        {
+            "key": "field_pcp_so_contact_lead",
+            "label": "Contact section — lead paragraph",
+            "name": "contact_lead",
+            "type": "textarea",
+            "rows": 3,
+            "default_value": "Not sure what your property needs? Get in touch and we will tell you honestly. Whether it is a quick driveway clean or a full commercial wash-down, we will scope the job properly and give you a clear price before we start."
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "site-options"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true,
+    "description": "Site-wide content shown on every page (contact, branding, footer, CTA).",
+    "show_in_rest": 0
+}

@@ -1,0 +1,68 @@
+{
+    "key": "group_pcp_blog_post",
+    "title": "Blog Post",
+    "fields": [
+        {
+            "key": "field_pcp_post_tab_hero",
+            "label": "Hero",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_pcp_post_mobile_hero_image",
+            "label": "Mobile hero image",
+            "name": "mobile_hero_image",
+            "type": "image",
+            "return_format": "array",
+            "preview_size": "medium",
+            "instructions": "Shown above the title on mobile only (hidden on desktop). Added for Google Ads conversion. Set the alt text on the image."
+        },
+        {
+            "key": "field_pcp_post_hero_eyebrow",
+            "label": "Hero eyebrow",
+            "name": "hero_eyebrow",
+            "type": "text",
+            "instructions": "Optional small label above the title. Leave blank to show the post category instead."
+        },
+        {
+            "key": "field_pcp_post_tab_sidebar",
+            "label": "Sidebar CTA",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_pcp_post_sidebar_cta_heading",
+            "label": "Sidebar CTA heading",
+            "name": "sidebar_cta_heading",
+            "type": "text",
+            "instructions": "Heading on the in-article and sidebar quote callouts. Leave blank to use the default."
+        },
+        {
+            "key": "field_pcp_post_sidebar_cta_body",
+            "label": "Sidebar CTA body",
+            "name": "sidebar_cta_body",
+            "type": "textarea",
+            "rows": 3,
+            "instructions": "Supporting line under the sidebar CTA heading. Leave blank to use the default."
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true,
+    "description": "Optional overrides for a single blog post. Fields left blank fall back to the design copy.",
+    "show_in_rest": 0
+}
