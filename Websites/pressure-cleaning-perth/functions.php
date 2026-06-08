@@ -12,3 +12,4 @@ require_once PCP_THEME_PATH . '/inc/acf-options.php';
 require_once PCP_THEME_PATH . '/inc/gravity-forms.php';
 require_once PCP_THEME_PATH . '/inc/helpers.php';
 require_once PCP_THEME_PATH . '/inc/seed-content.php';
+require_once PCP_THEME_PATH . '/inc/seed-media.php';

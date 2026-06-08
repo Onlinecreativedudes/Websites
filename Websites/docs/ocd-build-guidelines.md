@@ -828,6 +828,30 @@ Before handing the theme to the install agent, verify:
 
 ---
 
-## 20. When in doubt
+## 20. Media & ACF image seeding (standard — applies to every build)
+
+Bundled seed images must not look hard-coded. The client should open any page and
+see real, editable images in the Media Library and in the ACF fields — not empty
+fields with a file silently rendering behind them.
+
+Every build ships an `inc/seed-media.php` and a `deploy/seed-media.php` runner that:
+
+- **Import** every bundled image in `assets/images/` and `assets/brand/` into the
+  WordPress Media Library, with a marker meta (`_pcp_seed_file` / `_ocd_seed_file`)
+  so re-runs reuse the existing attachment instead of duplicating.
+- **Populate** the matching ACF image fields — logo (options), homepage section
+  images and repeater cards, and the hero/featured image on every CPT entry —
+  **only where the field is currently empty**. Never overwrite a field that already
+  has a value (so a client's real uploads are always safe).
+- Are **idempotent and non-destructive**: safe to run on every deploy.
+
+Template image helpers still keep a theme-file fallback for safety, but after the
+media seed runs there should be no visible placeholder that isn't also a real,
+swappable Media Library item wired to its ACF field. Run order at deploy:
+content seed → services seed → **media seed**.
+
+---
+
+## 21. When in doubt
 
 Stop and ask. Do not invent. Do not install a plugin to solve the problem. Do not pull a JS library. Do not add a build step. The constraints are deliberate.

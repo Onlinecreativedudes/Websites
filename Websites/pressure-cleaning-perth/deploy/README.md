@@ -28,6 +28,16 @@ are installed on the target, not committed here.
    (hero, problem, methods, why, process, FAQs, areas) plus Yoast title/meta.
    Both are idempotent (match by slug, update in place). Then flush permalinks:
    `wp rewrite flush` (the seeds also flush).
+7b. **Seed media** (recommended — run after the content seeds above):
+   ```
+   wp eval-file wp-content/themes/pressure-cleaning-perth/deploy/seed-media.php
+   ```
+   Imports every bundled image into the Media Library and fills the matching ACF
+   image fields (logo, homepage sections + service cards, service/commercial heroes
+   and featured images) **only where they are empty**. Idempotent and non-destructive:
+   it never overwrites real photos the client uploads, and re-running reuses the
+   already-imported attachments. After this, no image looks hard-coded — every one
+   is a real, editable Media Library item wired to its ACF field.
 8. **Gravity Forms** — create/import the quote form. Set its ID in
    **Site Options → CTA & Forms → Default quote form**, and per-page form IDs where wanted.
 9. **Site Options** — upload the logo (or it falls back to the bundled brand asset),
