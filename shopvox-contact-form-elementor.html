@@ -1,0 +1,232 @@
+<!-- ============================================================
+  shopVOX Contact Form — Elementor HTML widget version
+  Paste this ENTIRE snippet into a single Elementor HTML widget.
+  All styles are scoped to .ngsvx-form-wrap so nothing leaks
+  into the rest of the page. No jQuery required.
+============================================================= -->
+
+<div class="ngsvx-form-wrap">
+  <form id="ngsvxContactForm" class="ngsvx-form">
+    <div class="ngsvx-alert" role="alert"></div>
+
+    <input type="hidden" name="on_success" value="https://www.shopvox.com">
+    <input type="hidden" name="pipeline_name" value="Neto Graphics Sales">
+    <input type="hidden" name="title" value="Contact form sales lead">
+    <input type="hidden" name="lead_source_name" value="Contact Form">
+    <input type="hidden" name="vox_protection" id="ngsvx_vox_protection" value="">
+
+    <div class="ngsvx-group">
+      <label class="ngsvx-sr" for="ngsvx_name">Your Name</label>
+      <input type="text" name="primaryContactName" class="ngsvx-field" id="ngsvx_name" placeholder="Name" autocomplete="name">
+    </div>
+    <div class="ngsvx-group">
+      <label class="ngsvx-sr" for="ngsvx_phone">Phone</label>
+      <input type="tel" name="phone_number" class="ngsvx-field" id="ngsvx_phone" placeholder="Phone No." autocomplete="tel">
+    </div>
+    <div class="ngsvx-group">
+      <label class="ngsvx-sr" for="ngsvx_email">Your Email address</label>
+      <input type="email" name="email" class="ngsvx-field" id="ngsvx_email" placeholder="Email" autocomplete="email">
+    </div>
+    <div class="ngsvx-group">
+      <label class="ngsvx-sr" for="ngsvx_company">Company Name</label>
+      <input type="text" name="company_name" class="ngsvx-field" id="ngsvx_company" placeholder="Company Name" autocomplete="organization">
+    </div>
+    <div class="ngsvx-group ngsvx-full">
+      <label class="ngsvx-sr" for="ngsvx_details">Questions or Comments</label>
+      <textarea name="details" class="ngsvx-field" id="ngsvx_details" rows="4" placeholder="Message"></textarea>
+    </div>
+    <div class="ngsvx-group ngsvx-full">
+      <label class="ngsvx-sr" for="ngsvx_asset">Attach files</label>
+      <input type="file" name="asset[]" class="ngsvx-file" id="ngsvx_asset" multiple>
+    </div>
+    <button type="submit" class="ngsvx-send">Send</button>
+  </form>
+</div>
+
+<style>
+  .ngsvx-form-wrap,
+  .ngsvx-form-wrap * {
+    box-sizing: border-box;
+  }
+
+  .ngsvx-form-wrap {
+    font-family: inherit; /* match the site's theme font */
+    width: 100%;
+  }
+
+  .ngsvx-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 0;
+  }
+
+  .ngsvx-group {
+    margin: 0;
+    min-width: 0;
+  }
+
+  .ngsvx-full {
+    grid-column: 1 / -1;
+  }
+
+  /* visually hidden labels for accessibility */
+  .ngsvx-sr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .ngsvx-form .ngsvx-field,
+  .ngsvx-form .ngsvx-file {
+    display: block;
+    width: 100%;
+    font-family: inherit;
+    font-size: 16px;
+    line-height: 1.4;
+    color: #555a60;
+    background: #ffffff;
+    border: 1px solid #cfcfcf;
+    border-radius: 8px;
+    padding: 12px 16px;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    -webkit-appearance: none;
+    appearance: none;
+    box-shadow: none;
+  }
+
+  .ngsvx-form .ngsvx-field::placeholder {
+    color: #6b7177;
+    opacity: 1;
+  }
+
+  .ngsvx-form .ngsvx-field:focus,
+  .ngsvx-form .ngsvx-file:focus {
+    border-color: #999999;
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.06);
+  }
+
+  .ngsvx-form textarea.ngsvx-field {
+    min-height: 120px;
+    resize: vertical;
+  }
+
+  .ngsvx-form .ngsvx-file {
+    padding: 10px 16px;
+    color: #6b7177;
+    cursor: pointer;
+  }
+
+  .ngsvx-form .ngsvx-file::file-selector-button {
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    color: #ffffff;
+    background: #1c1c1c;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 14px;
+    margin-right: 12px;
+    cursor: pointer;
+  }
+
+  .ngsvx-form .ngsvx-send {
+    grid-column: 1 / -1;
+    display: block;
+    width: 100%;
+    font-family: inherit;
+    font-size: 17px;
+    font-weight: 600;
+    color: #f4732a;
+    background: #000000;
+    border: none;
+    border-radius: 8px;
+    padding: 14px 16px;
+    cursor: pointer;
+    transition: opacity 0.2s ease, transform 0.1s ease;
+  }
+
+  .ngsvx-form .ngsvx-send:hover {
+    opacity: 0.88;
+    color: #f4732a;
+    background: #000000;
+  }
+
+  .ngsvx-form .ngsvx-send:active {
+    transform: scale(0.99);
+  }
+
+  .ngsvx-form .ngsvx-send:disabled {
+    opacity: 0.6;
+    cursor: wait;
+  }
+
+  .ngsvx-alert {
+    display: none;
+    grid-column: 1 / -1;
+    background: #fdeaea;
+    border: 1px solid #e8b4b4;
+    border-radius: 8px;
+    color: #b03030;
+    font-size: 14px;
+    padding: 12px 16px;
+    margin: 0;
+  }
+
+  /* stack to one column when the widget itself is narrow */
+  @media (max-width: 420px) {
+    .ngsvx-form {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  (function() {
+    var form = document.getElementById("ngsvxContactForm");
+    if (!form || form.dataset.ngsvxBound) { return; }
+    form.dataset.ngsvxBound = "1";
+
+    var authToken = "3TkbtqUoAfwxD86617k_2w";
+    var accountId = "1412780c-e87e-40f6-9a53-cf826b7cfaed";
+    var errorMessage = "There was an error while sending your message.";
+    var alertBox = form.querySelector(".ngsvx-alert");
+    var sendBtn = form.querySelector(".ngsvx-send");
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+      alertBox.style.display = "none";
+
+      // honeypot — bots that fill this field are ignored
+      if (form.querySelector("#ngsvx_vox_protection").value !== "") { return; }
+
+      var successUrl = form.querySelector('[name="on_success"]').value;
+      var actionUrl = "https://api.shopvox.com/v1/sales_leads.json?authToken=" + authToken + "&account_id=" + accountId;
+
+      sendBtn.disabled = true;
+
+      fetch(actionUrl, {
+        method: "POST",
+        body: new FormData(form)
+      }).then(function(res) {
+        if (!res.ok) {
+          return res.json().then(function(data) { throw data; });
+        }
+        if (successUrl) { window.location = encodeURI(successUrl); }
+      }).catch(function(data) {
+        var errors = [errorMessage];
+        if (data && data.errors) { errors = errors.concat(data.errors); }
+        alertBox.innerHTML = errors.join("<br>");
+        alertBox.style.display = "block";
+        sendBtn.disabled = false;
+      });
+    });
+  })();
+</script>
