@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Contact Form</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+      :root {
+        --form-font: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        --field-border: #cfcfcf;
+        --field-border-focus: #999999;
+        --field-radius: 8px;
+        --field-text: #555a60;
+        --placeholder: #6b7177;
+        --btn-bg: #000000;
+        --btn-text: #f4732a;
+        --card-bg: #ffffff;
+        --card-radius: 24px;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        font-family: var(--form-font);
+        background: #0e0e0e;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        min-height: 100vh;
+        padding: 48px 24px;
+      }
+
+      .form-card {
+        background: var(--card-bg);
+        border-radius: var(--card-radius);
+        padding: 32px 28px;
+        width: 100%;
+        max-width: 640px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+      }
+
+      #contactForm {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+
+      /* Visually hidden labels — keeps the form accessible while the design
+         shows placeholder-only fields */
+      #contactForm label {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        padding: 0;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+        white-space: nowrap;
+        border: 0;
+      }
+
+      .form-group {
+        margin: 0;
+      }
+
+      .form-group--full {
+        grid-column: 1 / -1;
+      }
+
+      #contactForm .form-control,
+      #contactForm input[type="file"] {
+        width: 100%;
+        font-family: var(--form-font);
+        font-size: 16px;
+        color: var(--field-text);
+        background: #ffffff;
+        border: 1px solid var(--field-border);
+        border-radius: var(--field-radius);
+        padding: 13px 16px;
+        outline: none;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        -webkit-appearance: none;
+        appearance: none;
+      }
+
+      #contactForm .form-control::placeholder {
+        color: var(--placeholder);
+        opacity: 1;
+      }
+
+      #contactForm .form-control:focus,
+      #contactForm input[type="file"]:focus {
+        border-color: var(--field-border-focus);
+        box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.06);
+      }
+
+      #contactForm textarea.form-control {
+        min-height: 130px;
+        resize: vertical;
+      }
+
+      #contactForm input[type="file"] {
+        padding: 11px 16px;
+        color: var(--placeholder);
+        cursor: pointer;
+      }
+
+      #contactForm input[type="file"]::file-selector-button {
+        font-family: var(--form-font);
+        font-size: 14px;
+        font-weight: 500;
+        color: #ffffff;
+        background: #1c1c1c;
+        border: none;
+        border-radius: 6px;
+        padding: 6px 14px;
+        margin-right: 12px;
+        cursor: pointer;
+      }
+
+      #contactForm button[type="submit"] {
+        grid-column: 1 / -1;
+        font-family: var(--form-font);
+        font-size: 17px;
+        font-weight: 600;
+        color: var(--btn-text);
+        background: var(--btn-bg);
+        border: none;
+        border-radius: var(--field-radius);
+        padding: 15px 16px;
+        cursor: pointer;
+        transition: opacity 0.2s ease, transform 0.1s ease;
+      }
+
+      #contactForm button[type="submit"]:hover {
+        opacity: 0.88;
+      }
+
+      #contactForm button[type="submit"]:active {
+        transform: scale(0.99);
+      }
+
+      .alert-danger {
+        display: none; /* shown by the submit script on error */
+        grid-column: 1 / -1;
+        background: #fdeaea;
+        border: 1px solid #e8b4b4;
+        border-radius: var(--field-radius);
+        color: #b03030;
+        font-size: 14px;
+        padding: 12px 16px;
+        margin: 0;
+      }
+
+      @media (max-width: 560px) {
+        #contactForm {
+          grid-template-columns: 1fr;
+        }
+        .form-card {
+          padding: 24px 20px;
+          border-radius: 18px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="form-card">
+      <form id="contactForm">
+        <div id="shopvox-contactForm-error-message" class="alert alert-danger"></div>
+        <input type="hidden" name="on_success" id="on_success" value="https://www.shopvox.com">
+        <input type="hidden" name="pipeline_name" id="pipeline_name" value="Neto Graphics Sales">
+        <input type="hidden" name="title" id="title" value="Contact form sales lead">
+        <input type="hidden" name="lead_source_name" id="lead_source" value="Contact Form">
+        <input type="hidden" name="vox_protection" id="vox_protection" value="">
+
+        <div class="form-group">
+          <label for="primary_contact_name">Your Name</label>
+          <input type="text" name="primaryContactName" class="form-control" id="primary_contact_name" placeholder="Name" autocomplete="name">
+        </div>
+        <div class="form-group">
+          <label for="primaryPhone">Phone</label>
+          <input type="tel" name="phone_number" id="primaryPhone" class="form-control" placeholder="Phone No." autocomplete="tel">
+        </div>
+        <div class="form-group">
+          <label for="email">Your Email address</label>
+          <input type="email" name="email" class="form-control" id="email" placeholder="Email" autocomplete="email">
+        </div>
+        <div class="form-group">
+          <label for="company_name">Company Name</label>
+          <input type="text" name="company_name" class="form-control" id="company_name" placeholder="Company Name" autocomplete="organization">
+        </div>
+        <div class="form-group form-group--full">
+          <label for="details">Questions or Comments</label>
+          <textarea class="form-control" name="details" id="details" rows="3" placeholder="Message"></textarea>
+        </div>
+        <div class="form-group form-group--full">
+          <label for="asset">Asset</label>
+          <input type="file" name="asset[]" id="asset" multiple>
+        </div>
+        <button type="submit">Send</button>
+      </form>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    <script>
+      $(function() {
+        var authToken = "3TkbtqUoAfwxD86617k_2w";
+        var accountId = "1412780c-e87e-40f6-9a53-cf826b7cfaed";
+        var errorMessage = "There was an error while sending your message.";
+        $("#shopvox-contactForm-error-message").hide();
+        $("#contactForm").submit(function(e) {
+          $("#shopvox-contactForm-error-message").hide();
+          e.preventDefault();
+          var robotProtectionValue = $("#vox_protection").val();
+          if (robotProtectionValue !== "") {
+            return;
+          }
+          var successUrl = $("#contactForm #on_success").attr("value")
+          var actionUrl = "https://api.shopvox.com/v1/sales_leads.json?authToken="+authToken+"&account_id="+accountId;
+          $.ajax({
+            url: actionUrl,
+            type: "post",
+            dataType: "json",
+            processData: false,
+            contentType: false,
+            data: new FormData($("#contactForm")[0]),
+            success: function(data) {
+              if (successUrl) {
+                window.location = encodeURI(successUrl);
+              }
+            },
+            error: function(xhr, status, error) {
+              var errors = [errorMessage].concat(xhr.responseJSON.errors);
+
+              errors = errors.map(function(err) {
+                return err;
+              }).join("<br />");
+
+              $("#shopvox-contactForm-error-message").html(errors).show();
+            }
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
