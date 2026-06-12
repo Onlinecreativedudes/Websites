@@ -1,0 +1,7 @@
+{
+  "dentelectrical": {
+    "secret_prefix": "DENT",
+    "theme_slug": "dentelectrical",
+    "wp_path": "public_html"
+  }
+}

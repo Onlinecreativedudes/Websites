@@ -1,0 +1,150 @@
+name: Deploy theme to cPanel
+
+# Multi-client deploy. Each client site lives in Websites/<client>/ and maps
+# to an entry in sites.json, which names the per-client secret prefix
+# (e.g. DENT -> DENT_SSH_HOST, DENT_SSH_USER, DENT_SSH_KEY, DENT_SSH_PORT).
+# Paths on the server are relative to the cPanel user's home directory, so
+# the same convention works for every client account:
+#   wp_path:    public_html
+#   theme dir:  public_html/wp-content/themes/<theme_slug>
+# Connection details live in GitHub Actions Secrets only.
+
+on:
+  push:
+    branches: [ main ]
+    paths: [ 'Websites/**' ]
+  workflow_dispatch:
+    inputs:
+      client:
+        description: 'Site folder under Websites/ (e.g. dentelectrical)'
+        required: true
+        default: 'dentelectrical'
+        type: string
+      connection_test:
+        description: 'Only test the SSH connection — deploy nothing'
+        required: false
+        default: false
+        type: boolean
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  detect:
+    runs-on: ubuntu-latest
+    outputs:
+      clients: ${{ steps.set.outputs.clients }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Work out which client sites to deploy
+        id: set
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            clients='["${{ inputs.client }}"]'
+          else
+            before="${{ github.event.before }}"
+            if [ "$before" = "0000000000000000000000000000000000000000" ] || ! git cat-file -e "$before" 2>/dev/null; then
+              range="HEAD~1..HEAD"
+            else
+              range="$before..${{ github.sha }}"
+            fi
+            changed=$(git diff --name-only $range -- 'Websites/' | awk -F/ 'NF>2 {print $2}' | sort -u)
+            if [ -z "$changed" ]; then
+              clients='[]'
+            else
+              clients=$(printf '%s\n' $changed | jq -R . | jq -cs .)
+            fi
+          fi
+          echo "Deploying clients: $clients"
+          echo "clients=$clients" >> "$GITHUB_OUTPUT"
+
+  deploy:
+    needs: detect
+    if: needs.detect.outputs.clients != '[]'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        client: ${{ fromJson(needs.detect.outputs.clients) }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Load site config from sites.json
+        id: cfg
+        run: |
+          c='${{ matrix.client }}'
+          if ! jq -e --arg c "$c" 'has($c)' sites.json >/dev/null; then
+            echo "::error::'$c' has no entry in sites.json — add one before deploying."
+            exit 1
+          fi
+          if [ ! -d "Websites/$c" ]; then
+            echo "::error::Folder Websites/$c does not exist in the repo."
+            exit 1
+          fi
+          echo "prefix=$(jq -r --arg c "$c" '.[$c].secret_prefix' sites.json)" >> "$GITHUB_OUTPUT"
+          echo "theme=$(jq -r --arg c "$c" '.[$c].theme_slug' sites.json)"    >> "$GITHUB_OUTPUT"
+          echo "wp_path=$(jq -r --arg c "$c" '.[$c].wp_path' sites.json)"     >> "$GITHUB_OUTPUT"
+
+      - name: Configure SSH
+        env:
+          SSH_HOST: ${{ secrets[format('{0}_SSH_HOST', steps.cfg.outputs.prefix)] }}
+          SSH_USER: ${{ secrets[format('{0}_SSH_USER', steps.cfg.outputs.prefix)] }}
+          SSH_KEY:  ${{ secrets[format('{0}_SSH_KEY',  steps.cfg.outputs.prefix)] }}
+          SSH_PORT: ${{ secrets[format('{0}_SSH_PORT', steps.cfg.outputs.prefix)] || '22' }}
+        run: |
+          for v in SSH_HOST SSH_USER SSH_KEY; do
+            if [ -z "${!v}" ]; then
+              echo "::error::Secret ${{ steps.cfg.outputs.prefix }}_$v is empty or missing — add it under Settings > Secrets and variables > Actions."
+              exit 1
+            fi
+          done
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/id_deploy
+          chmod 600 ~/.ssh/id_deploy
+          ssh-keyscan -p "$SSH_PORT" -H "$SSH_HOST" >> ~/.ssh/known_hosts 2>/dev/null
+          # Persist connection details for later steps
+          {
+            echo "SSH_HOST=$SSH_HOST"
+            echo "SSH_USER=$SSH_USER"
+            echo "SSH_PORT=$SSH_PORT"
+          } >> "$GITHUB_ENV"
+          # Fail fast if the connection or auth is wrong
+          ssh -i ~/.ssh/id_deploy -p "$SSH_PORT" "$SSH_USER@$SSH_HOST" true
+          echo "SSH connection OK"
+
+      - name: Confirm WP-CLI + WordPress on the server
+        run: |
+          ssh -i ~/.ssh/id_deploy -p "$SSH_PORT" "$SSH_USER@$SSH_HOST" \
+            "wp --path='${{ steps.cfg.outputs.wp_path }}' core version"
+
+      - name: Connection test only — stopping here
+        if: github.event_name == 'workflow_dispatch' && inputs.connection_test
+        run: echo "Connection test passed for '${{ matrix.client }}'. Nothing was deployed."
+
+      - name: Deploy theme (rsync)
+        if: ${{ !(github.event_name == 'workflow_dispatch' && inputs.connection_test) }}
+        # --delete keeps the server theme an exact mirror of the repo theme.
+        # Scope is the theme dir only, so uploads/core/other files are untouched.
+        run: |
+          rsync -az --delete \
+            -e "ssh -i ~/.ssh/id_deploy -p $SSH_PORT" \
+            "Websites/${{ matrix.client }}/" \
+            "$SSH_USER@$SSH_HOST:${{ steps.cfg.outputs.wp_path }}/wp-content/themes/${{ steps.cfg.outputs.theme }}/"
+
+      - name: Sync ACF JSON and report status (evidence)
+        if: ${{ !(github.event_name == 'workflow_dispatch' && inputs.connection_test) }}
+        run: |
+          ssh -i ~/.ssh/id_deploy -p "$SSH_PORT" "$SSH_USER@$SSH_HOST" \
+            "set -e; \
+             cd '${{ steps.cfg.outputs.wp_path }}'; \
+             if wp cli has-command 'acf json' 2>/dev/null; then \
+               wp acf json status; wp acf json sync; wp acf json status; \
+             else \
+               echo 'ACF JSON CLI not available — skipping sync (fields will sync from acf-json/ on admin load).'; \
+             fi"
