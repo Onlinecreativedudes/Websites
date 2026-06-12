@@ -1,22 +1,23 @@
 name: Deploy theme to cPanel
 
-# Multi-client deploy with a single master deploy key.
+# Deploys client sites that all live on ONE dev cPanel account, each
+# WordPress install in its own folder under public_html/.
 #
-# - ONE GitHub secret, set once, never per client: DEPLOY_SSH_KEY
-#   (the private key; its public half gets authorized in each client's
-#   cPanel under SSH Access > Manage SSH Keys).
-# - Everything else per client (host, user, port, paths) lives in
-#   sites.json — not sensitive, editable in the repo.
+# - ONE GitHub secret, set once: DEPLOY_SSH_KEY (the private key; its
+#   public half is authorized once in the dev cPanel under
+#   SSH Access > Manage SSH Keys).
+# - Connection details live in sites.json: "defaults" holds the shared
+#   host/user/port, "sites" maps each Websites/<client>/ folder to its
+#   WordPress install path. A site entry can override any default.
 #
-# Onboarding a new client:
-#   1. cPanel: SSH Access > Import Key > paste the master PUBLIC key > Authorize
+# Onboarding a new client site:
+#   1. Install WordPress at public_html/<client> on the dev cPanel
 #   2. Add the client's entry to sites.json
-# That's it. No GitHub settings involved.
+# No new keys, no GitHub settings.
 #
-# Server paths are relative to the cPanel user's home directory, so the
-# same convention works on every account:
-#   wp_path:    public_html
-#   theme dir:  public_html/wp-content/themes/<theme_slug>
+# Server paths are relative to the cPanel user's home directory:
+#   wp_path:    public_html/<client>
+#   theme dir:  public_html/<client>/wp-content/themes/<theme_slug>
 
 on:
   push:
@@ -88,25 +89,27 @@ jobs:
         id: cfg
         run: |
           c='${{ matrix.client }}'
-          if ! jq -e --arg c "$c" 'has($c)' sites.json >/dev/null; then
-            echo "::error::'$c' has no entry in sites.json — add one before deploying."
+          if ! jq -e --arg c "$c" '.sites | has($c)' sites.json >/dev/null; then
+            echo "::error::'$c' has no entry under \"sites\" in sites.json — add one before deploying."
             exit 1
           fi
           if [ ! -d "Websites/$c" ]; then
             echo "::error::Folder Websites/$c does not exist in the repo."
             exit 1
           fi
-          host=$(jq -r --arg c "$c" '.[$c].host' sites.json)
-          if [ "$host" = "REPLACE_WITH_SERVER_HOSTNAME" ] || [ -z "$host" ] || [ "$host" = "null" ]; then
-            echo "::error::sites.json entry for '$c' still has a placeholder host — fill in the real server hostname."
+          # Site entry inherits from "defaults"; any key set on the site wins.
+          site=$(jq -c --arg c "$c" '.defaults + .sites[$c]' sites.json)
+          host=$(jq -rn --argjson s "$site" '$s.host')
+          if [ "$host" = "REPLACE_WITH_DEV_SERVER_HOSTNAME" ] || [ -z "$host" ] || [ "$host" = "null" ]; then
+            echo "::error::sites.json still has a placeholder host — fill in the real dev server hostname under \"defaults\"."
             exit 1
           fi
           {
             echo "SSH_HOST=$host"
-            echo "SSH_USER=$(jq -r --arg c "$c" '.[$c].user' sites.json)"
-            echo "SSH_PORT=$(jq -r --arg c "$c" '.[$c].port // 22' sites.json)"
-            echo "THEME_SLUG=$(jq -r --arg c "$c" '.[$c].theme_slug' sites.json)"
-            echo "WP_PATH=$(jq -r --arg c "$c" '.[$c].wp_path // "public_html"' sites.json)"
+            echo "SSH_USER=$(jq -rn --argjson s "$site" '$s.user')"
+            echo "SSH_PORT=$(jq -rn --argjson s "$site" '$s.port // 22')"
+            echo "THEME_SLUG=$(jq -rn --argjson s "$site" --arg c "$c" '$s.theme_slug // $c')"
+            echo "WP_PATH=$(jq -rn --argjson s "$site" --arg c "$c" '$s.wp_path // ("public_html/" + $c)')"
           } >> "$GITHUB_ENV"
 
       - name: Configure SSH

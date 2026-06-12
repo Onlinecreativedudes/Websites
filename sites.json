@@ -1,9 +1,13 @@
 {
-  "dentelectrical": {
-    "host": "REPLACE_WITH_SERVER_HOSTNAME",
-    "user": "REPLACE_WITH_CPANEL_USERNAME",
-    "port": 22,
-    "theme_slug": "dentelectrical",
-    "wp_path": "public_html"
+  "defaults": {
+    "host": "REPLACE_WITH_DEV_SERVER_HOSTNAME",
+    "user": "REPLACE_WITH_DEV_CPANEL_USERNAME",
+    "port": 22
+  },
+  "sites": {
+    "dentelectrical": {
+      "wp_path": "public_html/dentelectrical",
+      "theme_slug": "dentelectrical"
+    }
   }
 }
