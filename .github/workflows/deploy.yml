@@ -1,13 +1,22 @@
 name: Deploy theme to cPanel
 
-# Multi-client deploy. Each client site lives in Websites/<client>/ and maps
-# to an entry in sites.json, which names the per-client secret prefix
-# (e.g. DENT -> DENT_SSH_HOST, DENT_SSH_USER, DENT_SSH_KEY, DENT_SSH_PORT).
-# Paths on the server are relative to the cPanel user's home directory, so
-# the same convention works for every client account:
+# Multi-client deploy with a single master deploy key.
+#
+# - ONE GitHub secret, set once, never per client: DEPLOY_SSH_KEY
+#   (the private key; its public half gets authorized in each client's
+#   cPanel under SSH Access > Manage SSH Keys).
+# - Everything else per client (host, user, port, paths) lives in
+#   sites.json — not sensitive, editable in the repo.
+#
+# Onboarding a new client:
+#   1. cPanel: SSH Access > Import Key > paste the master PUBLIC key > Authorize
+#   2. Add the client's entry to sites.json
+# That's it. No GitHub settings involved.
+#
+# Server paths are relative to the cPanel user's home directory, so the
+# same convention works on every account:
 #   wp_path:    public_html
 #   theme dir:  public_html/wp-content/themes/<theme_slug>
-# Connection details live in GitHub Actions Secrets only.
 
 on:
   push:
@@ -87,33 +96,31 @@ jobs:
             echo "::error::Folder Websites/$c does not exist in the repo."
             exit 1
           fi
-          echo "prefix=$(jq -r --arg c "$c" '.[$c].secret_prefix' sites.json)" >> "$GITHUB_OUTPUT"
-          echo "theme=$(jq -r --arg c "$c" '.[$c].theme_slug' sites.json)"    >> "$GITHUB_OUTPUT"
-          echo "wp_path=$(jq -r --arg c "$c" '.[$c].wp_path' sites.json)"     >> "$GITHUB_OUTPUT"
+          host=$(jq -r --arg c "$c" '.[$c].host' sites.json)
+          if [ "$host" = "REPLACE_WITH_SERVER_HOSTNAME" ] || [ -z "$host" ] || [ "$host" = "null" ]; then
+            echo "::error::sites.json entry for '$c' still has a placeholder host — fill in the real server hostname."
+            exit 1
+          fi
+          {
+            echo "SSH_HOST=$host"
+            echo "SSH_USER=$(jq -r --arg c "$c" '.[$c].user' sites.json)"
+            echo "SSH_PORT=$(jq -r --arg c "$c" '.[$c].port // 22' sites.json)"
+            echo "THEME_SLUG=$(jq -r --arg c "$c" '.[$c].theme_slug' sites.json)"
+            echo "WP_PATH=$(jq -r --arg c "$c" '.[$c].wp_path // "public_html"' sites.json)"
+          } >> "$GITHUB_ENV"
 
       - name: Configure SSH
         env:
-          SSH_HOST: ${{ secrets[format('{0}_SSH_HOST', steps.cfg.outputs.prefix)] }}
-          SSH_USER: ${{ secrets[format('{0}_SSH_USER', steps.cfg.outputs.prefix)] }}
-          SSH_KEY:  ${{ secrets[format('{0}_SSH_KEY',  steps.cfg.outputs.prefix)] }}
-          SSH_PORT: ${{ secrets[format('{0}_SSH_PORT', steps.cfg.outputs.prefix)] || '22' }}
+          SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
         run: |
-          for v in SSH_HOST SSH_USER SSH_KEY; do
-            if [ -z "${!v}" ]; then
-              echo "::error::Secret ${{ steps.cfg.outputs.prefix }}_$v is empty or missing — add it under Settings > Secrets and variables > Actions."
-              exit 1
-            fi
-          done
+          if [ -z "$SSH_KEY" ]; then
+            echo "::error::Secret DEPLOY_SSH_KEY is missing — add the master private key once under Settings > Secrets and variables > Actions."
+            exit 1
+          fi
           mkdir -p ~/.ssh
           printf '%s\n' "$SSH_KEY" > ~/.ssh/id_deploy
           chmod 600 ~/.ssh/id_deploy
           ssh-keyscan -p "$SSH_PORT" -H "$SSH_HOST" >> ~/.ssh/known_hosts 2>/dev/null
-          # Persist connection details for later steps
-          {
-            echo "SSH_HOST=$SSH_HOST"
-            echo "SSH_USER=$SSH_USER"
-            echo "SSH_PORT=$SSH_PORT"
-          } >> "$GITHUB_ENV"
           # Fail fast if the connection or auth is wrong
           ssh -i ~/.ssh/id_deploy -p "$SSH_PORT" "$SSH_USER@$SSH_HOST" true
           echo "SSH connection OK"
@@ -121,7 +128,7 @@ jobs:
       - name: Confirm WP-CLI + WordPress on the server
         run: |
           ssh -i ~/.ssh/id_deploy -p "$SSH_PORT" "$SSH_USER@$SSH_HOST" \
-            "wp --path='${{ steps.cfg.outputs.wp_path }}' core version"
+            "wp --path=\"$WP_PATH\" core version"
 
       - name: Connection test only — stopping here
         if: github.event_name == 'workflow_dispatch' && inputs.connection_test
@@ -135,14 +142,14 @@ jobs:
           rsync -az --delete \
             -e "ssh -i ~/.ssh/id_deploy -p $SSH_PORT" \
             "Websites/${{ matrix.client }}/" \
-            "$SSH_USER@$SSH_HOST:${{ steps.cfg.outputs.wp_path }}/wp-content/themes/${{ steps.cfg.outputs.theme }}/"
+            "$SSH_USER@$SSH_HOST:$WP_PATH/wp-content/themes/$THEME_SLUG/"
 
       - name: Sync ACF JSON and report status (evidence)
         if: ${{ !(github.event_name == 'workflow_dispatch' && inputs.connection_test) }}
         run: |
           ssh -i ~/.ssh/id_deploy -p "$SSH_PORT" "$SSH_USER@$SSH_HOST" \
             "set -e; \
-             cd '${{ steps.cfg.outputs.wp_path }}'; \
+             cd \"$WP_PATH\"; \
              if wp cli has-command 'acf json' 2>/dev/null; then \
                wp acf json status; wp acf json sync; wp acf json status; \
              else \

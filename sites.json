@@ -1,6 +1,8 @@
 {
   "dentelectrical": {
-    "secret_prefix": "DENT",
+    "host": "REPLACE_WITH_SERVER_HOSTNAME",
+    "user": "REPLACE_WITH_CPANEL_USERNAME",
+    "port": 22,
     "theme_slug": "dentelectrical",
     "wp_path": "public_html"
   }
