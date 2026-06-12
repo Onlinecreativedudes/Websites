@@ -115,6 +115,7 @@ jobs:
       - name: Configure SSH
         env:
           SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          SSH_KEY_PASSPHRASE: ${{ secrets.DEPLOY_SSH_KEY_PASSPHRASE }}
         run: |
           if [ -z "$SSH_KEY" ]; then
             echo "::error::Secret DEPLOY_SSH_KEY is missing — add the master private key once under Settings > Secrets and variables > Actions."
@@ -123,6 +124,16 @@ jobs:
           mkdir -p ~/.ssh
           printf '%s\n' "$SSH_KEY" > ~/.ssh/id_deploy
           chmod 600 ~/.ssh/id_deploy
+          # cPanel-generated keys are passphrase-encrypted; decrypt for CI use
+          if grep -q ENCRYPTED ~/.ssh/id_deploy; then
+            if [ -z "$SSH_KEY_PASSPHRASE" ]; then
+              echo "::error::The deploy key is passphrase-protected — add the passphrase as secret DEPLOY_SSH_KEY_PASSPHRASE."
+              exit 1
+            fi
+            openssl rsa -in ~/.ssh/id_deploy -passin env:SSH_KEY_PASSPHRASE -out ~/.ssh/id_deploy_dec
+            mv ~/.ssh/id_deploy_dec ~/.ssh/id_deploy
+            chmod 600 ~/.ssh/id_deploy
+          fi
           ssh-keyscan -p "$SSH_PORT" -H "$SSH_HOST" >> ~/.ssh/known_hosts 2>/dev/null
           # Fail fast if the connection or auth is wrong
           ssh -i ~/.ssh/id_deploy -p "$SSH_PORT" "$SSH_USER@$SSH_HOST" true
