@@ -1,0 +1,7 @@
+---
+# cPanel Git Version Control deployment.
+# Lets you deploy from the cPanel UI ("Deploy HEAD Commit") after pulling.
+# The real work lives in deploy.sh so the cron job and the button share logic.
+deployment:
+  tasks:
+    - /bin/bash deploy.sh

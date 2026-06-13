@@ -22,10 +22,12 @@ name: Deploy theme to cPanel
 # ACF JSON sync happens inside the theme (inc/acf-sync.php) on admin
 # load, since WP-CLI isn't reachable without SSH.
 
+# NOTE: This host blocks inbound automation from GitHub's IPs (SSH filtered,
+# cPanel API returns 403), so the automatic push deploy is disabled. Deployment
+# now runs server-side via deploy.sh (cPanel cron / Git Version Control), which
+# pulls from GitHub instead. This workflow is kept for manual runs only, in case
+# the host's IP allowlist is opened up later.
 on:
-  push:
-    branches: [ main ]
-    paths: [ 'Websites/**' ]
   workflow_dispatch:
     inputs:
       client:
