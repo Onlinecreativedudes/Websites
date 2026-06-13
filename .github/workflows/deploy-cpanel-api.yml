@@ -104,7 +104,14 @@ jobs:
             echo "::error::Secret CPANEL_API_TOKEN is missing. Create a token in cPanel (Security > Manage API Tokens) and add it as a secret named CPANEL_API_TOKEN in the Logins environment (Settings > Environments > Logins)."
             exit 1
           fi
+          # cPanel tokens are alphanumeric; strip any whitespace/newline a paste
+          # may have introduced (a trailing newline breaks the auth header).
+          CP_TOKEN=$(printf '%s' "$CP_TOKEN" | tr -d '[:space:]')
+          echo "Token length after trimming: ${#CP_TOKEN} chars"
           AUTH="Authorization: cpanel $CP_USER:$CP_TOKEN"
+          echo "Runner public IP (for host firewall / geo allowlisting):"
+          curl -s --max-time 10 https://api.ipify.org || echo "(could not determine)"
+          echo
           BASE="https://$CP_HOST:2083"
           THEMES="$WP_PATH/wp-content/themes"
 
