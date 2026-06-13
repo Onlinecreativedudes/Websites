@@ -305,53 +305,77 @@ h1, h2, h3, h4 { font-family: var(--ff-display); }
 .form-card__sub--tight { margin: 0 0 30px; font-size: 13.5px; }
 .form-card__footnote { margin: 16px 0 0; font-size: 12.5px; line-height: 1.5; color: var(--c-text-faint); }
 
-.ocd-form .gform_wrapper .gform_fields { display: grid; grid-template-columns: 1fr; gap: 22px 24px; }
-.ocd-form .gform_wrapper .gfield_label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-.ocd-form .gform_wrapper .gfield_required { display: none; }
+/* Gravity Forms — the theme owns form styling (GF's default CSS is disabled in
+   inc/gravity-forms.php). !important is used only to override GF inline/vendor
+   rules, per the build guideline allowance for vendor overrides. */
+.ocd-form .gform_wrapper .gform_fields { display: grid; grid-template-columns: 1fr; gap: 22px 24px; list-style: none; margin: 0; padding: 0; }
+.ocd-form .gform_wrapper .gfield { margin: 0; padding: 0; }
+.ocd-form .gform_wrapper .ginput_container { margin: 0; }
+/* Hide labels (the design uses in-field placeholders), required marks, and the
+   GF internal elements that its now-disabled stylesheet would normally hide. */
+.ocd-form .gform_wrapper .gfield_label,
+.ocd-form .gform_wrapper .gfield_required,
+.ocd-form .gform_wrapper .gform_validation_container,
+.ocd-form .gform_wrapper .gfield--type-honeypot,
+.ocd-form .gform_wrapper .gfield_visibility_hidden,
+.ocd-form .gform_wrapper .gform_hidden { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .ocd-form .gform_wrapper input[type="text"],
 .ocd-form .gform_wrapper input[type="email"],
 .ocd-form .gform_wrapper input[type="tel"],
 .ocd-form .gform_wrapper select,
 .ocd-form .gform_wrapper textarea {
     width: 100%;
-    background: transparent;
-    border: none;
-    border-bottom: 1px solid rgba(20, 23, 26, .22);
-    border-radius: 0;
+    background: transparent !important;
+    border: none !important;
+    border-bottom: 1px solid rgba(20, 23, 26, .22) !important;
+    border-radius: 0 !important;
     padding: 12px 2px;
     font-size: 15px;
+    font-family: var(--ff-body);
     color: var(--c-ink);
     outline: none;
+    box-shadow: none !important;
     transition: border-color var(--transition);
 }
 .ocd-form .gform_wrapper input::placeholder,
-.ocd-form .gform_wrapper textarea::placeholder { color: var(--c-placeholder); }
+.ocd-form .gform_wrapper textarea::placeholder { color: var(--c-placeholder); opacity: 1; }
 .ocd-form .gform_wrapper input:focus,
 .ocd-form .gform_wrapper select:focus,
-.ocd-form .gform_wrapper textarea:focus { border-bottom-color: var(--c-bronze); }
+.ocd-form .gform_wrapper textarea:focus { border-bottom-color: var(--c-bronze) !important; }
 .ocd-form .gform_wrapper select {
     appearance: none;
+    -webkit-appearance: none;
     color: var(--c-text-muted);
     background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path d="M2 4l4 4 4-4" stroke="%2314171A" stroke-width="1.5" fill="none"/></svg>');
     background-repeat: no-repeat;
     background-position: right 2px center;
 }
 .ocd-form .gform_wrapper textarea { resize: vertical; min-height: 96px; }
-.ocd-form .gform_wrapper .gform_footer { margin: 30px 0 0; padding: 0; }
+.ocd-form .gform_wrapper .gform_footer { margin: 30px 0 0; padding: 0; display: block; }
 .ocd-form .gform_wrapper .gform_button {
     width: 100%;
-    background: var(--c-ink);
-    color: var(--c-paper);
-    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: var(--c-ink) !important;
+    color: var(--c-paper) !important;
+    border: none !important;
+    border-radius: 0 !important;
     padding: 17px;
     font-weight: 600;
     font-size: 15.5px;
     cursor: pointer;
     transition: background var(--transition), color var(--transition);
 }
-.ocd-form .gform_wrapper .gform_button:hover { background: var(--c-bronze); color: var(--c-ink); }
+.ocd-form .gform_wrapper .gform_button:hover { background: var(--c-bronze) !important; color: var(--c-ink) !important; }
 .ocd-form .gform_wrapper .gfield_validation_message,
 .ocd-form .gform_wrapper .gform_validation_errors { font-size: 13px; color: var(--c-error); background: none; border: none; padding: 6px 0 0; box-shadow: none; }
+.ocd-form .gform_wrapper .gfield_error input,
+.ocd-form .gform_wrapper .gfield_error select { border-bottom-color: var(--c-error) !important; }
+/* GF AJAX spinner + confirmation */
+.ocd-form .gform_ajax_spinner { margin-left: 12px; }
+.ocd-form .gform_confirmation_message { font-size: 15px; line-height: 1.55; color: var(--c-text-muted); }
 
 @media (min-width: 601px) {
     .ocd-form .gform_wrapper .gform_fields { grid-template-columns: 1fr 1fr; }

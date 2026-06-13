@@ -211,9 +211,10 @@ if ($slug === 'solar-naturally' && !$done('gf-created') && class_exists('GFAPI')
  * form. Both redirect to /thank-you/, BCC hello@onlinecreativedudes.com, use
  * the international phone format, and have the honeypot on. Their IDs are
  * written into the Home page's ACF fields (hero_form_id, contact_form_id). */
-if ($slug === 'hvnladvisory' && !$done('gf-created') && class_exists('GFAPI')) {
+if ($slug === 'hvnladvisory' && class_exists('GFAPI') && function_exists('update_field')) {
     $ty_url = home_url('/thank-you/');
     $bcc    = 'hello@onlinecreativedudes.com';
+    $roles  = 'Your role in the supply chain';
 
     // A GF notification to the admin, BCC'd to OCD, reply-to the form's email.
     $notification = function ($email_field_id) use ($bcc) {
@@ -243,17 +244,19 @@ if ($slug === 'hvnladvisory' && !$done('gf-created') && class_exists('GFAPI')) {
         ]];
     };
 
+    // The design uses in-field placeholders (labels are hidden), so every field
+    // carries a placeholder matching its label, and the select has a prompt.
     $exposure = [
         'title'          => 'Exposure Review',
         'description'    => '',
         'enableHoneypot' => true,
-        'button'         => ['type' => 'text', 'text' => 'Book My Exposure Review'],
+        'button'         => ['type' => 'text', 'text' => 'Book My Exposure Review →'],
         'fields'         => [
-            ['id' => 1, 'type' => 'text',  'label' => 'Name',    'isRequired' => true],
-            ['id' => 2, 'type' => 'text',  'label' => 'Company'],
-            ['id' => 3, 'type' => 'email', 'label' => 'Email',   'isRequired' => true],
-            ['id' => 4, 'type' => 'phone', 'label' => 'Phone',   'phoneFormat' => 'international'],
-            ['id' => 5, 'type' => 'select','label' => 'Your role in the supply chain', 'isRequired' => true,
+            ['id' => 1, 'type' => 'text',  'label' => 'Name',    'placeholder' => 'Name',    'isRequired' => true],
+            ['id' => 2, 'type' => 'text',  'label' => 'Company', 'placeholder' => 'Company'],
+            ['id' => 3, 'type' => 'email', 'label' => 'Email',   'placeholder' => 'Email',   'isRequired' => true],
+            ['id' => 4, 'type' => 'phone', 'label' => 'Phone',   'placeholder' => 'Phone',   'phoneFormat' => 'international'],
+            ['id' => 5, 'type' => 'select','label' => $roles, 'placeholder' => $roles, 'isRequired' => true,
                 'choices' => [
                     ['text' => 'We send or receive freight',                'value' => 'We send or receive freight'],
                     ['text' => 'We provide transport or logistics services','value' => 'We provide transport or logistics services'],
@@ -269,43 +272,73 @@ if ($slug === 'hvnladvisory' && !$done('gf-created') && class_exists('GFAPI')) {
         'title'          => 'Contact',
         'description'    => '',
         'enableHoneypot' => true,
-        'button'         => ['type' => 'text', 'text' => 'Send Message'],
+        'button'         => ['type' => 'text', 'text' => 'Send Message →'],
         'fields'         => [
-            ['id' => 1, 'type' => 'text',     'label' => 'Name',    'isRequired' => true],
-            ['id' => 2, 'type' => 'text',     'label' => 'Company'],
-            ['id' => 3, 'type' => 'email',    'label' => 'Email',   'isRequired' => true],
-            ['id' => 4, 'type' => 'phone',    'label' => 'Phone',   'phoneFormat' => 'international'],
-            ['id' => 5, 'type' => 'textarea', 'label' => 'Message'],
+            ['id' => 1, 'type' => 'text',     'label' => 'Name',    'placeholder' => 'Name',    'isRequired' => true],
+            ['id' => 2, 'type' => 'text',     'label' => 'Company', 'placeholder' => 'Company'],
+            ['id' => 3, 'type' => 'email',    'label' => 'Email',   'placeholder' => 'Email',   'isRequired' => true],
+            ['id' => 4, 'type' => 'phone',    'label' => 'Phone',   'placeholder' => 'Phone',   'phoneFormat' => 'international'],
+            ['id' => 5, 'type' => 'textarea', 'label' => 'Message', 'placeholder' => 'Message'],
         ],
         'notifications'  => $notification(3),
         'confirmations'  => $confirmation(),
     ];
 
-    $exposure_id = GFAPI::add_form($exposure);
-    $contact_id  = GFAPI::add_form($contact);
+    // Front page = the seeded landing page; that is where the form-ID fields live.
+    $page_id = (int) get_option('page_on_front');
+    if (!$page_id) {
+        $found = get_posts([
+            'post_type' => 'page', 'post_status' => 'any', 'numberposts' => 1,
+            'meta_key' => '_wp_page_template', 'meta_value' => 'page-templates/landing-page.php',
+        ]);
+        $page_id = $found ? $found[0]->ID : 0;
+    }
 
-    if (!is_wp_error($exposure_id) && !is_wp_error($contact_id) && function_exists('update_field')) {
-        // Front page = the seeded landing page; that is where the form-ID fields live.
-        $page_id = (int) get_option('page_on_front');
-        if (!$page_id) {
-            $found = get_posts([
-                'post_type' => 'page', 'post_status' => 'any', 'numberposts' => 1,
-                'meta_key' => '_wp_page_template', 'meta_value' => 'page-templates/landing-page.php',
-            ]);
-            $page_id = $found ? $found[0]->ID : 0;
-        }
-        if ($page_id) {
+    // Create the two forms once and wire their IDs into the page.
+    if (!$done('gf-created')) {
+        $exposure_id = GFAPI::add_form($exposure);
+        $contact_id  = GFAPI::add_form($contact);
+        if (!is_wp_error($exposure_id) && !is_wp_error($contact_id) && $page_id) {
             update_field('hero_form_id', $exposure_id, $page_id);
             update_field('contact_form_id', $contact_id, $page_id);
             echo "gravity forms created (exposure $exposure_id, contact $contact_id) and wired into page $page_id\n";
             $mark('gf-created');
+            $mark('gf-styled'); // created with placeholders already
         } else {
-            echo "forms created but landing page not found yet; will wire next deploy\n";
+            $err = is_wp_error($exposure_id) ? $exposure_id->get_error_message()
+                 : (is_wp_error($contact_id) ? $contact_id->get_error_message() : 'landing page not found yet');
+            echo "hvnladvisory form setup deferred: $err\n";
         }
-    } else {
-        $err = is_wp_error($exposure_id) ? $exposure_id->get_error_message()
-             : (is_wp_error($contact_id) ? $contact_id->get_error_message() : 'ACF update_field unavailable');
-        echo "hvnladvisory form setup failed: $err\n";
+    }
+
+    // One-time fix: the first version created these forms WITHOUT placeholders,
+    // so patch placeholders + button text onto the existing forms in place
+    // (keeps their IDs and any entries). Runs once, then leaves them editable.
+    if ($done('gf-created') && !$done('gf-styled') && $page_id) {
+        $sync = function ($fid, array $placeholders, $button_text) {
+            $fid = (int) $fid;
+            if (!$fid) { return false; }
+            $form = GFAPI::get_form($fid);
+            if (!$form || is_wp_error($form)) { return false; }
+            foreach ($form['fields'] as $f) {
+                if (isset($placeholders[$f->label])) { $f->placeholder = $placeholders[$f->label]; }
+            }
+            $form['button']['text'] = $button_text;
+            $form['enableHoneypot'] = true;
+            return !is_wp_error(GFAPI::update_form($form));
+        };
+        $ok1 = $sync(get_field('hero_form_id', $page_id),
+            ['Name' => 'Name', 'Company' => 'Company', 'Email' => 'Email', 'Phone' => 'Phone', $roles => $roles],
+            'Book My Exposure Review →');
+        $ok2 = $sync(get_field('contact_form_id', $page_id),
+            ['Name' => 'Name', 'Company' => 'Company', 'Email' => 'Email', 'Phone' => 'Phone', 'Message' => 'Message'],
+            'Send Message →');
+        if ($ok1 && $ok2) {
+            $mark('gf-styled');
+            echo "applied placeholders + button text to existing HVNL forms\n";
+        } else {
+            echo "HVNL form placeholder fix incomplete; will retry next deploy\n";
+        }
     }
 } elseif ($slug === 'hvnladvisory' && !$done('gf-created')) {
     echo "Gravity Forms not active yet; HVNL forms will be created once it is\n";
