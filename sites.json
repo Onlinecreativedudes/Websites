@@ -8,6 +8,10 @@
     "dentelectrical": {
       "wp_path": "public_html/dentelectrical",
       "theme_slug": "dentelectrical"
+    },
+    "hvnladvisory": {
+      "wp_path": "public_html/hvnladvisory",
+      "theme_slug": "hvnladvisory"
     }
   }
 }

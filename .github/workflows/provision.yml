@@ -1,0 +1,107 @@
+name: Provision WordPress on cPanel
+
+# Step 1 of onboarding a new client site (see deploy.yml): installs a fresh
+# WordPress at public_html/<client> on the shared dev cPanel account, using
+# the same single SSH key deploy.yml uses.
+#
+# What it does on the server (via .github/workflows/provision-remote.sh):
+#   1. Creates the MySQL database + db user through cPanel UAPI
+#   2. Downloads, configures and installs WordPress with WP-CLI
+#   3. Sets pretty permalinks and discourages search engine indexing (dev site)
+#   4. Creates and activates a placeholder theme named after the site title
+#      (the real theme lands later via the deploy workflow)
+#   5. Writes the generated admin + DB credentials to ~/.wp-admin-<client>.txt
+#      on the server — credentials are never printed in the CI log
+#
+# Safe to re-run: if WordPress is already installed at the target path the
+# script reports that and exits without changing anything.
+
+on:
+  workflow_dispatch:
+    inputs:
+      client:
+        description: 'Client slug (lowercase, e.g. hvnladvisory) — installs to public_html/<client> unless sites.json overrides wp_path'
+        required: true
+        type: string
+      site_title:
+        description: 'Website title (no apostrophes) — also names the placeholder theme'
+        required: true
+        type: string
+      admin_user:
+        description: 'WordPress admin username'
+        required: false
+        default: 'ocdadmin'
+        type: string
+      admin_email:
+        description: 'WordPress admin email'
+        required: false
+        default: 'hello@onlinecreativedudes.com'
+        type: string
+
+concurrency:
+  group: provision-${{ inputs.client }}
+
+jobs:
+  provision:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Load connection config from sites.json
+        run: |
+          c='${{ inputs.client }}'
+          if ! printf '%s' "$c" | grep -qE '^[a-z0-9-]+$'; then
+            echo "::error::Client slug must be lowercase letters, digits or hyphens."
+            exit 1
+          fi
+          # Inherit shared connection details; a sites.json entry is optional
+          # at provision time (it gets added for the deploy step anyway).
+          site=$(jq -c --arg c "$c" '.defaults + (.sites[$c] // {})' sites.json)
+          {
+            echo "SSH_HOST=$(jq -rn --argjson s "$site" '$s.host')"
+            echo "SSH_USER=$(jq -rn --argjson s "$site" '$s.user')"
+            echo "SSH_PORT=$(jq -rn --argjson s "$site" '$s.port // 22')"
+            echo "WP_PATH=$(jq -rn --argjson s "$site" --arg c "$c" '$s.wp_path // ("public_html/" + $c)')"
+            echo "THEME_SLUG=$(jq -rn --argjson s "$site" --arg c "$c" '$s.theme_slug // $c')"
+          } >> "$GITHUB_ENV"
+
+      - name: Configure SSH
+        env:
+          SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          SSH_KEY_PASSPHRASE: ${{ secrets.DEPLOY_SSH_KEY_PASSPHRASE }}
+        run: |
+          if [ -z "$SSH_KEY" ]; then
+            echo "::error::Secret DEPLOY_SSH_KEY is missing — add the master private key once under Settings > Secrets and variables > Actions."
+            exit 1
+          fi
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/id_deploy
+          chmod 600 ~/.ssh/id_deploy
+          # cPanel-generated keys are passphrase-encrypted; decrypt for CI use
+          if grep -q ENCRYPTED ~/.ssh/id_deploy; then
+            if [ -z "$SSH_KEY_PASSPHRASE" ]; then
+              echo "::error::The deploy key is passphrase-protected — add the passphrase as secret DEPLOY_SSH_KEY_PASSPHRASE."
+              exit 1
+            fi
+            openssl rsa -in ~/.ssh/id_deploy -passin env:SSH_KEY_PASSPHRASE -out ~/.ssh/id_deploy_dec
+            mv ~/.ssh/id_deploy_dec ~/.ssh/id_deploy
+            chmod 600 ~/.ssh/id_deploy
+          fi
+          ssh-keyscan -p "$SSH_PORT" -H "$SSH_HOST" >> ~/.ssh/known_hosts 2>/dev/null
+          ssh -i ~/.ssh/id_deploy -p "$SSH_PORT" "$SSH_USER@$SSH_HOST" true
+          echo "SSH connection OK"
+
+      - name: Install WordPress on the dev server
+        env:
+          CLIENT: ${{ inputs.client }}
+          SITE_TITLE: ${{ inputs.site_title }}
+          ADMIN_USER: ${{ inputs.admin_user }}
+          ADMIN_EMAIL: ${{ inputs.admin_email }}
+        run: |
+          case "$SITE_TITLE$ADMIN_USER$ADMIN_EMAIL" in
+            *"'"*) echo "::error::Inputs must not contain single quotes."; exit 1 ;;
+          esac
+          ssh -i ~/.ssh/id_deploy -p "$SSH_PORT" "$SSH_USER@$SSH_HOST" \
+            "CLIENT='$CLIENT' WP_PATH='$WP_PATH' THEME_SLUG='$THEME_SLUG' SITE_TITLE='$SITE_TITLE' ADMIN_USER='$ADMIN_USER' ADMIN_EMAIL='$ADMIN_EMAIL' bash -s" \
+            < .github/workflows/provision-remote.sh
