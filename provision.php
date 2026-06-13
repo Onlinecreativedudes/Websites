@@ -136,6 +136,40 @@ if (function_exists('update_field') && get_stylesheet() === $slug) {
     }
 }
 
+/* 1c. Image self-heal (Woody Craftwork). The first seed can land the text copy
+ *     but miss the Media Library image import (it then marks itself done and
+ *     never retries), leaving the hero and gallery blank. If the front page has
+ *     no hero image yet, clear the seed flag and re-run the seeder so the photos
+ *     bundled in the theme import. Marker-guarded: stops as soon as the images
+ *     are present, and only ever runs while the site is still blank, so it does
+ *     not clobber later edits. Scoped to this slug so other sites are untouched. */
+if ($slug === 'woodycraftwork' && function_exists('get_field') && function_exists('ocd_seed_run')
+    && get_stylesheet() === $slug && defined('OCD_SEED_OPTION') && !$done('images-seeded')) {
+    $fp = (int) get_option('page_on_front');
+    if (!$fp) {
+        $found = get_posts([
+            'post_type' => 'page', 'post_status' => 'any', 'numberposts' => 1,
+            'meta_key' => '_wp_page_template', 'meta_value' => 'page-templates/landing-page.php',
+        ]);
+        $fp = $found ? $found[0]->ID : 0;
+    }
+    $hero = $fp ? get_field('hero_image', $fp) : null;
+    if (!empty($hero)) {
+        $mark('images-seeded');
+        echo "woodycraftwork images present\n";
+    } else {
+        delete_option(OCD_SEED_OPTION);
+        echo "woodycraftwork hero image missing; re-running seed to import photos: " . ocd_seed_run() . "\n";
+        $hero = $fp ? get_field('hero_image', $fp) : null;
+        if (!empty($hero)) {
+            $mark('images-seeded');
+            echo "woodycraftwork images imported\n";
+        } else {
+            echo "woodycraftwork images still missing after re-seed; check uploads dir is writable\n";
+        }
+    }
+}
+
 /* 2. Landing page + static front page (once). */
 if (!$done('page-created')) {
     $template = 'page-templates/landing-page.php';
