@@ -115,6 +115,11 @@ jobs:
             echo "WP_PATH=$(jq -rn --argjson s "$site" --arg c "$c" '$s.wp_path // ("public_html/" + $c)')"
           } >> "$GITHUB_ENV"
 
+      - name: Debug — list visible secret names (values stay masked)
+        env:
+          SECRET_KEYS: ${{ toJson(secrets) }}
+        run: echo "$SECRET_KEYS" | jq 'keys'
+
       - name: Configure SSH
         env:
           SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
