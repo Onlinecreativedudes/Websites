@@ -36,6 +36,39 @@ $legacy = fn($n) => ($slug === 'solar-naturally') ? "$home/.solar-$n" : null;
 $done   = fn($n) => file_exists($marker($n)) || ($legacy($n) && file_exists($legacy($n)));
 $mark   = fn($n) => @touch($marker($n));
 
+/* 0a. Install plugins from the server-side cache (~/plugin-cache/*.zip), if any.
+       Drop the plugin zips into that folder once (cPanel File Manager); they get
+       installed here and on every future site, without putting licensed paid
+       binaries in the public repo. Only installs a plugin not already present. */
+$cache = null;
+foreach (["$home/plugin-cache", "$home/plugins"] as $cand) {
+    if (is_dir($cand)) { $cache = $cand; break; }
+}
+if ($cache) {
+    foreach (glob("$cache/*.zip") as $zip) {
+        if (class_exists('ZipArchive')) {
+            $za = new ZipArchive;
+            if ($za->open($zip) === true) {
+                $first = $za->getNameIndex(0);
+                $top   = $first ? explode('/', $first)[0] : '';
+                if ($top && is_dir(WP_PLUGIN_DIR . "/$top")) {
+                    echo "plugin already installed, skipping: $top\n";
+                } else {
+                    $za->extractTo(WP_PLUGIN_DIR);
+                    echo "installed plugin from cache: " . basename($zip) . "\n";
+                }
+                $za->close();
+                continue;
+            }
+        }
+        // Fallback when PHP lacks the zip extension.
+        exec('unzip -oq ' . escapeshellarg($zip) . ' -d ' . escapeshellarg(WP_PLUGIN_DIR), $o, $rc);
+        echo $rc === 0
+            ? "installed plugin from cache (unzip): " . basename($zip) . "\n"
+            : "could not install " . basename($zip) . " (no zip support)\n";
+    }
+}
+
 /* 0. Activate the plugins the theme expects, if installed. Not marker-guarded:
       idempotent and re-checked each deploy, so a plugin installed later gets
       switched on automatically. ACF Pro is preferred over the free ACF. */

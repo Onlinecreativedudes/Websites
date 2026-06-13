@@ -6,7 +6,7 @@
   },
   "sites": {
     "solar-naturally": {
-      "wp_path": "public_html/solar",
+      "wp_path": "dev.onlinecreativedudes.com/solar",
       "theme_slug": "solar-naturally",
       "url": "https://dev.onlinecreativedudes.com/solar"
     },
