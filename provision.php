@@ -97,6 +97,29 @@ foreach ($plugins as $label => $file) {
         : "plugin activated: $label\n";
 }
 
+/* 0c. Keep build-excluded plugins deactivated. The build standard says WP
+      Rocket and migration plugins must not be active during the build (the
+      reviewer installs and configures WP Rocket separately). An active caching
+      plugin also breaks the layout here by stripping CSS via its optimisation,
+      so this both follows the standard and self-heals that breakage.
+      Idempotent: only acts when one is actually active. */
+$exclude = [
+    'wp-rocket/wp-rocket.php',
+    'all-in-one-wp-migration/all-in-one-wp-migration.php',
+    'all-in-one-wp-migration-unlimited-extension/all-in-one-wp-migration-unlimited-extension.php',
+];
+foreach ($exclude as $xfile) {
+    if (is_plugin_active($xfile)) {
+        deactivate_plugins($xfile);
+        echo "deactivated build-excluded plugin: $xfile\n";
+    }
+}
+// Drop any optimised/cached CSS WP Rocket may have left behind.
+if (function_exists('rocket_clean_domain')) {
+    rocket_clean_domain();
+    echo "cleared WP Rocket cache\n";
+}
+
 /* 1. Activate the theme. Idempotent and not marker-guarded: activate whenever
       the theme is present and not already the active one, so it reliably comes
       on once the files land (and recovers if an earlier deploy used a wrong
