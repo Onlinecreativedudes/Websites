@@ -47,10 +47,24 @@ for name, site in cfg.get("sites", {}).items():
         continue
     wp_path = site.get("wp_path", f"public_html/{name}")
     slug    = site.get("theme_slug", name)
-    dest    = os.path.join(home, wp_path, "wp-content", "themes", slug) + "/"
-    os.makedirs(dest, exist_ok=True)
-    subprocess.run(["rsync", "-a", "--delete", src, dest], check=True)
-    print(f"deployed {name} -> {dest}")
+    src     = src.rstrip("/")
+    dest    = os.path.join(home, wp_path, "wp-content", "themes", slug)
+
+    # Mirror the theme into the install. Prefer rsync, but fall back to a
+    # pure-Python copy when rsync isn't available to the cPanel user (common
+    # on shared hosting) so the deploy never silently fails at the copy step.
+    parent = os.path.dirname(dest)
+    if not os.path.isdir(parent):
+        print(f"themes dir missing: {parent} -- is WordPress at {wp_path}?")
+        continue
+    if shutil.which("rsync"):
+        subprocess.run(["rsync", "-a", "--delete", src + "/", dest + "/"], check=True)
+        print(f"deployed {name} (rsync) -> {dest}")
+    else:
+        if os.path.isdir(dest):
+            shutil.rmtree(dest)
+        shutil.copytree(src, dest)
+        print(f"deployed {name} (copy) -> {dest}")
 
     # One-time provisioning: activate theme, create page, wire form.
     wp_load = os.path.join(home, wp_path, "wp-load.php")
