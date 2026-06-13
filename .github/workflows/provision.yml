@@ -112,9 +112,15 @@ jobs:
           echo "Repository variable DEPLOY_SSH_KEY visible: $HAS_VAR_KEY"
           echo "Secret DEPLOY_SSH_KEY_PASSPHRASE visible:   $HAS_SECRET_PASS"
           echo "Variable DEPLOY_SSH_KEY_PASSPHRASE visible: $HAS_VAR_PASS"
-          echo "Environments configured on this repo (secrets stored in an environment are NOT visible to this workflow):"
-          curl -s -H "Authorization: Bearer ${{ github.token }}" \
-            "https://api.github.com/repos/${{ github.repository }}/environments" | head -c 2000 || true
+          echo "Port reachability on $SSH_HOST (candidate SSH ports + cPanel API):"
+          for port in 22 222 2222 2683 2200 2083 443; do
+            if timeout 8 bash -c "exec 3<>/dev/tcp/$SSH_HOST/$port" 2>/dev/null; then
+              echo "  port $port: OPEN"
+              exec 3<&- 3>&- 2>/dev/null || true
+            else
+              echo "  port $port: no response"
+            fi
+          done
 
       - name: Configure SSH
         env:

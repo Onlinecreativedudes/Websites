@@ -1,5 +1,5 @@
 {
   "client": "hvnladvisory",
   "site_title": "HVNL Advisory",
-  "note": "Verbose SSH connectivity diagnostics"
+  "note": "Probe candidate SSH ports on the dev host"
 }
