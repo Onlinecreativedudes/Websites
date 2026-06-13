@@ -1,0 +1,13 @@
+{
+  "defaults": {
+    "host": "syn01bd.syd6.hostyourservices.net",
+    "user": "devonlin",
+    "port": 22
+  },
+  "sites": {
+    "dentelectrical": {
+      "wp_path": "public_html/dentelectrical",
+      "theme_slug": "dentelectrical"
+    }
+  }
+}
