@@ -24,6 +24,7 @@ define('WP_USE_THEMES', false);
 define('WP_ADMIN', true); // make switch_theme() and theme helpers available
 require $wp_load;
 require_once ABSPATH . 'wp-admin/includes/theme.php';
+require_once ABSPATH . 'wp-admin/includes/plugin.php';
 
 $home = rtrim($home, '/');
 // Markers are namespaced per slug so each site provisions independently
@@ -34,6 +35,32 @@ $marker = fn($n) => "$home/.prov-$slug-$n";
 $legacy = fn($n) => ($slug === 'solar-naturally') ? "$home/.solar-$n" : null;
 $done   = fn($n) => file_exists($marker($n)) || ($legacy($n) && file_exists($legacy($n)));
 $mark   = fn($n) => @touch($marker($n));
+
+/* 0. Activate the plugins the theme expects, if installed. Not marker-guarded:
+      idempotent and re-checked each deploy, so a plugin installed later gets
+      switched on automatically. ACF Pro is preferred over the free ACF. */
+$acf_pro = file_exists(WP_PLUGIN_DIR . '/advanced-custom-fields-pro/acf.php');
+$plugins = [
+    'Advanced Custom Fields PRO' => 'advanced-custom-fields-pro/acf.php',
+    'Advanced Custom Fields'     => $acf_pro ? null : 'advanced-custom-fields/acf.php',
+    'Gravity Forms'              => 'gravityforms/gravityforms.php',
+    'Yoast SEO'                  => 'wordpress-seo/wp-seo.php',
+];
+foreach ($plugins as $label => $file) {
+    if (!$file) { continue; }
+    if (!file_exists(WP_PLUGIN_DIR . '/' . $file)) {
+        echo "plugin not installed: $label\n";
+        continue;
+    }
+    if (is_plugin_active($file)) {
+        echo "plugin already active: $label\n";
+        continue;
+    }
+    $res = activate_plugin($file);
+    echo is_wp_error($res)
+        ? "plugin activation failed ($label): " . $res->get_error_message() . "\n"
+        : "plugin activated: $label\n";
+}
 
 /* 1. Activate the theme (once). */
 if (!$done('theme-activated')) {
