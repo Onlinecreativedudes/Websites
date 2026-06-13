@@ -1,23 +1,27 @@
 name: Deploy theme via cPanel API
 
-# The dev server's firewall blocks SSH from GitHub runners entirely, but the
-# cPanel API port (2083) is open — so this deploys themes over HTTPS instead:
+# Deploys a client theme to the dev cPanel over the HTTPS cPanel API (port
+# 2083) instead of SSH/rsync:
 #   1. Zips Websites/<client>/ as <theme_slug>/
 #   2. Uploads the zip with UAPI Fileman::upload_files
-#   3. Moves the current theme dir to .trash and extracts the zip in its place
+#   3. Moves the current theme dir aside and extracts the zip in its place
 #   4. Verifies style.css on the server matches the repo (version line)
 #
-# Needs ONE credential in the "Logins" environment:
-#   CPANEL_API_TOKEN — created in cPanel under Security > Manage API Tokens.
-# Username/host/port come from sites.json.
+# Needs ONE credential: secret CPANEL_API_TOKEN (cPanel > Security > Manage
+# API Tokens). Username/host/port come from sites.json.
 #
-# Note: no WP-CLI over the API, so the ACF JSON sync step from the SSH deploy
-# does not run here — ACF picks the field groups up from acf-json/ in admin.
+# IMPORTANT — host firewall (verified 2026-06-13): the dev host
+# (hostyourservices / VentraIP, AU) blocks BOTH SSH (ports 22/222/2222/2683/
+# 2200 filtered) AND the cPanel API from GitHub's runner IPs. The cPanel port
+# accepts the TCP/TLS connection but returns a host-level "403 Access denied"
+# before checking the token (the same token authenticates fine from an
+# Australian IP). Until the host allowlists the runners / lifts country
+# blocking on the cPanel service, automated deploys from GitHub cannot reach
+# the server — deploy by uploading the built theme zip in cPanel File Manager,
+# or run this workflow from a self-hosted runner on an allowed network.
+# This workflow is dispatch-only so it does not fail on every push meanwhile.
 
 on:
-  push:
-    branches: [ main, claude/eager-lovelace-011s7p ]
-    paths: [ 'Websites/**' ]
   workflow_dispatch:
     inputs:
       client:
