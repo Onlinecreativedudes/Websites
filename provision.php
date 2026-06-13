@@ -40,8 +40,11 @@ $mark   = fn($n) => @touch($marker($n));
        Drop the plugin zips into that folder once (cPanel File Manager); they get
        installed here and on every future site, without putting licensed paid
        binaries in the public repo. Only installs a plugin not already present. */
-$cache = "$home/plugin-cache";
-if (is_dir($cache)) {
+$cache = null;
+foreach (["$home/plugin-cache", "$home/plugins"] as $cand) {
+    if (is_dir($cand)) { $cache = $cand; break; }
+}
+if ($cache) {
     foreach (glob("$cache/*.zip") as $zip) {
         if (class_exists('ZipArchive')) {
             $za = new ZipArchive;
