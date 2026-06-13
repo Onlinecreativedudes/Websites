@@ -120,6 +120,16 @@ jobs:
           SECRET_KEYS: ${{ toJson(secrets) }}
         run: echo "$SECRET_KEYS" | jq 'keys'
 
+      - name: Probe server ports from the runner
+        run: |
+          for port in 22 2683 443 2083 2087; do
+            if timeout 8 bash -c "echo > /dev/tcp/$SSH_HOST/$port" 2>/dev/null; then
+              echo "port $port: OPEN"
+            else
+              echo "port $port: closed/filtered"
+            fi
+          done
+
       - name: Configure SSH
         env:
           SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
