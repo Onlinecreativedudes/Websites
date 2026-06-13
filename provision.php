@@ -119,6 +119,9 @@ if (function_exists('rocket_clean_domain')) {
     rocket_clean_domain();
     echo "cleared WP Rocket cache\n";
 }
+// Purge the LiteSpeed server cache so updated CSS/JS/templates are served
+// immediately to all visitors (logged-in users already bypass the page cache).
+do_action('litespeed_purge_all');
 
 /* 1. Activate the theme. Idempotent and not marker-guarded: activate whenever
       the theme is present and not already the active one, so it reliably comes
