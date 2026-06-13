@@ -142,14 +142,27 @@ jobs:
             mv ~/.ssh/id_deploy_dec ~/.ssh/id_deploy
             chmod 600 ~/.ssh/id_deploy
           fi
-          # Fail fast if the connection or auth is wrong; surface the SSH error
-          if ! ssh -i ~/.ssh/id_deploy -p "$SSH_PORT" \
-               -o ConnectTimeout=20 -o BatchMode=yes -o StrictHostKeyChecking=accept-new \
-               "$SSH_USER@$SSH_HOST" true 2> /tmp/ssh_err; then
-            echo "::error::SSH connection failed: $(tail -3 /tmp/ssh_err | tr '\n' ' ')"
-            exit 1
+          # Fail fast if the connection or auth is wrong; surface the SSH error.
+          # -4 forces IPv4 (GitHub runners have no IPv6). Tries the configured
+          # port first, then the other common cPanel SSH port as a fallback.
+          try_ssh() {
+            ssh -4 -i ~/.ssh/id_deploy -p "$1" \
+              -o ConnectTimeout=20 -o BatchMode=yes -o StrictHostKeyChecking=accept-new \
+              "$SSH_USER@$SSH_HOST" true 2> /tmp/ssh_err
+          }
+          if try_ssh "$SSH_PORT"; then
+            echo "SSH connection OK on port $SSH_PORT"
+          else
+            first_err=$(tail -3 /tmp/ssh_err | tr '\n' ' ')
+            alt_port=$([ "$SSH_PORT" = "22" ] && echo 2683 || echo 22)
+            if try_ssh "$alt_port"; then
+              echo "SSH connection OK on fallback port $alt_port (configured port $SSH_PORT failed: $first_err)"
+              echo "SSH_PORT=$alt_port" >> "$GITHUB_ENV"
+            else
+              echo "::error::SSH failed on port $SSH_PORT ($first_err) and port $alt_port ($(tail -3 /tmp/ssh_err | tr '\n' ' '))"
+              exit 1
+            fi
           fi
-          echo "SSH connection OK"
 
       - name: Confirm WP-CLI + WordPress on the server
         run: |
