@@ -21,7 +21,9 @@ name: Deploy theme to cPanel
 
 on:
   push:
-    branches: [ main ]
+    # claude/eager-lovelace-011s7p: temporary — dev deploys straight from the
+    # hvnladvisory build branch; drop it from this list when the branch merges.
+    branches: [ main, claude/eager-lovelace-011s7p ]
     paths: [ 'Websites/**' ]
   workflow_dispatch:
     inputs:
