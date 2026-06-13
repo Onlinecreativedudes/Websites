@@ -5,9 +5,18 @@
         {
             "key": "field_hvnl_opt_tab_brand",
             "label": "Branding & Header",
-            "name": "",
+            "name": "tab_branding_header",
             "type": "tab",
-            "placement": "top"
+            "placement": "top",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "endpoint": 0
         },
         {
             "key": "field_hvnl_opt_site_logo",
@@ -17,7 +26,21 @@
             "instructions": "One logo is used everywhere; the footer renders it inverted automatically.",
             "return_format": "array",
             "preview_size": "medium",
-            "library": "all"
+            "library": "all",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": ""
         },
         {
             "key": "field_hvnl_opt_announcement_text",
@@ -25,97 +48,251 @@
             "name": "announcement_text",
             "type": "textarea",
             "instructions": "The single dark line above the header. Leave empty to hide the strip.",
-            "rows": 2
+            "rows": 2,
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "new_lines": ""
         },
         {
             "key": "field_hvnl_opt_nav_cta_label",
             "label": "Header CTA button label",
             "name": "nav_cta_label",
             "type": "text",
-            "instructions": "Defaults to \"Book an Exposure Review\" when empty. Links to the hero form."
+            "instructions": "Defaults to \"Book an Exposure Review\" when empty. Links to the hero form.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         },
         {
             "key": "field_hvnl_opt_tab_contact",
             "label": "Contact Details",
-            "name": "",
+            "name": "tab_contact_details",
             "type": "tab",
-            "placement": "top"
+            "placement": "top",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "endpoint": 0
         },
         {
             "key": "field_hvnl_opt_business_phone",
             "label": "Business phone (dialable)",
             "name": "business_phone",
             "type": "text",
-            "instructions": "Digits with country code, e.g. +61386186954. Used in tel: links."
+            "instructions": "Digits with country code, e.g. +61386186954. Used in tel: links.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         },
         {
             "key": "field_hvnl_opt_display_phone",
             "label": "Display phone",
             "name": "display_phone",
             "type": "text",
-            "instructions": "Formatted for humans, e.g. (03) 8618 6954."
+            "instructions": "Formatted for humans, e.g. (03) 8618 6954.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         },
         {
             "key": "field_hvnl_opt_business_email",
             "label": "Business email",
             "name": "business_email",
-            "type": "email"
+            "type": "email",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            }
         },
         {
             "key": "field_hvnl_opt_coverage_text",
             "label": "Coverage line",
             "name": "coverage_text",
             "type": "text",
-            "instructions": "e.g. \"All of Australia\". Shown in the contact section and footer."
+            "instructions": "e.g. \"All of Australia\". Shown in the contact section and footer.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         },
         {
             "key": "field_hvnl_opt_business_address",
             "label": "Business address",
             "name": "business_address",
             "type": "text",
-            "instructions": "Optional \u2014 used in schema only if filled."
+            "instructions": "Optional \u2014 used in schema only if filled.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         },
         {
             "key": "field_hvnl_opt_tab_footer",
             "label": "Footer",
-            "name": "",
+            "name": "tab_footer",
             "type": "tab",
-            "placement": "top"
+            "placement": "top",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "endpoint": 0
         },
         {
             "key": "field_hvnl_opt_footer_blurb",
             "label": "Footer blurb",
             "name": "footer_blurb",
             "type": "textarea",
-            "rows": 3
+            "rows": 3,
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "new_lines": ""
         },
         {
             "key": "field_hvnl_opt_footer_cta_label",
             "label": "Footer CTA button label",
             "name": "footer_cta_label",
             "type": "text",
-            "instructions": "Defaults to \"Book an Exposure Review\" when empty."
+            "instructions": "Defaults to \"Book an Exposure Review\" when empty.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         },
         {
             "key": "field_hvnl_opt_copyright_line",
             "label": "Copyright line",
             "name": "copyright_line",
             "type": "text",
-            "instructions": "Leave empty for the automatic \"\u00a9 [year] [site name]\" line."
+            "instructions": "Leave empty for the automatic \"\u00a9 [year] [site name]\" line.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         },
         {
             "key": "field_hvnl_opt_footer_disclaimer",
             "label": "Disclaimer line",
             "name": "footer_disclaimer",
             "type": "text",
-            "instructions": "e.g. \"General information only \u2014 not legal advice.\""
+            "instructions": "e.g. \"General information only \u2014 not legal advice.\"",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         },
         {
             "key": "field_hvnl_opt_tab_schema",
             "label": "Schema",
-            "name": "",
+            "name": "tab_schema",
             "type": "tab",
-            "placement": "top"
+            "placement": "top",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "endpoint": 0
         },
         {
             "key": "field_hvnl_opt_schema_business_type",
@@ -123,14 +300,37 @@
             "name": "schema_business_type",
             "type": "text",
             "instructions": "Schema.org type for the JSON-LD block, e.g. ProfessionalService.",
-            "default_value": "ProfessionalService"
+            "default_value": "ProfessionalService",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         },
         {
             "key": "field_hvnl_opt_schema_abn",
             "label": "ABN",
             "name": "schema_abn",
             "type": "text",
-            "instructions": "Optional."
+            "instructions": "Optional.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         }
     ],
     "location": [
@@ -149,5 +349,6 @@
     "instruction_placement": "label",
     "active": true,
     "description": "Site-wide content: branding, contact details, footer and schema.",
-    "show_in_rest": 0
+    "show_in_rest": 0,
+    "modified": 1781335770
 }
