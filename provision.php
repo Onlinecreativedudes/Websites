@@ -311,6 +311,105 @@ if ($slug === 'hvnladvisory' && !$done('gf-created') && class_exists('GFAPI')) {
     echo "Gravity Forms not active yet; HVNL forms will be created once it is\n";
 }
 
+/* 3c. Woody Craftwork forms: the hero "Request a call back" form and the
+ * "Request a free quote" contact form. Both redirect to /thank-you/, BCC
+ * hello@onlinecreativedudes.com, use the international phone format, and have
+ * the honeypot on. Their IDs are written into the Home page's ACF fields
+ * (hero_form_id, contact_form_id). */
+if ($slug === 'woodycraftwork' && !$done('gf-created') && class_exists('GFAPI')) {
+    $ty_url = home_url('/thank-you/');
+    $bcc    = 'hello@onlinecreativedudes.com';
+
+    $notification = function ($email_field_id) use ($bcc) {
+        $nid = uniqid();
+        return [$nid => [
+            'id'       => $nid,
+            'isActive' => true,
+            'name'     => 'Admin Notification',
+            'event'    => 'form_submission',
+            'to'       => '{admin_email}',
+            'toType'   => 'email',
+            'bcc'      => $bcc,
+            'replyTo'  => '{' . $email_field_id . '}',
+            'subject'  => 'New enquiry from {form_title}',
+            'message'  => '{all_fields}',
+        ]];
+    };
+    $confirmation = function () use ($ty_url) {
+        $cid = uniqid();
+        return [$cid => [
+            'id'        => $cid,
+            'name'      => 'Default Confirmation',
+            'isDefault' => true,
+            'type'      => 'redirect',
+            'url'       => $ty_url,
+        ]];
+    };
+
+    // Hero call-back: name + message. No email field, so reply-to is the admin.
+    $callback = [
+        'title'          => 'Request a Call Back',
+        'description'    => '',
+        'enableHoneypot' => true,
+        'button'         => ['type' => 'text', 'text' => 'Request call back'],
+        'fields'         => [
+            ['id' => 1, 'type' => 'text', 'label' => 'Name',    'isRequired' => true],
+            ['id' => 2, 'type' => 'text', 'label' => 'Message', 'isRequired' => true, 'description' => 'Tell us about your project, or just your number'],
+        ],
+        'confirmations'  => $confirmation(),
+    ];
+
+    // Contact: name, phone, email, suburb, project type, detail.
+    $quote = [
+        'title'          => 'Request a Free Quote',
+        'description'    => '',
+        'enableHoneypot' => true,
+        'button'         => ['type' => 'text', 'text' => 'Request my free quote'],
+        'fields'         => [
+            ['id' => 1, 'type' => 'text',     'label' => 'Name',         'isRequired' => true],
+            ['id' => 2, 'type' => 'phone',    'label' => 'Phone',        'isRequired' => true, 'phoneFormat' => 'international'],
+            ['id' => 3, 'type' => 'email',    'label' => 'Email',        'isRequired' => true],
+            ['id' => 4, 'type' => 'text',     'label' => 'Suburb'],
+            ['id' => 5, 'type' => 'select',   'label' => 'Project type',  'isRequired' => true,
+                'choices' => array_map(fn($v) => ['text' => $v, 'value' => $v], [
+                    'Custom Kitchen', 'Bathroom & Vanity', 'Laundry', 'Wardrobe / Robe',
+                    'Home Office', 'Entertainment / Living', 'Commercial fit-out', 'Other',
+                ])],
+            ['id' => 6, 'type' => 'textarea', 'label' => 'About your project'],
+        ],
+        'notifications'  => $notification(3),
+        'confirmations'  => $confirmation(),
+    ];
+
+    $callback_id = GFAPI::add_form($callback);
+    $quote_id    = GFAPI::add_form($quote);
+
+    if (!is_wp_error($callback_id) && !is_wp_error($quote_id) && function_exists('update_field')) {
+        $page_id = (int) get_option('page_on_front');
+        if (!$page_id) {
+            $found = get_posts([
+                'post_type' => 'page', 'post_status' => 'any', 'numberposts' => 1,
+                'meta_key' => '_wp_page_template', 'meta_value' => 'page-templates/landing-page.php',
+            ]);
+            $page_id = $found ? $found[0]->ID : 0;
+        }
+        if ($page_id) {
+            update_field('hero_form_id', $callback_id, $page_id);
+            update_field('contact_form_id', $quote_id, $page_id);
+            echo "gravity forms created (callback $callback_id, quote $quote_id) and wired into page $page_id\n";
+            $mark('gf-created');
+        } else {
+            echo "forms created but landing page not found yet; will wire next deploy\n";
+        }
+    } else {
+        $err = is_wp_error($callback_id) ? $callback_id->get_error_message()
+             : (is_wp_error($quote_id) ? $quote_id->get_error_message() : 'ACF update_field unavailable');
+        echo "woodycraftwork form setup failed: $err\n";
+    }
+} elseif ($slug === 'woodycraftwork' && !$done('gf-created')) {
+    echo "Gravity Forms not active yet; Woody Craftwork forms will be created once it is\n";
+}
+
 /* 4. Seed ACF fields with the theme's default content (once), so the editing
       screen mirrors the front end instead of showing empty fields. The theme
       ships a seed.json with "page" and "options" sections; values are written
