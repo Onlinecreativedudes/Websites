@@ -16,6 +16,13 @@ name: Provision WordPress on cPanel
 # Safe to re-run: if WordPress is already installed at the target path the
 # script reports that and exits without changing anything.
 
+# Two ways to start a provision:
+#   1. workflow_dispatch with the inputs below, or
+#   2. commit a provision-request.json at the repo root, e.g.
+#        { "client": "hvnladvisory", "site_title": "HVNL Advisory" }
+#      (optional keys: admin_user, admin_email) — useful where dispatching
+#      isn't possible, e.g. from automation without actions:write.
+
 on:
   workflow_dispatch:
     inputs:
@@ -37,9 +44,11 @@ on:
         required: false
         default: 'hello@onlinecreativedudes.com'
         type: string
+  push:
+    paths: [ 'provision-request.json' ]
 
 concurrency:
-  group: provision-${{ inputs.client }}
+  group: provision-${{ github.ref }}
 
 jobs:
   provision:
@@ -48,9 +57,33 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Resolve provision inputs
+        run: |
+          if [ "${{ github.event_name }}" = "push" ]; then
+            c=$(jq -r '.client // empty' provision-request.json)
+            title=$(jq -r '.site_title // empty' provision-request.json)
+            admin_user=$(jq -r '.admin_user // "ocdadmin"' provision-request.json)
+            admin_email=$(jq -r '.admin_email // "hello@onlinecreativedudes.com"' provision-request.json)
+          else
+            c='${{ inputs.client }}'
+            title='${{ inputs.site_title }}'
+            admin_user='${{ inputs.admin_user }}'
+            admin_email='${{ inputs.admin_email }}'
+          fi
+          if [ -z "$c" ] || [ -z "$title" ]; then
+            echo "::error::client and site_title are required (workflow inputs or provision-request.json)."
+            exit 1
+          fi
+          {
+            echo "CLIENT=$c"
+            echo "SITE_TITLE=$title"
+            echo "ADMIN_USER=$admin_user"
+            echo "ADMIN_EMAIL=$admin_email"
+          } >> "$GITHUB_ENV"
+
       - name: Load connection config from sites.json
         run: |
-          c='${{ inputs.client }}'
+          c="$CLIENT"
           if ! printf '%s' "$c" | grep -qE '^[a-z0-9-]+$'; then
             echo "::error::Client slug must be lowercase letters, digits or hyphens."
             exit 1
@@ -93,11 +126,6 @@ jobs:
           echo "SSH connection OK"
 
       - name: Install WordPress on the dev server
-        env:
-          CLIENT: ${{ inputs.client }}
-          SITE_TITLE: ${{ inputs.site_title }}
-          ADMIN_USER: ${{ inputs.admin_user }}
-          ADMIN_EMAIL: ${{ inputs.admin_email }}
         run: |
           case "$SITE_TITLE$ADMIN_USER$ADMIN_EMAIL" in
             *"'"*) echo "::error::Inputs must not contain single quotes."; exit 1 ;;
