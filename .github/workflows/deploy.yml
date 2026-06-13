@@ -19,11 +19,13 @@ name: Deploy theme to cPanel
 #   wp_path:    public_html/<client>
 #   theme dir:  public_html/<client>/wp-content/themes/<theme_slug>
 
+# NOTE: the dev server firewall blocks SSH from GitHub runners (verified
+# 2026-06-13 — ports 22/222/2222/2683/2200 all filtered). Until the host opens
+# SSH, deploys run over the cPanel API instead: see deploy-cpanel-api.yml.
+
 on:
   push:
-    # claude/eager-lovelace-011s7p: temporary — dev deploys straight from the
-    # hvnladvisory build branch; drop it from this list when the branch merges.
-    branches: [ main, claude/eager-lovelace-011s7p ]
+    branches: [ main ]
     paths: [ 'Websites/**' ]
   workflow_dispatch:
     inputs:

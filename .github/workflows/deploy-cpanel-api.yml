@@ -1,0 +1,175 @@
+name: Deploy theme via cPanel API
+
+# The dev server's firewall blocks SSH from GitHub runners entirely, but the
+# cPanel API port (2083) is open — so this deploys themes over HTTPS instead:
+#   1. Zips Websites/<client>/ as <theme_slug>/
+#   2. Uploads the zip with UAPI Fileman::upload_files
+#   3. Moves the current theme dir to .trash and extracts the zip in its place
+#   4. Verifies style.css on the server matches the repo (version line)
+#
+# Needs ONE credential in the "Logins" environment:
+#   CPANEL_API_TOKEN — created in cPanel under Security > Manage API Tokens.
+# Username/host/port come from sites.json.
+#
+# Note: no WP-CLI over the API, so the ACF JSON sync step from the SSH deploy
+# does not run here — ACF picks the field groups up from acf-json/ in admin.
+
+on:
+  push:
+    branches: [ main, claude/eager-lovelace-011s7p ]
+    paths: [ 'Websites/**' ]
+  workflow_dispatch:
+    inputs:
+      client:
+        description: 'Site folder under Websites/ (e.g. hvnladvisory)'
+        required: true
+        default: 'hvnladvisory'
+        type: string
+
+concurrency:
+  group: deploy-api-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  detect:
+    runs-on: ubuntu-latest
+    outputs:
+      clients: ${{ steps.set.outputs.clients }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Work out which client sites to deploy
+        id: set
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            clients='["${{ inputs.client }}"]'
+          else
+            before="${{ github.event.before }}"
+            if [ "$before" = "0000000000000000000000000000000000000000" ] || ! git cat-file -e "$before" 2>/dev/null; then
+              range="HEAD~1..HEAD"
+            else
+              range="$before..${{ github.sha }}"
+            fi
+            changed=$(git diff --name-only $range -- 'Websites/' | awk -F/ 'NF>2 {print $2}' | sort -u)
+            if [ -z "$changed" ]; then
+              clients='[]'
+            else
+              clients=$(printf '%s\n' $changed | jq -R . | jq -cs .)
+            fi
+          fi
+          echo "Deploying clients: $clients"
+          echo "clients=$clients" >> "$GITHUB_OUTPUT"
+
+  deploy:
+    needs: detect
+    if: needs.detect.outputs.clients != '[]'
+    runs-on: ubuntu-latest
+    environment: Logins
+    strategy:
+      fail-fast: false
+      matrix:
+        client: ${{ fromJson(needs.detect.outputs.clients) }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Load site config from sites.json
+        run: |
+          c='${{ matrix.client }}'
+          if ! jq -e --arg c "$c" '.sites | has($c)' sites.json >/dev/null; then
+            echo "::error::'$c' has no entry under \"sites\" in sites.json — add one before deploying."
+            exit 1
+          fi
+          if [ ! -d "Websites/$c" ]; then
+            echo "::error::Folder Websites/$c does not exist in the repo."
+            exit 1
+          fi
+          site=$(jq -c --arg c "$c" '.defaults + .sites[$c]' sites.json)
+          {
+            echo "CP_HOST=$(jq -rn --argjson s "$site" '$s.host')"
+            echo "CP_USER=$(jq -rn --argjson s "$site" '$s.user')"
+            echo "THEME_SLUG=$(jq -rn --argjson s "$site" --arg c "$c" '$s.theme_slug // $c')"
+            echo "WP_PATH=$(jq -rn --argjson s "$site" --arg c "$c" '$s.wp_path // ("public_html/" + $c)')"
+          } >> "$GITHUB_ENV"
+
+      - name: Deploy theme over the cPanel API
+        env:
+          CP_TOKEN: ${{ secrets.CPANEL_API_TOKEN }}
+          CLIENT: ${{ matrix.client }}
+        run: |
+          if [ -z "$CP_TOKEN" ]; then
+            echo "::error::Secret CPANEL_API_TOKEN is missing. Create a token in cPanel (Security > Manage API Tokens) and add it as a secret named CPANEL_API_TOKEN in the Logins environment (Settings > Environments > Logins)."
+            exit 1
+          fi
+          AUTH="Authorization: cpanel $CP_USER:$CP_TOKEN"
+          BASE="https://$CP_HOST:2083"
+          THEMES="$WP_PATH/wp-content/themes"
+
+          uapi() { # uapi <Module/function> [curl args...]
+            local fn="$1"; shift
+            curl -sk -H "$AUTH" "$BASE/execute/$fn" "$@"
+          }
+          check() { # check <label> <json> — UAPI success is status:1
+            local label="$1" json="$2"
+            if ! printf '%s' "$json" | jq -e '.status == 1' >/dev/null 2>&1; then
+              echo "::error::$label failed:"
+              printf '%s\n' "$json" | head -c 1500
+              exit 1
+            fi
+            echo "$label: OK"
+          }
+
+          echo "Packing Websites/$CLIENT as $THEME_SLUG/"
+          staging=$(mktemp -d)
+          cp -r "Websites/$CLIENT" "$staging/$THEME_SLUG"
+          (cd "$staging" && zip -qr theme.zip "$THEME_SLUG")
+          ls -la "$staging/theme.zip"
+
+          echo "Uploading zip to $THEMES"
+          out=$(uapi Fileman/upload_files -F "dir=$THEMES" -F "file-1=@$staging/theme.zip;filename=$THEME_SLUG.zip")
+          check "Upload" "$out"
+
+          # Clean mirror: move any existing theme dir aside before extracting
+          ts=$(date +%s)
+          curl -sk -H "$AUTH" "$BASE/json-api/cpanel" \
+            --data-urlencode "cpanel_jsonapi_apiversion=2" \
+            --data-urlencode "cpanel_jsonapi_module=Fileman" \
+            --data-urlencode "cpanel_jsonapi_func=fileop" \
+            --data-urlencode "op=move" \
+            --data-urlencode "sourcefiles=$THEMES/$THEME_SLUG" \
+            --data-urlencode "destfiles=$THEMES/.$THEME_SLUG-replaced-$ts" \
+            > /dev/null || true
+
+          echo "Extracting on the server"
+          out=$(curl -sk -H "$AUTH" "$BASE/json-api/cpanel" \
+            --data-urlencode "cpanel_jsonapi_apiversion=2" \
+            --data-urlencode "cpanel_jsonapi_module=Fileman" \
+            --data-urlencode "cpanel_jsonapi_func=fileop" \
+            --data-urlencode "op=extract" \
+            --data-urlencode "sourcefiles=$THEMES/$THEME_SLUG.zip" \
+            --data-urlencode "destfiles=$THEMES")
+          if printf '%s' "$out" | jq -e '.cpanelresult.error' >/dev/null 2>&1 && [ "$(printf '%s' "$out" | jq -r '.cpanelresult.error')" != "null" ]; then
+            echo "::error::Extract failed:"; printf '%s\n' "$out" | head -c 1500; exit 1
+          fi
+          echo "Extract: OK"
+
+          echo "Removing uploaded zip and replaced theme copy"
+          uapi Fileman/delete_files --data-urlencode "paths=$THEMES/$THEME_SLUG.zip" > /dev/null || true
+          uapi Fileman/delete_files --data-urlencode "paths=$THEMES/.$THEME_SLUG-replaced-$ts" > /dev/null || true
+
+          echo "Verifying style.css on the server"
+          out=$(uapi Fileman/get_file_content --data-urlencode "dir=$THEMES/$THEME_SLUG" --data-urlencode "file=style.css")
+          check "Read-back" "$out"
+          server_version=$(printf '%s' "$out" | jq -r '.data.content' | grep -oE 'Version: [0-9.]+' | head -1)
+          repo_version=$(grep -oE 'Version: [0-9.]+' "Websites/$CLIENT/style.css" | head -1)
+          echo "Server theme $server_version / repo $repo_version"
+          if [ "$server_version" != "$repo_version" ]; then
+            echo "::error::Deployed style.css does not match the repo."
+            exit 1
+          fi
+
+          echo "Theme file listing on server:"
+          uapi Fileman/list_files --data-urlencode "dir=$THEMES/$THEME_SLUG" | jq -r '.data[]?.file' | sort | head -40
