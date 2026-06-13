@@ -3,21 +3,24 @@ name: Deploy theme to cPanel
 # Deploys client sites that all live on ONE dev cPanel account, each
 # WordPress install in its own folder under public_html/.
 #
-# - ONE GitHub secret, set once: DEPLOY_SSH_KEY (the private key; its
-#   public half is authorized once in the dev cPanel under
-#   SSH Access > Manage SSH Keys).
+# Transport is the cPanel API over HTTPS (port 2083) because the server's
+# firewall blocks SSH from GitHub runners (verified by probe: 22 and 2683
+# filtered, 443 and 2083 open).
+#
+# - ONE GitHub secret, set once: CPANEL_PASSWORD (the cPanel account
+#   password for the user in sites.json).
 # - Connection details live in sites.json: "defaults" holds the shared
-#   host/user/port, "sites" maps each Websites/<client>/ folder to its
-#   WordPress install path. A site entry can override any default.
+#   cpanel_host/user, "sites" maps each Websites/<client>/ folder to its
+#   WordPress install path and public URL. A site entry can override any
+#   default.
 #
 # Onboarding a new client site:
 #   1. Install WordPress at public_html/<client> on the dev cPanel
 #   2. Add the client's entry to sites.json
 # No new keys, no GitHub settings.
 #
-# Server paths are relative to the cPanel user's home directory:
-#   wp_path:    public_html/<client>
-#   theme dir:  public_html/<client>/wp-content/themes/<theme_slug>
+# ACF JSON sync happens inside the theme (inc/acf-sync.php) on admin
+# load, since WP-CLI isn't reachable without SSH.
 
 on:
   push:
@@ -26,12 +29,12 @@ on:
   workflow_dispatch:
     inputs:
       client:
-        description: 'Site folder under Websites/ (e.g. dentelectrical)'
+        description: 'Site folder under Websites/ (e.g. solar-naturally)'
         required: true
-        default: 'dentelectrical'
+        default: 'solar-naturally'
         type: string
       connection_test:
-        description: 'Only test the SSH connection — deploy nothing'
+        description: 'Only test the cPanel API connection — deploy nothing'
         required: false
         default: false
         type: boolean
@@ -77,9 +80,6 @@ jobs:
     needs: detect
     if: needs.detect.outputs.clients != '[]'
     runs-on: ubuntu-latest
-    # The deploy secrets (DEPLOY_SSH_KEY, DEPLOY_SSH_KEY_PASSPHRASE) live in
-    # this GitHub environment; the job must run in its context to read them.
-    environment: Configure Logins
     strategy:
       fail-fast: false
       matrix:
@@ -102,105 +102,104 @@ jobs:
           fi
           # Site entry inherits from "defaults"; any key set on the site wins.
           site=$(jq -c --arg c "$c" '.defaults + .sites[$c]' sites.json)
-          host=$(jq -rn --argjson s "$site" '$s.host')
-          if [ "$host" = "REPLACE_WITH_DEV_SERVER_HOSTNAME" ] || [ -z "$host" ] || [ "$host" = "null" ]; then
-            echo "::error::sites.json still has a placeholder host — fill in the real dev server hostname under \"defaults\"."
-            exit 1
-          fi
           {
-            echo "SSH_HOST=$host"
-            echo "SSH_USER=$(jq -rn --argjson s "$site" '$s.user')"
-            echo "SSH_PORT=$(jq -rn --argjson s "$site" '$s.port // 22')"
+            echo "CP_HOST=$(jq -rn --argjson s "$site" '$s.cpanel_host')"
+            echo "CP_USER=$(jq -rn --argjson s "$site" '$s.user')"
             echo "THEME_SLUG=$(jq -rn --argjson s "$site" --arg c "$c" '$s.theme_slug // $c')"
             echo "WP_PATH=$(jq -rn --argjson s "$site" --arg c "$c" '$s.wp_path // ("public_html/" + $c)')"
+            echo "SITE_URL=$(jq -rn --argjson s "$site" '$s.url // empty')"
           } >> "$GITHUB_ENV"
 
-      - name: Debug — list visible secret names (values stay masked)
+      - name: Test cPanel API connection
         env:
-          SECRET_KEYS: ${{ toJson(secrets) }}
-        run: echo "$SECRET_KEYS" | jq 'keys'
-
-      - name: Probe server ports from the runner
+          CPANEL_PASSWORD: ${{ secrets.CPANEL_PASSWORD }}
         run: |
-          for port in 22 2683 443 2083 2087; do
-            if timeout 8 bash -c "echo > /dev/tcp/$SSH_HOST/$port" 2>/dev/null; then
-              echo "port $port: OPEN"
-            else
-              echo "port $port: closed/filtered"
-            fi
-          done
-
-      - name: Configure SSH
-        env:
-          SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
-          SSH_KEY_PASSPHRASE: ${{ secrets.DEPLOY_SSH_KEY_PASSPHRASE }}
-        run: |
-          if [ -z "$SSH_KEY" ]; then
-            echo "::error::Secret DEPLOY_SSH_KEY is missing — add the master private key once under Settings > Secrets and variables > Actions."
+          if [ -z "$CPANEL_PASSWORD" ]; then
+            echo "::error::Secret CPANEL_PASSWORD is missing — add the cPanel account password as a repository secret."
             exit 1
           fi
-          mkdir -p ~/.ssh
-          printf '%s\n' "$SSH_KEY" > ~/.ssh/id_deploy
-          chmod 600 ~/.ssh/id_deploy
-          # cPanel-generated keys are passphrase-encrypted; decrypt for CI use
-          if grep -q ENCRYPTED ~/.ssh/id_deploy; then
-            if [ -z "$SSH_KEY_PASSPHRASE" ]; then
-              echo "::error::The deploy key is passphrase-protected — add the passphrase as secret DEPLOY_SSH_KEY_PASSPHRASE."
-              exit 1
-            fi
-            openssl rsa -in ~/.ssh/id_deploy -passin env:SSH_KEY_PASSPHRASE -out ~/.ssh/id_deploy_dec
-            mv ~/.ssh/id_deploy_dec ~/.ssh/id_deploy
-            chmod 600 ~/.ssh/id_deploy
+          # uapi: Fileman::list_files on the home dir proves auth + reachability
+          resp=$(curl -sS -m 30 -u "$CP_USER:$CPANEL_PASSWORD" \
+            "https://$CP_HOST:2083/execute/Fileman/list_files?dir=%2Fhome%2F$CP_USER" || true)
+          if ! echo "$resp" | jq -e '.status == 1' >/dev/null 2>&1; then
+            echo "::error::cPanel API auth/connection failed: $(echo "$resp" | head -c 300)"
+            exit 1
           fi
-          # Fail fast if the connection or auth is wrong; surface the SSH error.
-          # -4 forces IPv4 (GitHub runners have no IPv6). Tries the configured
-          # port first, then the other common cPanel SSH port as a fallback.
-          try_ssh() {
-            ssh -4 -i ~/.ssh/id_deploy -p "$1" \
-              -o ConnectTimeout=20 -o BatchMode=yes -o StrictHostKeyChecking=accept-new \
-              "$SSH_USER@$SSH_HOST" true 2> /tmp/ssh_err
-          }
-          if try_ssh "$SSH_PORT"; then
-            echo "SSH connection OK on port $SSH_PORT"
-          else
-            first_err=$(tail -3 /tmp/ssh_err | tr '\n' ' ')
-            alt_port=$([ "$SSH_PORT" = "22" ] && echo 2683 || echo 22)
-            if try_ssh "$alt_port"; then
-              echo "SSH connection OK on fallback port $alt_port (configured port $SSH_PORT failed: $first_err)"
-              echo "SSH_PORT=$alt_port" >> "$GITHUB_ENV"
-            else
-              echo "::error::SSH failed on port $SSH_PORT ($first_err) and port $alt_port ($(tail -3 /tmp/ssh_err | tr '\n' ' '))"
-              exit 1
-            fi
-          fi
+          echo "cPanel API connection OK"
 
-      - name: Confirm WP-CLI + WordPress on the server
+      - name: Confirm WordPress install exists at the target path
+        env:
+          CPANEL_PASSWORD: ${{ secrets.CPANEL_PASSWORD }}
         run: |
-          ssh -i ~/.ssh/id_deploy -p "$SSH_PORT" "$SSH_USER@$SSH_HOST" \
-            "wp --path=\"$WP_PATH\" core version"
+          enc_path=$(python3 -c "import urllib.parse;print(urllib.parse.quote('/home/$CP_USER/$WP_PATH'))")
+          resp=$(curl -sS -m 30 -u "$CP_USER:$CPANEL_PASSWORD" \
+            "https://$CP_HOST:2083/execute/Fileman/list_files?dir=$enc_path")
+          if ! echo "$resp" | jq -e '.data[]? | select(.file == "wp-config.php")' >/dev/null; then
+            echo "::error::No wp-config.php found in $WP_PATH — is WordPress installed there?"
+            echo "$resp" | jq -r '.data[]?.file' | head -20
+            exit 1
+          fi
+          echo "WordPress install confirmed at $WP_PATH"
 
       - name: Connection test only — stopping here
         if: github.event_name == 'workflow_dispatch' && inputs.connection_test
         run: echo "Connection test passed for '${{ matrix.client }}'. Nothing was deployed."
 
-      - name: Deploy theme (rsync)
+      - name: Package theme
         if: ${{ !(github.event_name == 'workflow_dispatch' && inputs.connection_test) }}
-        # --delete keeps the server theme an exact mirror of the repo theme.
-        # Scope is the theme dir only, so uploads/core/other files are untouched.
         run: |
-          rsync -az --delete \
-            -e "ssh -i ~/.ssh/id_deploy -p $SSH_PORT" \
-            "Websites/${{ matrix.client }}/" \
-            "$SSH_USER@$SSH_HOST:$WP_PATH/wp-content/themes/$THEME_SLUG/"
+          mkdir -p /tmp/pkg
+          cp -r "Websites/${{ matrix.client }}" "/tmp/pkg/$THEME_SLUG"
+          (cd /tmp/pkg && zip -qr theme.zip "$THEME_SLUG")
+          ls -la /tmp/pkg/theme.zip
 
-      - name: Sync ACF JSON and report status (evidence)
+      - name: Upload and extract theme via cPanel API
         if: ${{ !(github.event_name == 'workflow_dispatch' && inputs.connection_test) }}
+        env:
+          CPANEL_PASSWORD: ${{ secrets.CPANEL_PASSWORD }}
         run: |
-          ssh -i ~/.ssh/id_deploy -p "$SSH_PORT" "$SSH_USER@$SSH_HOST" \
-            "set -e; \
-             cd \"$WP_PATH\"; \
-             if wp cli has-command 'acf json' 2>/dev/null; then \
-               wp acf json status; wp acf json sync; wp acf json status; \
-             else \
-               echo 'ACF JSON CLI not available — skipping sync (fields will sync from acf-json/ on admin load).'; \
-             fi"
+          api() {
+            curl -sS -m 60 -u "$CP_USER:$CPANEL_PASSWORD" "$@"
+          }
+          enc() { python3 -c "import urllib.parse,sys;print(urllib.parse.quote(sys.argv[1]))" "$1"; }
+
+          home="/home/$CP_USER"
+          themes_dir="$home/$WP_PATH/wp-content/themes"
+
+          # 1. Upload the zip to the home directory
+          up=$(api -X POST "https://$CP_HOST:2083/execute/Fileman/upload_files" \
+            -F "dir=$home" -F "file-1=@/tmp/pkg/theme.zip")
+          echo "$up" | jq -e '.status == 1' >/dev/null || { echo "::error::Upload failed: $(echo "$up" | head -c 300)"; exit 1; }
+          echo "Uploaded theme.zip"
+
+          # 2. Remove the existing theme dir so deletions in the repo propagate
+          api "https://$CP_HOST:2083/json-api/cpanel?cpanel_jsonapi_apiversion=2&cpanel_jsonapi_module=Fileman&cpanel_jsonapi_func=fileop&op=unlink&sourcefiles=$(enc "$themes_dir/$THEME_SLUG")" >/dev/null || true
+
+          # 3. Extract the zip into the themes directory
+          ex=$(api "https://$CP_HOST:2083/json-api/cpanel?cpanel_jsonapi_apiversion=2&cpanel_jsonapi_module=Fileman&cpanel_jsonapi_func=fileop&op=extract&sourcefiles=$(enc "$home/theme.zip")&destfiles=$(enc "$themes_dir")")
+          if echo "$ex" | jq -e '.cpanelresult.error' >/dev/null 2>&1; then
+            echo "::error::Extract failed: $(echo "$ex" | head -c 400)"
+            exit 1
+          fi
+          echo "Extracted theme into $themes_dir/$THEME_SLUG"
+
+          # 4. Clean up the uploaded zip
+          api "https://$CP_HOST:2083/json-api/cpanel?cpanel_jsonapi_apiversion=2&cpanel_jsonapi_module=Fileman&cpanel_jsonapi_func=fileop&op=unlink&sourcefiles=$(enc "$home/theme.zip")" >/dev/null || true
+
+      - name: Verify deployed files and site response (evidence)
+        if: ${{ !(github.event_name == 'workflow_dispatch' && inputs.connection_test) }}
+        env:
+          CPANEL_PASSWORD: ${{ secrets.CPANEL_PASSWORD }}
+        run: |
+          enc_path=$(python3 -c "import urllib.parse;print(urllib.parse.quote('/home/$CP_USER/$WP_PATH/wp-content/themes/$THEME_SLUG'))")
+          resp=$(curl -sS -m 30 -u "$CP_USER:$CPANEL_PASSWORD" \
+            "https://$CP_HOST:2083/execute/Fileman/list_files?dir=$enc_path")
+          echo "Theme directory listing:"
+          echo "$resp" | jq -r '.data[]?.file' | sort
+          echo "$resp" | jq -e '.data[]? | select(.file == "style.css")' >/dev/null \
+            || { echo "::error::style.css missing from deployed theme dir"; exit 1; }
+          if [ -n "$SITE_URL" ]; then
+            code=$(curl -s -o /dev/null -w "%{http_code}" -m 30 -L "$SITE_URL" || echo 000)
+            echo "Site $SITE_URL responded with HTTP $code"
+          fi
+          echo "Deploy verified."

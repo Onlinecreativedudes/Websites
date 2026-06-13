@@ -2,7 +2,7 @@
   "defaults": {
     "host": "syn01bd.syd6.hostyourservices.net",
     "user": "devonlin",
-    "port": 2683
+    "cpanel_host": "syn01bd.syd6.hostyourservices.net"
   },
   "sites": {
     "dentelectrical": {
@@ -11,7 +11,8 @@
     },
     "solar-naturally": {
       "wp_path": "public_html/solar",
-      "theme_slug": "solar-naturally"
+      "theme_slug": "solar-naturally",
+      "url": "https://dev.onlinecreativedudes.com/solar"
     }
   }
 }
