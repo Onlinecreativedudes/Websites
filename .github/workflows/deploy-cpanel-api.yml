@@ -123,11 +123,13 @@ jobs:
           }
 
           echo "Checking API authentication"
-          code=$(curl -sk -o /tmp/authcheck -w '%{http_code}' -H "$AUTH" "$BASE/execute/Variables/get_user_information")
+          code=$(curl -sk -D /tmp/authhdrs -o /tmp/authcheck -w '%{http_code}' -H "$AUTH" "$BASE/execute/Variables/get_user_information")
           echo "HTTP $code from Variables::get_user_information"
           if [ "$code" != "200" ] || ! jq -e '.status == 1' /tmp/authcheck >/dev/null 2>&1; then
+            echo "Response headers (identifies whether cPanel or an edge firewall answered):"
+            cat /tmp/authhdrs
             echo "Response body (first 400 chars):"; head -c 400 /tmp/authcheck; echo
-            echo "::error::cPanel API authentication failed for user '$CP_USER'. Check that the token was created in cPanel (Security > Manage API Tokens) for THIS account — not in WHM — and was pasted without spaces or line breaks."
+            echo "::error::cPanel API authentication failed for user '$CP_USER'."
             exit 1
           fi
           echo "API auth OK as $CP_USER"
