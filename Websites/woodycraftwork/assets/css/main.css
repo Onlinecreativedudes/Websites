@@ -308,15 +308,20 @@ p{margin:0 0 1em;}
    Gravity Forms — scoped under .ocd-form so GF output matches the design.
    The hero call-back and the contact card both render on the dark ink panel.
    ========================================================================= */
-.ocd-form .gform_wrapper.gravity-theme .gform_fields{grid-row-gap:22px;grid-column-gap:24px;}
-.ocd-form .gform_wrapper .gfield_label,
-.ocd-form .gform_wrapper.gravity-theme .gfield_label{font-family:var(--display);font-size:.6rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--bronze);margin-bottom:10px;}
+/* GF's own CSS is switched off (see inc/gravity-forms.php), so layout and the
+   elements GF used to hide are driven here. Rules are markup-agnostic: they
+   work for both legacy ul/li and the gravity-theme grid. */
+.ocd-form .gform_wrapper .gform_fields{display:block;margin:0;padding:0;list-style:none;}
+.ocd-form .gform_wrapper .gfield{margin:0 0 22px;padding:0;list-style:none;}
+.ocd-form .gform_wrapper .gfield:last-child{margin-bottom:0;}
+.ocd-form .gform_wrapper .gfield_label{display:block;font-family:var(--display);font-size:.6rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--bronze);margin-bottom:10px;}
 .ocd-form .gform_wrapper .gfield_required{color:var(--bronze);}
+.ocd-form .gform_wrapper .ginput_container{margin-top:0;}
 .ocd-form .gform_wrapper input[type=text],
 .ocd-form .gform_wrapper input[type=email],
 .ocd-form .gform_wrapper input[type=tel],
 .ocd-form .gform_wrapper select,
-.ocd-form .gform_wrapper textarea{width:100%;padding:11px 2px;border:0;border-bottom:1px solid var(--ink-3);background:transparent;color:#fff;font-family:var(--body);font-size:1rem;border-radius:0;transition:border-color .25s;}
+.ocd-form .gform_wrapper textarea{width:100%;padding:11px 2px;border:0;border-bottom:1px solid var(--ink-3);background:transparent;color:#fff;font-family:var(--body);font-size:1rem;border-radius:0;box-shadow:none;transition:border-color .25s;}
 .ocd-form .gform_wrapper input::placeholder,
 .ocd-form .gform_wrapper textarea::placeholder{color:rgba(255,255,255,.32);}
 .ocd-form .gform_wrapper input:focus,
@@ -325,17 +330,40 @@ p{margin:0 0 1em;}
 .ocd-form .gform_wrapper select{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath fill='none' stroke='%23BD8A55' stroke-width='1.5' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 2px center;}
 .ocd-form .gform_wrapper select option{background:var(--ink);color:#fff;}
 .ocd-form .gform_wrapper textarea{min-height:80px;resize:vertical;}
-.ocd-form .gform_wrapper .gform_footer{margin-top:18px;padding:0;}
-.ocd-form .gform_wrapper .gform_button{display:inline-flex;align-items:center;justify-content:center;gap:11px;width:100%;font-family:var(--display);font-weight:500;font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;padding:17px 34px;border:1px solid #fff;background:#fff;color:var(--ink);transition:background .3s var(--ease),color .3s var(--ease),border-color .3s var(--ease);}
+.ocd-form .gform_wrapper .gfield_description,
+.ocd-form .gform_wrapper .gsection_description{color:var(--white-45);font-size:.82rem;padding:6px 0 0;}
+.ocd-form .gform_wrapper .gform_footer{margin:18px 0 0;padding:0;}
+.ocd-form .gform_wrapper .gform_button{display:inline-flex;align-items:center;justify-content:center;gap:11px;width:100%;font-family:var(--display);font-weight:500;font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;padding:17px 34px;border:1px solid #fff;border-radius:0;background:#fff;color:var(--ink);transition:background .3s var(--ease),color .3s var(--ease),border-color .3s var(--ease);}
 .ocd-form .gform_wrapper .gform_button:hover{background:var(--bronze);border-color:var(--bronze);color:#fff;}
 .ocd-form .gform_wrapper .gfield_validation_message,
 .ocd-form .gform_wrapper .validation_message{color:#E0916C;font-size:.74rem;margin-top:6px;background:none;border:0;padding:0;}
-.ocd-form .gform_wrapper .gform_validation_errors{display:none;}
+/* GF no longer hides these itself, so hide them here. */
+.ocd-form .gform_wrapper .gform_validation_errors,
+.ocd-form .gform_wrapper .gfield--type-honeypot,
+.ocd-form .gform_wrapper .gform_validation_container,
+.ocd-form .gform_wrapper .gfield_visibility_hidden{display:none !important;}
+.ocd-form .gform_confirmation_message{color:#fff;font-family:var(--display);letter-spacing:.04em;}
 
-/* hero call-back: keep the GF form compact and horizontal on desktop */
-.cb-form-slot .gform_wrapper.gravity-theme .gform_fields{grid-template-columns:1fr 1.6fr auto;align-items:end;grid-column-gap:22px;}
-.cb-form-slot .gform_wrapper .gform_footer{margin-top:0;align-self:end;}
-.cb-form-slot .gform_wrapper .gform_button{background:#fff;border-color:#fff;white-space:nowrap;width:auto;}
+/* Contact card: two-up rows for the short fields (name/phone/email/suburb). */
+@media(min-width:600px){
+  .ocd-form--contact .gform_wrapper .gfield{display:inline-block;width:calc(50% - 12px);vertical-align:top;}
+  .ocd-form--contact .gform_wrapper .gfield:nth-of-type(odd){margin-right:24px;}
+  .ocd-form--contact .gform_wrapper .gfield--type-select,
+  .ocd-form--contact .gform_wrapper .gfield--type-textarea{display:block;width:100%;margin-right:0;}
+}
+
+/* Hero call-back: one horizontal bar (fields + button) on desktop. */
+.cb-form-slot .gform_wrapper form{display:flex;align-items:flex-end;gap:0 22px;flex-wrap:wrap;}
+.cb-form-slot .gform_wrapper .gform_body{flex:1 1 auto;min-width:0;}
+.cb-form-slot .gform_wrapper .gform_fields{display:flex;gap:22px;}
+.cb-form-slot .gform_wrapper .gfield{flex:1;margin:0;min-width:0;}
+.cb-form-slot .gform_wrapper .gfield_description{display:none;}
+.cb-form-slot .gform_wrapper .gform_footer{margin:0;flex:0 0 auto;}
+.cb-form-slot .gform_wrapper .gform_button{width:auto;white-space:nowrap;}
+@media(max-width:768px){
+  .cb-form-slot .gform_wrapper form{flex-direction:column;align-items:stretch;gap:18px;}
+  .cb-form-slot .gform_wrapper .gform_fields{flex-direction:column;gap:18px;}
+}
 
 /* ---------- Responsive ---------- */
 @media(max-width:1024px){

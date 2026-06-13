@@ -349,9 +349,10 @@ if ($slug === 'hvnladvisory' && class_exists('GFAPI') && function_exists('update
  * hello@onlinecreativedudes.com, use the international phone format, and have
  * the honeypot on. Their IDs are written into the Home page's ACF fields
  * (hero_form_id, contact_form_id). */
-if ($slug === 'woodycraftwork' && !$done('gf-created') && class_exists('GFAPI')) {
+if ($slug === 'woodycraftwork' && class_exists('GFAPI') && function_exists('update_field')) {
     $ty_url = home_url('/thank-you/');
     $bcc    = 'hello@onlinecreativedudes.com';
+    $project = 'Project type';
 
     $notification = function ($email_field_id) use ($bcc) {
         $nid = uniqid();
@@ -379,6 +380,8 @@ if ($slug === 'woodycraftwork' && !$done('gf-created') && class_exists('GFAPI'))
         ]];
     };
 
+    // The design uses in-field placeholders, so every field carries a
+    // placeholder matching the design HTML, and the select has a prompt.
     // Hero call-back: name + message. No email field, so reply-to is the admin.
     $callback = [
         'title'          => 'Request a Call Back',
@@ -386,8 +389,8 @@ if ($slug === 'woodycraftwork' && !$done('gf-created') && class_exists('GFAPI'))
         'enableHoneypot' => true,
         'button'         => ['type' => 'text', 'text' => 'Request call back'],
         'fields'         => [
-            ['id' => 1, 'type' => 'text', 'label' => 'Name',    'isRequired' => true],
-            ['id' => 2, 'type' => 'text', 'label' => 'Message', 'isRequired' => true, 'description' => 'Tell us about your project, or just your number'],
+            ['id' => 1, 'type' => 'text', 'label' => 'Name',    'placeholder' => 'Your name', 'isRequired' => true],
+            ['id' => 2, 'type' => 'text', 'label' => 'Message', 'placeholder' => 'Tell us about your project, or just your number', 'isRequired' => true],
         ],
         'confirmations'  => $confirmation(),
     ];
@@ -399,45 +402,73 @@ if ($slug === 'woodycraftwork' && !$done('gf-created') && class_exists('GFAPI'))
         'enableHoneypot' => true,
         'button'         => ['type' => 'text', 'text' => 'Request my free quote'],
         'fields'         => [
-            ['id' => 1, 'type' => 'text',     'label' => 'Name',         'isRequired' => true],
-            ['id' => 2, 'type' => 'phone',    'label' => 'Phone',        'isRequired' => true, 'phoneFormat' => 'international'],
-            ['id' => 3, 'type' => 'email',    'label' => 'Email',        'isRequired' => true],
-            ['id' => 4, 'type' => 'text',     'label' => 'Suburb'],
-            ['id' => 5, 'type' => 'select',   'label' => 'Project type',  'isRequired' => true,
+            ['id' => 1, 'type' => 'text',     'label' => 'Name',     'placeholder' => 'Your name',    'isRequired' => true],
+            ['id' => 2, 'type' => 'phone',    'label' => 'Phone',    'placeholder' => 'Mobile number','isRequired' => true, 'phoneFormat' => 'international'],
+            ['id' => 3, 'type' => 'email',    'label' => 'Email',    'placeholder' => 'you@email.com','isRequired' => true],
+            ['id' => 4, 'type' => 'text',     'label' => 'Suburb',   'placeholder' => 'Your suburb'],
+            ['id' => 5, 'type' => 'select',   'label' => $project, 'placeholder' => 'Select a project', 'isRequired' => true,
                 'choices' => array_map(fn($v) => ['text' => $v, 'value' => $v], [
                     'Custom Kitchen', 'Bathroom & Vanity', 'Laundry', 'Wardrobe / Robe',
                     'Home Office', 'Entertainment / Living', 'Commercial fit-out', 'Other',
                 ])],
-            ['id' => 6, 'type' => 'textarea', 'label' => 'About your project'],
+            ['id' => 6, 'type' => 'textarea', 'label' => 'About your project', 'placeholder' => 'Tell us about your space, your ideas and your timeframe...'],
         ],
         'notifications'  => $notification(3),
         'confirmations'  => $confirmation(),
     ];
 
-    $callback_id = GFAPI::add_form($callback);
-    $quote_id    = GFAPI::add_form($quote);
+    // Front page = the seeded landing page; that is where the form-ID fields live.
+    $page_id = (int) get_option('page_on_front');
+    if (!$page_id) {
+        $found = get_posts([
+            'post_type' => 'page', 'post_status' => 'any', 'numberposts' => 1,
+            'meta_key' => '_wp_page_template', 'meta_value' => 'page-templates/landing-page.php',
+        ]);
+        $page_id = $found ? $found[0]->ID : 0;
+    }
 
-    if (!is_wp_error($callback_id) && !is_wp_error($quote_id) && function_exists('update_field')) {
-        $page_id = (int) get_option('page_on_front');
-        if (!$page_id) {
-            $found = get_posts([
-                'post_type' => 'page', 'post_status' => 'any', 'numberposts' => 1,
-                'meta_key' => '_wp_page_template', 'meta_value' => 'page-templates/landing-page.php',
-            ]);
-            $page_id = $found ? $found[0]->ID : 0;
-        }
-        if ($page_id) {
+    // Create the two forms once and wire their IDs into the page.
+    if (!$done('gf-created')) {
+        $callback_id = GFAPI::add_form($callback);
+        $quote_id    = GFAPI::add_form($quote);
+        if (!is_wp_error($callback_id) && !is_wp_error($quote_id) && $page_id) {
             update_field('hero_form_id', $callback_id, $page_id);
             update_field('contact_form_id', $quote_id, $page_id);
             echo "gravity forms created (callback $callback_id, quote $quote_id) and wired into page $page_id\n";
             $mark('gf-created');
+            $mark('gf-styled'); // created with placeholders already
         } else {
-            echo "forms created but landing page not found yet; will wire next deploy\n";
+            $err = is_wp_error($callback_id) ? $callback_id->get_error_message()
+                 : (is_wp_error($quote_id) ? $quote_id->get_error_message() : 'landing page not found yet');
+            echo "woodycraftwork form setup deferred: $err\n";
         }
-    } else {
-        $err = is_wp_error($callback_id) ? $callback_id->get_error_message()
-             : (is_wp_error($quote_id) ? $quote_id->get_error_message() : 'ACF update_field unavailable');
-        echo "woodycraftwork form setup failed: $err\n";
+    }
+
+    // One-time fix: the first version created these forms WITHOUT placeholders,
+    // so patch placeholders onto the existing forms in place (keeps their IDs
+    // and any entries). Runs once, then leaves them editable.
+    if ($done('gf-created') && !$done('gf-styled') && $page_id) {
+        $sync = function ($fid, array $placeholders) {
+            $fid = (int) $fid;
+            if (!$fid) { return false; }
+            $form = GFAPI::get_form($fid);
+            if (!$form || is_wp_error($form)) { return false; }
+            foreach ($form['fields'] as $f) {
+                if (isset($placeholders[$f->label])) { $f->placeholder = $placeholders[$f->label]; }
+            }
+            $form['enableHoneypot'] = true;
+            return !is_wp_error(GFAPI::update_form($form));
+        };
+        $ok1 = $sync(get_field('hero_form_id', $page_id),
+            ['Name' => 'Your name', 'Message' => 'Tell us about your project, or just your number']);
+        $ok2 = $sync(get_field('contact_form_id', $page_id),
+            ['Name' => 'Your name', 'Phone' => 'Mobile number', 'Email' => 'you@email.com', 'Suburb' => 'Your suburb', $project => 'Select a project', 'About your project' => 'Tell us about your space, your ideas and your timeframe...']);
+        if ($ok1 && $ok2) {
+            $mark('gf-styled');
+            echo "applied placeholders to existing Woody Craftwork forms\n";
+        } else {
+            echo "Woody Craftwork form placeholder fix incomplete; will retry next deploy\n";
+        }
     }
 } elseif ($slug === 'woodycraftwork' && !$done('gf-created')) {
     echo "Gravity Forms not active yet; Woody Craftwork forms will be created once it is\n";
