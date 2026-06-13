@@ -1,4 +1,5 @@
 {
   "client": "hvnladvisory",
-  "site_title": "HVNL Advisory"
+  "site_title": "HVNL Advisory",
+  "note": "WP installed manually via cPanel 2026-06-13; re-run is a connection + install verification only"
 }
