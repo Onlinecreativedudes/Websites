@@ -142,9 +142,13 @@ jobs:
             mv ~/.ssh/id_deploy_dec ~/.ssh/id_deploy
             chmod 600 ~/.ssh/id_deploy
           fi
-          ssh-keyscan -p "$SSH_PORT" -H "$SSH_HOST" >> ~/.ssh/known_hosts 2>/dev/null
-          # Fail fast if the connection or auth is wrong
-          ssh -i ~/.ssh/id_deploy -p "$SSH_PORT" "$SSH_USER@$SSH_HOST" true
+          # Fail fast if the connection or auth is wrong; surface the SSH error
+          if ! ssh -i ~/.ssh/id_deploy -p "$SSH_PORT" \
+               -o ConnectTimeout=20 -o BatchMode=yes -o StrictHostKeyChecking=accept-new \
+               "$SSH_USER@$SSH_HOST" true 2> /tmp/ssh_err; then
+            echo "::error::SSH connection failed: $(tail -3 /tmp/ssh_err | tr '\n' ' ')"
+            exit 1
+          fi
           echo "SSH connection OK"
 
       - name: Confirm WP-CLI + WordPress on the server
