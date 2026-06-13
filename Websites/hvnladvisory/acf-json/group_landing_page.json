@@ -1,0 +1,915 @@
+{
+    "key": "group_landing_page",
+    "title": "Landing Page",
+    "fields": [
+        {
+            "key": "field_hvnl_tab_hero",
+            "label": "Hero",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_hvnl_hero_kicker",
+            "label": "Kicker (small uppercase label)",
+            "name": "hero_kicker",
+            "type": "text"
+        },
+        {
+            "key": "field_hvnl_hero_headline",
+            "label": "Headline",
+            "name": "hero_headline",
+            "type": "textarea",
+            "instructions": "To italicise a word in the gold serif style, wrap it like: <span class=\"accent\">liability</span>.",
+            "rows": 2,
+            "new_lines": ""
+        },
+        {
+            "key": "field_hvnl_hero_intro",
+            "label": "Intro paragraph",
+            "name": "hero_intro",
+            "type": "textarea",
+            "rows": 4
+        },
+        {
+            "key": "field_hvnl_hero_ticks",
+            "label": "Tick points",
+            "name": "hero_ticks",
+            "type": "repeater",
+            "layout": "table",
+            "button_label": "Add point",
+            "sub_fields": [
+                {
+                    "label": "Point",
+                    "name": "label",
+                    "type": "text",
+                    "key": "field_hvnl_hero_ticks_label",
+                    "parent_repeater": "field_hvnl_hero_ticks"
+                }
+            ]
+        },
+        {
+            "key": "field_hvnl_hero_image",
+            "label": "Background image (desktop)",
+            "name": "hero_image",
+            "type": "image",
+            "return_format": "array",
+            "preview_size": "medium",
+            "library": "all"
+        },
+        {
+            "key": "field_hvnl_hero_mobile_image",
+            "label": "Mobile hero image",
+            "name": "hero_mobile_image",
+            "type": "image",
+            "instructions": "Shown above the headline on mobile only (Google Ads conversion optimisation). Hidden on desktop.",
+            "return_format": "array",
+            "preview_size": "medium",
+            "library": "all"
+        },
+        {
+            "key": "field_hvnl_hero_form_eyebrow",
+            "label": "Form eyebrow",
+            "name": "hero_form_eyebrow",
+            "type": "text",
+            "instructions": "The italic serif line above the form heading, e.g. \"No cost \u00b7 no obligation\"."
+        },
+        {
+            "key": "field_hvnl_hero_form_heading",
+            "label": "Form heading",
+            "name": "hero_form_heading",
+            "type": "text"
+        },
+        {
+            "key": "field_hvnl_hero_form_subheading",
+            "label": "Form subheading",
+            "name": "hero_form_subheading",
+            "type": "text"
+        },
+        {
+            "key": "field_hvnl_hero_form_id",
+            "label": "Gravity Form ID",
+            "name": "hero_form_id",
+            "type": "number",
+            "instructions": "ID of the Exposure Review form (Forms list shows each form's ID)."
+        },
+        {
+            "key": "field_hvnl_hero_form_footnote",
+            "label": "Form footnote",
+            "name": "hero_form_footnote",
+            "type": "textarea",
+            "rows": 2
+        },
+        {
+            "key": "field_hvnl_tab_trust_bar",
+            "label": "Trust Bar",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_hvnl_trust_bar_items",
+            "label": "Trust points",
+            "name": "trust_bar_items",
+            "type": "repeater",
+            "instructions": "Short credibility statements separated by gold dots.",
+            "layout": "table",
+            "button_label": "Add point",
+            "sub_fields": [
+                {
+                    "label": "Point",
+                    "name": "label",
+                    "type": "text",
+                    "key": "field_hvnl_trust_bar_items_label",
+                    "parent_repeater": "field_hvnl_trust_bar_items"
+                }
+            ]
+        },
+        {
+            "key": "field_hvnl_tab_blind_spots",
+            "label": "Blind Spots",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_hvnl_bs_kicker",
+            "label": "Kicker",
+            "name": "bs_kicker",
+            "type": "text"
+        },
+        {
+            "key": "field_hvnl_bs_headline",
+            "label": "Headline",
+            "name": "bs_headline",
+            "type": "textarea",
+            "instructions": "To italicise a word in the gold serif style, wrap it like: <span class=\"accent\">liability</span>.",
+            "rows": 2,
+            "new_lines": ""
+        },
+        {
+            "key": "field_hvnl_bs_intro",
+            "label": "Intro paragraph",
+            "name": "bs_intro",
+            "type": "textarea",
+            "rows": 3
+        },
+        {
+            "key": "field_hvnl_bs_cards",
+            "label": "Cards",
+            "name": "bs_cards",
+            "type": "repeater",
+            "instructions": "Numbered automatically in display order.",
+            "layout": "row",
+            "button_label": "Add card",
+            "sub_fields": [
+                {
+                    "label": "Title",
+                    "name": "title",
+                    "type": "text",
+                    "key": "field_hvnl_bs_cards_title",
+                    "parent_repeater": "field_hvnl_bs_cards"
+                },
+                {
+                    "label": "Text",
+                    "name": "text",
+                    "type": "textarea",
+                    "rows": 3,
+                    "key": "field_hvnl_bs_cards_text",
+                    "parent_repeater": "field_hvnl_bs_cards"
+                }
+            ]
+        },
+        {
+            "key": "field_hvnl_bs_cta_text",
+            "label": "Closing statement",
+            "name": "bs_cta_text",
+            "type": "textarea",
+            "rows": 2
+        },
+        {
+            "key": "field_hvnl_bs_cta_label",
+            "label": "CTA button label",
+            "name": "bs_cta_label",
+            "type": "text"
+        },
+        {
+            "key": "field_hvnl_tab_services",
+            "label": "Services",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_hvnl_services_kicker",
+            "label": "Kicker",
+            "name": "services_kicker",
+            "type": "text"
+        },
+        {
+            "key": "field_hvnl_services_headline",
+            "label": "Headline",
+            "name": "services_headline",
+            "type": "textarea",
+            "instructions": "To italicise a word in the gold serif style, wrap it like: <span class=\"accent\">liability</span>.",
+            "rows": 2,
+            "new_lines": ""
+        },
+        {
+            "key": "field_hvnl_services_intro",
+            "label": "Intro paragraph",
+            "name": "services_intro",
+            "type": "textarea",
+            "rows": 3
+        },
+        {
+            "key": "field_hvnl_services_items",
+            "label": "Services",
+            "name": "services_items",
+            "type": "repeater",
+            "instructions": "Numbered automatically in display order.",
+            "layout": "row",
+            "button_label": "Add service",
+            "sub_fields": [
+                {
+                    "label": "Title",
+                    "name": "title",
+                    "type": "text",
+                    "key": "field_hvnl_services_items_title",
+                    "parent_repeater": "field_hvnl_services_items"
+                },
+                {
+                    "label": "Text",
+                    "name": "text",
+                    "type": "textarea",
+                    "rows": 3,
+                    "key": "field_hvnl_services_items_text",
+                    "parent_repeater": "field_hvnl_services_items"
+                }
+            ]
+        },
+        {
+            "key": "field_hvnl_tab_offer",
+            "label": "Offer Banner",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_hvnl_offer_image",
+            "label": "Background image",
+            "name": "offer_image",
+            "type": "image",
+            "return_format": "array",
+            "preview_size": "medium",
+            "library": "all"
+        },
+        {
+            "key": "field_hvnl_offer_kicker",
+            "label": "Kicker",
+            "name": "offer_kicker",
+            "type": "text"
+        },
+        {
+            "key": "field_hvnl_offer_headline",
+            "label": "Headline",
+            "name": "offer_headline",
+            "type": "textarea",
+            "instructions": "To italicise a word in the gold serif style, wrap it like: <span class=\"accent\">liability</span>.",
+            "rows": 2,
+            "new_lines": ""
+        },
+        {
+            "key": "field_hvnl_offer_intro",
+            "label": "Intro paragraph",
+            "name": "offer_intro",
+            "type": "textarea",
+            "rows": 3
+        },
+        {
+            "key": "field_hvnl_offer_ticks",
+            "label": "Tick points",
+            "name": "offer_ticks",
+            "type": "repeater",
+            "layout": "table",
+            "button_label": "Add point",
+            "sub_fields": [
+                {
+                    "label": "Point",
+                    "name": "label",
+                    "type": "text",
+                    "key": "field_hvnl_offer_ticks_label",
+                    "parent_repeater": "field_hvnl_offer_ticks"
+                }
+            ]
+        },
+        {
+            "key": "field_hvnl_offer_cta_label",
+            "label": "CTA button label",
+            "name": "offer_cta_label",
+            "type": "text"
+        },
+        {
+            "key": "field_hvnl_offer_microcopy",
+            "label": "Microcopy under button",
+            "name": "offer_microcopy",
+            "type": "text",
+            "instructions": "e.g. \"No cost. No obligation. No sales pitch.\""
+        },
+        {
+            "key": "field_hvnl_tab_about",
+            "label": "About",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_hvnl_about_kicker",
+            "label": "Kicker",
+            "name": "about_kicker",
+            "type": "text"
+        },
+        {
+            "key": "field_hvnl_about_headline",
+            "label": "Headline",
+            "name": "about_headline",
+            "type": "textarea",
+            "instructions": "To italicise a word in the gold serif style, wrap it like: <span class=\"accent\">liability</span>.",
+            "rows": 2,
+            "new_lines": ""
+        },
+        {
+            "key": "field_hvnl_about_body",
+            "label": "Body copy",
+            "name": "about_body",
+            "type": "wysiwyg",
+            "instructions": "Two short paragraphs in the design.",
+            "tabs": "visual",
+            "toolbar": "basic",
+            "media_upload": 0
+        },
+        {
+            "key": "field_hvnl_about_credentials",
+            "label": "Credential points",
+            "name": "about_credentials",
+            "type": "repeater",
+            "layout": "table",
+            "button_label": "Add point",
+            "sub_fields": [
+                {
+                    "label": "Point",
+                    "name": "label",
+                    "type": "text",
+                    "key": "field_hvnl_about_credentials_label",
+                    "parent_repeater": "field_hvnl_about_credentials"
+                }
+            ]
+        },
+        {
+            "key": "field_hvnl_about_cta_label",
+            "label": "CTA button label",
+            "name": "about_cta_label",
+            "type": "text"
+        },
+        {
+            "key": "field_hvnl_about_portrait",
+            "label": "Portrait photo",
+            "name": "about_portrait",
+            "type": "image",
+            "return_format": "array",
+            "preview_size": "medium",
+            "library": "all"
+        },
+        {
+            "key": "field_hvnl_about_stat_number",
+            "label": "Stat number",
+            "name": "about_stat_number",
+            "type": "text",
+            "instructions": "e.g. \"19+\" \u2014 shown in the dark floating badge."
+        },
+        {
+            "key": "field_hvnl_about_stat_label",
+            "label": "Stat label",
+            "name": "about_stat_label",
+            "type": "text",
+            "instructions": "e.g. \"Years experience\"."
+        },
+        {
+            "key": "field_hvnl_about_badge_name",
+            "label": "Name badge \u2014 name",
+            "name": "about_badge_name",
+            "type": "text"
+        },
+        {
+            "key": "field_hvnl_about_badge_role",
+            "label": "Name badge \u2014 role",
+            "name": "about_badge_role",
+            "type": "text"
+        },
+        {
+            "key": "field_hvnl_tab_team",
+            "label": "Team",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_hvnl_team_headline",
+            "label": "Team headline",
+            "name": "team_headline",
+            "type": "textarea",
+            "instructions": "To italicise a word in the gold serif style, wrap it like: <span class=\"accent\">liability</span>.",
+            "rows": 2,
+            "new_lines": ""
+        },
+        {
+            "key": "field_hvnl_team_members",
+            "label": "Team members",
+            "name": "team_members",
+            "type": "repeater",
+            "layout": "row",
+            "button_label": "Add member",
+            "sub_fields": [
+                {
+                    "label": "Photo",
+                    "name": "photo",
+                    "type": "image",
+                    "return_format": "array",
+                    "preview_size": "medium",
+                    "library": "all",
+                    "key": "field_hvnl_team_members_photo",
+                    "parent_repeater": "field_hvnl_team_members"
+                },
+                {
+                    "label": "Name",
+                    "name": "name",
+                    "type": "text",
+                    "key": "field_hvnl_team_members_name",
+                    "parent_repeater": "field_hvnl_team_members"
+                },
+                {
+                    "label": "Role",
+                    "name": "role",
+                    "type": "text",
+                    "key": "field_hvnl_team_members_role",
+                    "parent_repeater": "field_hvnl_team_members"
+                }
+            ]
+        },
+        {
+            "key": "field_hvnl_tab_why",
+            "label": "Why Us",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_hvnl_why_kicker",
+            "label": "Kicker",
+            "name": "why_kicker",
+            "type": "text"
+        },
+        {
+            "key": "field_hvnl_why_headline",
+            "label": "Headline",
+            "name": "why_headline",
+            "type": "textarea",
+            "instructions": "To italicise a word in the gold serif style, wrap it like: <span class=\"accent\">liability</span>.",
+            "rows": 2,
+            "new_lines": ""
+        },
+        {
+            "key": "field_hvnl_why_cards",
+            "label": "Cards",
+            "name": "why_cards",
+            "type": "repeater",
+            "layout": "row",
+            "button_label": "Add card",
+            "sub_fields": [
+                {
+                    "label": "Title",
+                    "name": "title",
+                    "type": "text",
+                    "key": "field_hvnl_why_cards_title",
+                    "parent_repeater": "field_hvnl_why_cards"
+                },
+                {
+                    "label": "Text",
+                    "name": "text",
+                    "type": "textarea",
+                    "rows": 3,
+                    "key": "field_hvnl_why_cards_text",
+                    "parent_repeater": "field_hvnl_why_cards"
+                }
+            ]
+        },
+        {
+            "key": "field_hvnl_tab_industries",
+            "label": "Industries",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_hvnl_ind_image",
+            "label": "Background image",
+            "name": "ind_image",
+            "type": "image",
+            "return_format": "array",
+            "preview_size": "medium",
+            "library": "all"
+        },
+        {
+            "key": "field_hvnl_ind_kicker",
+            "label": "Kicker",
+            "name": "ind_kicker",
+            "type": "text"
+        },
+        {
+            "key": "field_hvnl_ind_headline",
+            "label": "Headline",
+            "name": "ind_headline",
+            "type": "textarea",
+            "instructions": "To italicise a word in the gold serif style, wrap it like: <span class=\"accent\">liability</span>.",
+            "rows": 2,
+            "new_lines": ""
+        },
+        {
+            "key": "field_hvnl_ind_intro",
+            "label": "Intro paragraph",
+            "name": "ind_intro",
+            "type": "textarea",
+            "rows": 3
+        },
+        {
+            "key": "field_hvnl_ind_cards",
+            "label": "Industry cards",
+            "name": "ind_cards",
+            "type": "repeater",
+            "instructions": "Numbered automatically in display order.",
+            "layout": "row",
+            "button_label": "Add industry",
+            "sub_fields": [
+                {
+                    "label": "Title",
+                    "name": "title",
+                    "type": "text",
+                    "key": "field_hvnl_ind_cards_title",
+                    "parent_repeater": "field_hvnl_ind_cards"
+                },
+                {
+                    "label": "Text",
+                    "name": "text",
+                    "type": "textarea",
+                    "rows": 3,
+                    "key": "field_hvnl_ind_cards_text",
+                    "parent_repeater": "field_hvnl_ind_cards"
+                }
+            ]
+        },
+        {
+            "key": "field_hvnl_tab_who",
+            "label": "Who We Help",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_hvnl_who_kicker",
+            "label": "Kicker",
+            "name": "who_kicker",
+            "type": "text"
+        },
+        {
+            "key": "field_hvnl_who_headline",
+            "label": "Headline",
+            "name": "who_headline",
+            "type": "textarea",
+            "instructions": "To italicise a word in the gold serif style, wrap it like: <span class=\"accent\">liability</span>.",
+            "rows": 2,
+            "new_lines": ""
+        },
+        {
+            "key": "field_hvnl_who_rows",
+            "label": "Audience rows",
+            "name": "who_rows",
+            "type": "repeater",
+            "instructions": "Rows alternate image side automatically; the second row sits on the darker band.",
+            "layout": "row",
+            "button_label": "Add row",
+            "sub_fields": [
+                {
+                    "label": "Small label",
+                    "name": "label",
+                    "type": "text",
+                    "instructions": "e.g. \"Freight owners\".",
+                    "key": "field_hvnl_who_rows_label",
+                    "parent_repeater": "field_hvnl_who_rows"
+                },
+                {
+                    "label": "Heading",
+                    "name": "heading",
+                    "type": "text",
+                    "key": "field_hvnl_who_rows_heading",
+                    "parent_repeater": "field_hvnl_who_rows"
+                },
+                {
+                    "label": "Paragraph",
+                    "name": "text",
+                    "type": "textarea",
+                    "rows": 4,
+                    "key": "field_hvnl_who_rows_text",
+                    "parent_repeater": "field_hvnl_who_rows"
+                },
+                {
+                    "label": "Tick points",
+                    "name": "ticks",
+                    "type": "repeater",
+                    "layout": "table",
+                    "button_label": "Add point",
+                    "sub_fields": [
+                        {
+                            "key": "field_hvnl_who_rows_ticks_label",
+                            "label": "Point",
+                            "name": "label",
+                            "type": "text",
+                            "parent_repeater": "field_hvnl_who_rows_ticks"
+                        }
+                    ],
+                    "key": "field_hvnl_who_rows_ticks",
+                    "parent_repeater": "field_hvnl_who_rows"
+                },
+                {
+                    "label": "CTA button label",
+                    "name": "cta_label",
+                    "type": "text",
+                    "key": "field_hvnl_who_rows_cta_label",
+                    "parent_repeater": "field_hvnl_who_rows"
+                },
+                {
+                    "label": "Photo",
+                    "name": "image",
+                    "type": "image",
+                    "return_format": "array",
+                    "preview_size": "medium",
+                    "library": "all",
+                    "key": "field_hvnl_who_rows_image",
+                    "parent_repeater": "field_hvnl_who_rows"
+                }
+            ]
+        },
+        {
+            "key": "field_hvnl_tab_how",
+            "label": "How We Work",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_hvnl_how_kicker",
+            "label": "Kicker",
+            "name": "how_kicker",
+            "type": "text"
+        },
+        {
+            "key": "field_hvnl_how_headline",
+            "label": "Headline",
+            "name": "how_headline",
+            "type": "textarea",
+            "instructions": "To italicise a word in the gold serif style, wrap it like: <span class=\"accent\">liability</span>.",
+            "rows": 2,
+            "new_lines": ""
+        },
+        {
+            "key": "field_hvnl_how_intro",
+            "label": "Intro paragraph",
+            "name": "how_intro",
+            "type": "textarea",
+            "rows": 3
+        },
+        {
+            "key": "field_hvnl_how_steps",
+            "label": "Steps",
+            "name": "how_steps",
+            "type": "repeater",
+            "instructions": "Numbered automatically in display order.",
+            "layout": "row",
+            "button_label": "Add step",
+            "sub_fields": [
+                {
+                    "label": "Title",
+                    "name": "title",
+                    "type": "text",
+                    "key": "field_hvnl_how_steps_title",
+                    "parent_repeater": "field_hvnl_how_steps"
+                },
+                {
+                    "label": "Text",
+                    "name": "text",
+                    "type": "textarea",
+                    "rows": 3,
+                    "key": "field_hvnl_how_steps_text",
+                    "parent_repeater": "field_hvnl_how_steps"
+                }
+            ]
+        },
+        {
+            "key": "field_hvnl_tab_evidence",
+            "label": "Evidence Banner",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_hvnl_evidence_headline",
+            "label": "Headline",
+            "name": "evidence_headline",
+            "type": "textarea",
+            "instructions": "To italicise a word in the gold serif style, wrap it like: <span class=\"accent\">liability</span>.",
+            "rows": 2,
+            "new_lines": ""
+        },
+        {
+            "key": "field_hvnl_evidence_text",
+            "label": "Supporting line",
+            "name": "evidence_text",
+            "type": "textarea",
+            "rows": 2
+        },
+        {
+            "key": "field_hvnl_evidence_cta_label",
+            "label": "CTA button label",
+            "name": "evidence_cta_label",
+            "type": "text"
+        },
+        {
+            "key": "field_hvnl_tab_reviews",
+            "label": "Reviews",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_hvnl_reviews_kicker",
+            "label": "Kicker",
+            "name": "reviews_kicker",
+            "type": "text"
+        },
+        {
+            "key": "field_hvnl_reviews_headline",
+            "label": "Headline",
+            "name": "reviews_headline",
+            "type": "textarea",
+            "instructions": "To italicise a word in the gold serif style, wrap it like: <span class=\"accent\">liability</span>.",
+            "rows": 2,
+            "new_lines": ""
+        },
+        {
+            "key": "field_hvnl_reviews_items",
+            "label": "Reviews",
+            "name": "reviews_items",
+            "type": "repeater",
+            "layout": "row",
+            "button_label": "Add review",
+            "sub_fields": [
+                {
+                    "label": "Quote",
+                    "name": "quote",
+                    "type": "textarea",
+                    "rows": 4,
+                    "key": "field_hvnl_reviews_items_quote",
+                    "parent_repeater": "field_hvnl_reviews_items"
+                },
+                {
+                    "label": "Reviewer name",
+                    "name": "name",
+                    "type": "text",
+                    "key": "field_hvnl_reviews_items_name",
+                    "parent_repeater": "field_hvnl_reviews_items"
+                },
+                {
+                    "label": "Business type",
+                    "name": "business",
+                    "type": "text",
+                    "key": "field_hvnl_reviews_items_business",
+                    "parent_repeater": "field_hvnl_reviews_items"
+                }
+            ]
+        },
+        {
+            "key": "field_hvnl_tab_final",
+            "label": "Final CTA",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_hvnl_final_image",
+            "label": "Background image",
+            "name": "final_image",
+            "type": "image",
+            "return_format": "array",
+            "preview_size": "medium",
+            "library": "all"
+        },
+        {
+            "key": "field_hvnl_final_headline",
+            "label": "Headline",
+            "name": "final_headline",
+            "type": "textarea",
+            "instructions": "To italicise a word in the gold serif style, wrap it like: <span class=\"accent\">liability</span>.",
+            "rows": 2,
+            "new_lines": ""
+        },
+        {
+            "key": "field_hvnl_final_text",
+            "label": "Supporting line",
+            "name": "final_text",
+            "type": "textarea",
+            "rows": 2
+        },
+        {
+            "key": "field_hvnl_final_cta_label",
+            "label": "CTA button label",
+            "name": "final_cta_label",
+            "type": "text"
+        },
+        {
+            "key": "field_hvnl_tab_contact",
+            "label": "Contact",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_hvnl_contact_kicker",
+            "label": "Kicker",
+            "name": "contact_kicker",
+            "type": "text"
+        },
+        {
+            "key": "field_hvnl_contact_headline",
+            "label": "Headline",
+            "name": "contact_headline",
+            "type": "textarea",
+            "instructions": "To italicise a word in the gold serif style, wrap it like: <span class=\"accent\">liability</span>.",
+            "rows": 2,
+            "new_lines": ""
+        },
+        {
+            "key": "field_hvnl_contact_intro",
+            "label": "Intro paragraph",
+            "name": "contact_intro",
+            "type": "textarea",
+            "rows": 3
+        },
+        {
+            "key": "field_hvnl_contact_form_eyebrow",
+            "label": "Form eyebrow",
+            "name": "contact_form_eyebrow",
+            "type": "text",
+            "instructions": "The large italic serif line, e.g. \"Send us a note\"."
+        },
+        {
+            "key": "field_hvnl_contact_form_subheading",
+            "label": "Form subheading",
+            "name": "contact_form_subheading",
+            "type": "text",
+            "instructions": "e.g. \"We reply within one business day.\""
+        },
+        {
+            "key": "field_hvnl_contact_form_id",
+            "label": "Gravity Form ID",
+            "name": "contact_form_id",
+            "type": "number",
+            "instructions": "ID of the Contact form. Email, phone and coverage rows come from Site Options."
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-templates/landing-page.php"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": [
+        "the_content",
+        "discussion",
+        "comments",
+        "slug",
+        "author",
+        "format",
+        "page_attributes",
+        "send-trackbacks"
+    ],
+    "active": true,
+    "description": "All content for the HVNL Advisory landing page, one tab per section in render order.",
+    "show_in_rest": 0
+}

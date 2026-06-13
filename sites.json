@@ -13,6 +13,11 @@
       "wp_path": "public_html/solar",
       "theme_slug": "solar-naturally",
       "url": "https://dev.onlinecreativedudes.com/solar"
+    },
+    "hvnladvisory": {
+      "wp_path": "public_html/hvnladvisory",
+      "theme_slug": "hvnladvisory",
+      "url": "https://dev.onlinecreativedudes.com/hvnladvisory"
     }
   }
 }

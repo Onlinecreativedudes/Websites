@@ -26,8 +26,13 @@ require $wp_load;
 require_once ABSPATH . 'wp-admin/includes/theme.php';
 
 $home = rtrim($home, '/');
-$marker = fn($n) => "$home/.solar-$n";
-$done   = fn($n) => file_exists($marker($n));
+// Markers are namespaced per slug so each site provisions independently
+// (a shared marker would make the second site on the account get skipped).
+// solar-naturally keeps its original ".solar-*" markers for back-compat so it
+// does not re-run and duplicate its form.
+$marker = fn($n) => "$home/.prov-$slug-$n";
+$legacy = fn($n) => ($slug === 'solar-naturally') ? "$home/.solar-$n" : null;
+$done   = fn($n) => file_exists($marker($n)) || ($legacy($n) && file_exists($legacy($n)));
 $mark   = fn($n) => @touch($marker($n));
 
 /* 1. Activate the theme (once). */
@@ -53,7 +58,7 @@ if (!$done('page-created')) {
         'numberposts' => 1,
     ]);
     $pid = $existing ? $existing[0]->ID : wp_insert_post([
-        'post_title'  => 'Solar Naturally',
+        'post_title'  => get_bloginfo('name') ?: ucwords(str_replace('-', ' ', $slug)),
         'post_name'   => 'home',
         'post_status' => 'publish',
         'post_type'   => 'page',
@@ -69,8 +74,10 @@ if (!$done('page-created')) {
     }
 }
 
-/* 3. Gravity Forms assessment form + wire ID into Site Options (once GF active). */
-if (!$done('gf-created') && class_exists('GFAPI')) {
+/* 3. Gravity Forms assessment form + wire ID into Site Options (once GF active).
+ * Solar-specific: other themes (e.g. hvnladvisory) document their forms in the
+ * theme README for the install agent to build and wire via ACF. */
+if ($slug === 'solar-naturally' && !$done('gf-created') && class_exists('GFAPI')) {
     $form = [
         'title'       => 'Solar Assessment',
         'description' => '',
@@ -107,7 +114,7 @@ if (!$done('gf-created') && class_exists('GFAPI')) {
     } else {
         echo "gravity form creation failed: " . $form_id->get_error_message() . "\n";
     }
-} elseif (!$done('gf-created')) {
+} elseif ($slug === 'solar-naturally' && !$done('gf-created')) {
     echo "Gravity Forms not active yet; assessment form will be created once it is\n";
 }
 

@@ -1,0 +1,170 @@
+{
+    "key": "group_site_options",
+    "title": "Site Options",
+    "fields": [
+        {
+            "key": "field_hvnl_opt_tab_brand",
+            "label": "Branding & Header",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_hvnl_opt_site_logo",
+            "label": "Logo",
+            "name": "site_logo",
+            "type": "image",
+            "instructions": "One logo is used everywhere; the footer renders it inverted automatically.",
+            "return_format": "array",
+            "preview_size": "medium",
+            "library": "all"
+        },
+        {
+            "key": "field_hvnl_opt_announcement_text",
+            "label": "Announcement strip text",
+            "name": "announcement_text",
+            "type": "textarea",
+            "instructions": "The single dark line above the header. Leave empty to hide the strip.",
+            "rows": 2
+        },
+        {
+            "key": "field_hvnl_opt_nav_cta_label",
+            "label": "Header CTA button label",
+            "name": "nav_cta_label",
+            "type": "text",
+            "instructions": "Defaults to \"Book an Exposure Review\" when empty. Links to the hero form."
+        },
+        {
+            "key": "field_hvnl_opt_show_loader",
+            "label": "Show intro loader animation",
+            "name": "show_loader",
+            "type": "true_false",
+            "instructions": "The brief branded splash screen on the landing page.",
+            "ui": 1,
+            "default_value": 1
+        },
+        {
+            "key": "field_hvnl_opt_loader_tagline",
+            "label": "Loader tagline",
+            "name": "loader_tagline",
+            "type": "text",
+            "instructions": "Small uppercase line under the loader logo.",
+            "default_value": "Chain of Responsibility Compliance"
+        },
+        {
+            "key": "field_hvnl_opt_tab_contact",
+            "label": "Contact Details",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_hvnl_opt_business_phone",
+            "label": "Business phone (dialable)",
+            "name": "business_phone",
+            "type": "text",
+            "instructions": "Digits with country code, e.g. +61386186954. Used in tel: links."
+        },
+        {
+            "key": "field_hvnl_opt_display_phone",
+            "label": "Display phone",
+            "name": "display_phone",
+            "type": "text",
+            "instructions": "Formatted for humans, e.g. (03) 8618 6954."
+        },
+        {
+            "key": "field_hvnl_opt_business_email",
+            "label": "Business email",
+            "name": "business_email",
+            "type": "email"
+        },
+        {
+            "key": "field_hvnl_opt_coverage_text",
+            "label": "Coverage line",
+            "name": "coverage_text",
+            "type": "text",
+            "instructions": "e.g. \"All of Australia\". Shown in the contact section and footer."
+        },
+        {
+            "key": "field_hvnl_opt_business_address",
+            "label": "Business address",
+            "name": "business_address",
+            "type": "text",
+            "instructions": "Optional \u2014 used in schema only if filled."
+        },
+        {
+            "key": "field_hvnl_opt_tab_footer",
+            "label": "Footer",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_hvnl_opt_footer_blurb",
+            "label": "Footer blurb",
+            "name": "footer_blurb",
+            "type": "textarea",
+            "rows": 3
+        },
+        {
+            "key": "field_hvnl_opt_footer_cta_label",
+            "label": "Footer CTA button label",
+            "name": "footer_cta_label",
+            "type": "text",
+            "instructions": "Defaults to \"Book an Exposure Review\" when empty."
+        },
+        {
+            "key": "field_hvnl_opt_copyright_line",
+            "label": "Copyright line",
+            "name": "copyright_line",
+            "type": "text",
+            "instructions": "Leave empty for the automatic \"\u00a9 [year] [site name]\" line."
+        },
+        {
+            "key": "field_hvnl_opt_footer_disclaimer",
+            "label": "Disclaimer line",
+            "name": "footer_disclaimer",
+            "type": "text",
+            "instructions": "e.g. \"General information only \u2014 not legal advice.\""
+        },
+        {
+            "key": "field_hvnl_opt_tab_schema",
+            "label": "Schema",
+            "name": "",
+            "type": "tab",
+            "placement": "top"
+        },
+        {
+            "key": "field_hvnl_opt_schema_business_type",
+            "label": "Schema business type",
+            "name": "schema_business_type",
+            "type": "text",
+            "instructions": "Schema.org type for the JSON-LD block, e.g. ProfessionalService.",
+            "default_value": "ProfessionalService"
+        },
+        {
+            "key": "field_hvnl_opt_schema_abn",
+            "label": "ABN",
+            "name": "schema_abn",
+            "type": "text",
+            "instructions": "Optional."
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "site-options"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true,
+    "description": "Site-wide content: branding, contact details, footer and schema.",
+    "show_in_rest": 0
+}
