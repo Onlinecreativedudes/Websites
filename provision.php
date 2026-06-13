@@ -551,4 +551,34 @@ if (!$done('seeded')) {
     }
 }
 
+/* 5. Load ACF field groups from the theme's JSON, not a stale DB copy. If an
+      earlier deploy force-synced a group into the database, that DB copy can
+      flatten the section tabs (tab fields have empty names) and overrides the
+      clean JSON. Delete any DB-resident copy whose key matches a group the
+      theme ships as JSON, so ACF renders the JSON definition (tabs and field
+      widths intact). Field VALUES are post meta and are not affected. */
+if (!$done('acf-json-cleanup') && function_exists('acf_delete_field_group')) {
+    $json_dir = get_theme_root() . "/$slug/acf-json";
+    $cleared = 0;
+    if (is_dir($json_dir)) {
+        foreach (glob("$json_dir/*.json") as $jf) {
+            $g   = json_decode(file_get_contents($jf), true);
+            $key = $g['key'] ?? '';
+            if (!$key) { continue; }
+            $posts = get_posts([
+                'post_type'   => 'acf-field-group',
+                'post_status' => 'any',
+                'name'        => $key,
+                'numberposts' => -1,
+            ]);
+            foreach ($posts as $p) {
+                acf_delete_field_group($p->ID);
+                $cleared++;
+            }
+        }
+    }
+    echo "ACF: cleared $cleared stale DB group(s); rendering from theme JSON\n";
+    $mark('acf-json-cleanup');
+}
+
 echo "provisioning pass complete\n";
