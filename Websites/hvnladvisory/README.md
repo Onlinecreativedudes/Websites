@@ -26,7 +26,7 @@ Do **not** install WP Rocket or any caching/optimisation plugin — the reviewer
 
 ## Gravity Forms (2 forms)
 
-Create both forms, then paste their IDs into the Home page ACF fields (Hero tab → "Gravity Form ID", Contact tab → "Gravity Form ID").
+**These are now created automatically** by the server-side deploy (`provision.php`, once Gravity Forms is active): an **Exposure Review** form and a **Contact** form, each with the honeypot on, international phone format, a notification BCC'd to `hello@onlinecreativedudes.com`, and a confirmation redirect to `/thank-you/`. Their IDs are written into the Home page ACF fields automatically. The spec below is the reference for what gets built / to verify in admin.
 
 **Form 1 — Exposure Review (hero form)**
 - Fields: Name (text, required), Company (text), Email (email, required), Phone (phone), "Your role in the supply chain" (select, required) with options:
@@ -50,13 +50,15 @@ Create both forms, then paste their IDs into the Home page ACF fields (Hero tab 
 
 ## Menus (Appearance → Menus)
 
-- **Primary Navigation:** Services (`#services`), Who We Help (`#who`), How We Work (`#how`), About (`#about`), Contact (`#contact`) — custom links to those anchors.
+The header navigation **falls back to the section anchors automatically** — Services (`#services`), Who We Help (`#who`), How We Work (`#how`), About (`#about`), Contact (`#contact`) — so the nav works with no setup. Only create/assign menus if you want to override that default:
+
+- **Primary Navigation:** the five anchor links above (overrides the automatic ones).
 - **Footer — Quick Links:** same five anchor links.
 - **Footer — Services:** CoR Self-Assessment, On-Site CoR Audit, System Design, Managed Support, Enforcement Response, NHVAS Audits — all pointing to `#services`.
 
 ## Site Options checklist
 
-Seeded with launch values — confirm each: logo, announcement strip text, header CTA label, loader toggle/tagline, business phone `+61386186954`, display phone `(03) 8618 6954`, email `contact@hvnladvisory.com.au`, coverage "All of Australia", footer blurb, copyright, disclaimer, schema type (ProfessionalService), optional address/ABN.
+Seeded with launch values — confirm each: logo, announcement strip text, header CTA label, business phone `+61386186954`, display phone `(03) 8618 6954`, email `contact@hvnladvisory.com.au`, coverage "All of Australia", footer blurb, copyright, disclaimer, schema type (ProfessionalService), optional address/ABN.
 
 ## Placeholders to resolve before launch
 
@@ -68,6 +70,5 @@ Seeded with launch values — confirm each: logo, announcement strip text, heade
 
 - The supplied logo is a JPEG on white; the theme blends it (multiply on light, inverted on dark) exactly like the design. A transparent PNG/SVG from the client can replace it later with no code change.
 - SEO meta is Yoast's job — the theme outputs no description/OG/canonical tags. Configure titles/descriptions in Yoast after install.
-- The intro loader animation can be turned off at Site Options → "Show intro loader animation".
 - No tracking scripts in the theme (GTM goes in via HFCM later by Mahesh).
 - Do not install a page builder, alternate form plugin, or any CSS/JS framework.

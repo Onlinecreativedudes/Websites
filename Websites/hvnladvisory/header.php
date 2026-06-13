@@ -47,22 +47,6 @@ if ($is_landing) {
 
 <a class="skip-link" href="#main"><?php esc_html_e('Skip to main content', 'hvnladvisory'); ?></a>
 
-<?php if ($is_landing && get_field('show_loader', 'option')) : ?>
-<div class="loader" data-loader>
-    <div class="loader__mark">
-        <?php
-        if ($logo && !empty($logo['ID'])) {
-            echo ocd_render_image($logo, 'medium', 'loader__logo logo-blend');
-        } else {
-            echo '<span class="loader__name">' . esc_html(get_bloginfo('name')) . '</span>';
-        }
-        ?>
-    </div>
-    <div class="loader__bar"><i></i></div>
-    <div class="loader__tag"><?php echo esc_html(get_field('loader_tagline', 'option') ?: 'Chain of Responsibility Compliance'); ?></div>
-</div>
-<?php endif; ?>
-
 <?php if ($announcement) : ?>
 <div class="announce">
     <div class="announce__inner container container--wide">
@@ -85,17 +69,7 @@ if ($is_landing) {
         </a>
 
         <nav class="nav__desktop" aria-label="<?php esc_attr_e('Primary', 'hvnladvisory'); ?>">
-            <?php
-            if (has_nav_menu('primary')) {
-                wp_nav_menu([
-                    'theme_location' => 'primary',
-                    'container'      => false,
-                    'menu_class'     => 'nav__links',
-                    'depth'          => 1,
-                    'fallback_cb'    => false,
-                ]);
-            }
-            ?>
+            <?php ocd_primary_nav('nav__links'); ?>
             <?php if ($nav_phone) : ?><span class="nav__divider" aria-hidden="true"></span><?php endif; ?>
             <?php ocd_phone_link('nav__phone'); ?>
             <?php ocd_book_cta($nav_cta ?: 'Book an Exposure Review', 'btn btn--dark btn--sm nav__cta'); ?>
@@ -109,17 +83,7 @@ if ($is_landing) {
 </header>
 
 <div class="nav-menu" id="nav-menu" data-nav-menu>
-    <?php
-    if (has_nav_menu('primary')) {
-        wp_nav_menu([
-            'theme_location' => 'primary',
-            'container'      => false,
-            'menu_class'     => 'nav-menu__links',
-            'depth'          => 1,
-            'fallback_cb'    => false,
-        ]);
-    }
-    ?>
+    <?php ocd_primary_nav('nav-menu__links'); ?>
     <?php ocd_phone_link('nav-menu__phone'); ?>
     <?php ocd_book_cta($nav_cta ?: 'Book an Exposure Review', 'btn btn--bronze nav-menu__cta'); ?>
 </div>

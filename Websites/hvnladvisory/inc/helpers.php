@@ -2,6 +2,43 @@
 if (!defined('ABSPATH')) { exit; }
 
 /**
+ * The landing page's in-page sections, used for the anchor navigation.
+ * Each section template renders a matching id (#services, #who, etc).
+ */
+function ocd_nav_items() {
+    return [
+        '#services' => 'Services',
+        '#who'      => 'Who We Help',
+        '#how'      => 'How We Work',
+        '#about'    => 'About',
+        '#contact'  => 'Contact',
+    ];
+}
+
+/**
+ * Primary navigation. Uses an assigned WordPress menu if there is one,
+ * otherwise falls back to the landing page's section anchors so the nav
+ * always works on this single-page site.
+ */
+function ocd_primary_nav($menu_class) {
+    if (has_nav_menu('primary')) {
+        wp_nav_menu([
+            'theme_location' => 'primary',
+            'container'      => false,
+            'menu_class'     => $menu_class,
+            'depth'          => 1,
+            'fallback_cb'    => false,
+        ]);
+        return;
+    }
+    echo '<ul class="' . esc_attr($menu_class) . '">';
+    foreach (ocd_nav_items() as $href => $label) {
+        printf('<li><a href="%s">%s</a></li>', esc_url($href), esc_html($label));
+    }
+    echo '</ul>';
+}
+
+/**
  * Render an ACF Link field as an anchor.
  */
 function ocd_render_link($link, $class = 'btn btn--dark') {

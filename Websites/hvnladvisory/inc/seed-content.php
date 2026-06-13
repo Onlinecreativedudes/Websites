@@ -493,8 +493,6 @@ function ocd_seed_site_options($images) {
     update_field('site_logo', ocd_seed_img($images, 'logo', 'HVNL — Heavy Vehicle National Law Advisory'), 'option');
     update_field('announcement_text', 'Independent Chain of Responsibility & HVNL compliance advisory — servicing businesses across Australia', 'option');
     update_field('nav_cta_label', 'Book an Exposure Review', 'option');
-    update_field('show_loader', 1, 'option');
-    update_field('loader_tagline', 'Chain of Responsibility Compliance', 'option');
 
     update_field('business_phone', '+61386186954', 'option');
     update_field('display_phone', '(03) 8618 6954', 'option');

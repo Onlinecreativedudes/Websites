@@ -35,23 +35,6 @@
             "instructions": "Defaults to \"Book an Exposure Review\" when empty. Links to the hero form."
         },
         {
-            "key": "field_hvnl_opt_show_loader",
-            "label": "Show intro loader animation",
-            "name": "show_loader",
-            "type": "true_false",
-            "instructions": "The brief branded splash screen on the landing page.",
-            "ui": 1,
-            "default_value": 1
-        },
-        {
-            "key": "field_hvnl_opt_loader_tagline",
-            "label": "Loader tagline",
-            "name": "loader_tagline",
-            "type": "text",
-            "instructions": "Small uppercase line under the loader logo.",
-            "default_value": "Chain of Responsibility Compliance"
-        },
-        {
             "key": "field_hvnl_opt_tab_contact",
             "label": "Contact Details",
             "name": "",

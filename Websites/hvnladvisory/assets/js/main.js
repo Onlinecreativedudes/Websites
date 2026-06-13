@@ -3,21 +3,6 @@
 
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    /* Loader splash — slides away once assets are in (1.7s fallback). */
-    const initLoader = () => {
-        const loader = document.querySelector('[data-loader]');
-        if (!loader) return;
-        let done = false;
-        const finish = () => {
-            if (done) return;
-            done = true;
-            loader.classList.add('is-done');
-            setTimeout(() => { loader.style.display = 'none'; }, 1000);
-        };
-        setTimeout(finish, 1700);
-        window.addEventListener('load', () => setTimeout(finish, 400));
-    };
-
     /* Mobile nav panel */
     const initMobileNav = () => {
         const toggle = document.querySelector('[data-nav-toggle]');
@@ -82,7 +67,6 @@
     };
 
     document.addEventListener('DOMContentLoaded', () => {
-        initLoader();
         initMobileNav();
         initScrollEffects();
     });

@@ -178,4 +178,108 @@ if ($slug === 'solar-naturally' && !$done('gf-created') && class_exists('GFAPI')
     echo "Gravity Forms not active yet; assessment form will be created once it is\n";
 }
 
+/* 3b. HVNL Advisory forms: the hero "Exposure Review" form and the "Contact"
+ * form. Both redirect to /thank-you/, BCC hello@onlinecreativedudes.com, use
+ * the international phone format, and have the honeypot on. Their IDs are
+ * written into the Home page's ACF fields (hero_form_id, contact_form_id). */
+if ($slug === 'hvnladvisory' && !$done('gf-created') && class_exists('GFAPI')) {
+    $ty_url = home_url('/thank-you/');
+    $bcc    = 'hello@onlinecreativedudes.com';
+
+    // A GF notification to the admin, BCC'd to OCD, reply-to the form's email.
+    $notification = function ($email_field_id) use ($bcc) {
+        $nid = uniqid();
+        return [$nid => [
+            'id'        => $nid,
+            'isActive'  => true,
+            'name'      => 'Admin Notification',
+            'event'     => 'form_submission',
+            'to'        => '{admin_email}',
+            'toType'    => 'email',
+            'bcc'       => $bcc,
+            'replyTo'   => '{' . $email_field_id . '}',
+            'subject'   => 'New enquiry from {form_title}',
+            'message'   => '{all_fields}',
+        ]];
+    };
+    // Page-redirect confirmation to the Thank You page.
+    $confirmation = function () use ($ty_url) {
+        $cid = uniqid();
+        return [$cid => [
+            'id'        => $cid,
+            'name'      => 'Default Confirmation',
+            'isDefault' => true,
+            'type'      => 'redirect',
+            'url'       => $ty_url,
+        ]];
+    };
+
+    $exposure = [
+        'title'          => 'Exposure Review',
+        'description'    => '',
+        'enableHoneypot' => true,
+        'button'         => ['type' => 'text', 'text' => 'Book My Exposure Review'],
+        'fields'         => [
+            ['id' => 1, 'type' => 'text',  'label' => 'Name',    'isRequired' => true],
+            ['id' => 2, 'type' => 'text',  'label' => 'Company'],
+            ['id' => 3, 'type' => 'email', 'label' => 'Email',   'isRequired' => true],
+            ['id' => 4, 'type' => 'phone', 'label' => 'Phone',   'phoneFormat' => 'international'],
+            ['id' => 5, 'type' => 'select','label' => 'Your role in the supply chain', 'isRequired' => true,
+                'choices' => [
+                    ['text' => 'We send or receive freight',                'value' => 'We send or receive freight'],
+                    ['text' => 'We provide transport or logistics services','value' => 'We provide transport or logistics services'],
+                    ['text' => 'We operate heavy vehicles',                 'value' => 'We operate heavy vehicles'],
+                    ['text' => 'Not sure',                                  'value' => 'Not sure'],
+                ]],
+        ],
+        'notifications'  => $notification(3),
+        'confirmations'  => $confirmation(),
+    ];
+
+    $contact = [
+        'title'          => 'Contact',
+        'description'    => '',
+        'enableHoneypot' => true,
+        'button'         => ['type' => 'text', 'text' => 'Send Message'],
+        'fields'         => [
+            ['id' => 1, 'type' => 'text',     'label' => 'Name',    'isRequired' => true],
+            ['id' => 2, 'type' => 'text',     'label' => 'Company'],
+            ['id' => 3, 'type' => 'email',    'label' => 'Email',   'isRequired' => true],
+            ['id' => 4, 'type' => 'phone',    'label' => 'Phone',   'phoneFormat' => 'international'],
+            ['id' => 5, 'type' => 'textarea', 'label' => 'Message'],
+        ],
+        'notifications'  => $notification(3),
+        'confirmations'  => $confirmation(),
+    ];
+
+    $exposure_id = GFAPI::add_form($exposure);
+    $contact_id  = GFAPI::add_form($contact);
+
+    if (!is_wp_error($exposure_id) && !is_wp_error($contact_id) && function_exists('update_field')) {
+        // Front page = the seeded landing page; that is where the form-ID fields live.
+        $page_id = (int) get_option('page_on_front');
+        if (!$page_id) {
+            $found = get_posts([
+                'post_type' => 'page', 'post_status' => 'any', 'numberposts' => 1,
+                'meta_key' => '_wp_page_template', 'meta_value' => 'page-templates/landing-page.php',
+            ]);
+            $page_id = $found ? $found[0]->ID : 0;
+        }
+        if ($page_id) {
+            update_field('hero_form_id', $exposure_id, $page_id);
+            update_field('contact_form_id', $contact_id, $page_id);
+            echo "gravity forms created (exposure $exposure_id, contact $contact_id) and wired into page $page_id\n";
+            $mark('gf-created');
+        } else {
+            echo "forms created but landing page not found yet; will wire next deploy\n";
+        }
+    } else {
+        $err = is_wp_error($exposure_id) ? $exposure_id->get_error_message()
+             : (is_wp_error($contact_id) ? $contact_id->get_error_message() : 'ACF update_field unavailable');
+        echo "hvnladvisory form setup failed: $err\n";
+    }
+} elseif ($slug === 'hvnladvisory' && !$done('gf-created')) {
+    echo "Gravity Forms not active yet; HVNL forms will be created once it is\n";
+}
+
 echo "provisioning pass complete\n";
