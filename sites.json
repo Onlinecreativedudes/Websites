@@ -2,7 +2,7 @@
   "defaults": {
     "host": "syn01bd.syd6.hostyourservices.net",
     "user": "devonlin",
-    "port": 22
+    "port": 2683
   },
   "sites": {
     "dentelectrical": {
