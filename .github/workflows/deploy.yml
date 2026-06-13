@@ -77,6 +77,9 @@ jobs:
     needs: detect
     if: needs.detect.outputs.clients != '[]'
     runs-on: ubuntu-latest
+    # The deploy secrets (DEPLOY_SSH_KEY, DEPLOY_SSH_KEY_PASSPHRASE) live in
+    # this GitHub environment; the job must run in its context to read them.
+    environment: Configure Logins
     strategy:
       fail-fast: false
       matrix:
