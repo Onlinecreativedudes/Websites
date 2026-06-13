@@ -1,0 +1,122 @@
+{
+  "page": {
+    "hero_eyebrow": "Bunbury · Solar & Battery Packages",
+    "hero_headline": "Stop renting power<br>from the grid.<br><em>Start owning it.</em>",
+    "hero_lede": "Solar and battery systems installed by our own in-house team across Bunbury and the South West, in as little as four to six weeks. Backed by 18 years of experience and full system warranties.",
+    "hero_primary_cta_label": "Get my free assessment",
+    "hero_secondary_cta_label": "See our work",
+    "hero_trust_left": "Trusted by <b>65,000+</b> Australian families",
+    "hero_trust_right": "<b>Since 2008</b> · in-house certified crew",
+
+    "whynow_eyebrow": "Why move now",
+    "whynow_heading": "Why Bunbury homeowners<br>are moving now",
+    "whynow_lede": "Electricity prices keep rising, the current government incentive won't last, and winter heating is about to send your bill skyrocketing. Take advantage of the rebate before power prices climb again from 1 July.",
+    "whynow_cta_label": "Lock in the rebate",
+    "whynow_points": [
+      { "icon": "users", "title": "In-house, certified crew", "text": "Every install is done by our own electricians. No subcontractors handed your job." },
+      { "icon": "home", "title": "Over 65,000 families served", "text": "Eighteen years and tens of thousands of Australian homes powered properly." },
+      { "icon": "timer", "title": "Fast turnaround", "text": "Most systems designed, approved and switched on in four to six weeks." },
+      { "icon": "shield-check", "title": "Full system warranties", "text": "Panels, battery and workmanship — covered and put in writing." }
+    ],
+
+    "assess_eyebrow": "Free assessment",
+    "assess_heading": "Get your solar<br>& battery assessment",
+    "assess_lede": "No pressure. No obligation. Just an honest look at what your roof could save you.",
+    "assess_points": [
+      { "icon": "ruler", "text": "Sized to your real usage, a tailormade solution" },
+      { "icon": "file-check", "text": "Production figures in writing before you sign" },
+      { "icon": "hard-hat", "text": "No subcontractors" }
+    ],
+    "assess_seal_caption": "Western Australia's<br><b>No.1 rated</b> solar retailer, 2025",
+
+    "whychoose_eyebrow": "Why Solar Naturally",
+    "whychoose_heading": "Why Australia chooses<br>Solar Naturally",
+    "whychoose_lede": "Plenty of companies will sell you the cheapest panels on the market and disappear once the job's done. That's not us. We install systems built to perform for years, installed by our fully qualified in-house team of electricians, and we put our production figures in writing so you know exactly what you're getting before you sign anything.",
+    "whychoose_script_line": "We're locally based, and we've built our name on doing the job properly the first time, every time.",
+    "whychoose_cta_label": "Talk to our team",
+    "whychoose_stat_number": "18",
+    "whychoose_stat_label": "years doing the job<br>properly, first time",
+
+    "services_eyebrow": "What we install",
+    "services_heading": "Complete home and business energy systems",
+    "services_lede": "Designed and fitted by one accountable team — from the first panel to the final commissioning.",
+    "services_cards": [
+      { "icon": "sun", "title": "Solar Panel Systems", "text": "Properly sized systems matched to your roof and your real usage, not a one-size template.", "image_style": "scene" },
+      { "icon": "battery-charging", "title": "Home Battery Storage", "text": "Store the power you generate and use it at night, when grid rates hit hardest.", "image_style": "product" },
+      { "icon": "plug-zap", "title": "Solar + Battery Packages", "text": "A complete setup that cuts your reliance on the grid from day one.", "image_style": "scene" },
+      { "icon": "refresh-cw", "title": "Inverter Upgrades", "text": "Failing or ageing inverter? We replace it and bring your system back to full output.", "image_style": "product" },
+      { "icon": "activity", "title": "System Health Checks", "text": "Older system underperforming? We find out why and tell you straight.", "image_style": "scene" },
+      { "icon": "car-front", "title": "EV Charger Add-On", "text": "Charging an electric vehicle? We can add a charger to your install.", "image_style": "scene" }
+    ],
+
+    "ctaband_eyebrow": "The cost of waiting",
+    "ctaband_heading": "Every delay means the<br>grid keeps the money.",
+    "ctaband_text": "Your roof could be paying you back instead. Find out what it's worth in one free assessment.",
+    "ctaband_cta_label": "Get my free assessment",
+
+    "gallery_eyebrow": "Our work",
+    "gallery_heading": "Real systems, across<br>the South West",
+    "gallery_lede": "From architectural homes to working agribusiness and industry — installed and signed off by our own team.",
+    "gallery_projects": [
+      { "category": "Residential", "title": "Coombe Residence", "meta": "Architectural home · solar + battery", "big": true },
+      { "category": "Residential", "title": "West Coast", "meta": "Two-storey rooftop array", "big": false },
+      { "category": "Commercial", "title": "Patane Produce", "meta": "Agribusiness · large-scale rooftop", "big": true },
+      { "category": "Residential", "title": "River Way", "meta": "Modern family home", "big": false },
+      { "category": "Residential", "title": "Swan", "meta": "Premium residence", "big": false },
+      { "category": "Commercial", "title": "Tyrecycle", "meta": "Industrial facility · full-roof system", "big": false },
+      { "category": "Commercial", "title": "South West Growers", "meta": "Rural sheds · commercial solar", "big": true }
+    ],
+
+    "reviews_eyebrow": "What our customers say",
+    "reviews_heading": "Straight talk, honest<br>systems, real savings",
+    "reviews_rating_line": "<b>4.9</b> / 5 average · verified Google reviews",
+    "reviews_items": [
+      { "name": "Mark T.", "location": "Australind, WA", "text": "From quote to switch-on the whole thing was painless. Their own crew did the install, no subbies, and the production numbers they promised are exactly what we are seeing on the app." },
+      { "name": "Sandra & Paul", "location": "Eaton, WA", "text": "We were nervous about the cost. They sized a system to our actual usage instead of overselling us. Bill has gone from $390 a month to under $60. Wish we had done it years ago." },
+      { "name": "Dimitri K.", "location": "Dalyellup, WA", "text": "Honest from the first phone call. They told us our old inverter was worth replacing rather than a whole new system. That kind of straight talk is why we trusted them." },
+      { "name": "Rebecca H.", "location": "Bunbury, WA", "text": "Battery was installed in a day, tidy work, everything labelled and explained. We run the house off stored solar through the evening now. Genuinely impressed." },
+      { "name": "The Nguyen family", "location": "Capel, WA", "text": "Four to six weeks they said, and they delivered. Local team, answered every question, and followed up after to make sure it was all running right." }
+    ],
+
+    "healthcheck_eyebrow": "System health check",
+    "healthcheck_heading": "Old system costing you<br>more than it saves?",
+    "healthcheck_lede": "Ageing panels and failing inverters quietly bleed money. You keep paying rising grid prices while a system that should be working for you sits at half output. We assess what you've got, tell you straight whether it's worth upgrading or replacing, and size the right solution for your home.",
+    "healthcheck_cta_label": "Book a free health check",
+    "healthcheck_caption": "Upgrade or replace — we tell you straight",
+
+    "finalcta_eyebrow": "Let's start",
+    "finalcta_heading": "Ready to take control of your<br>power bills before the next rebate cut?",
+    "finalcta_lede": "Tell us a bit about your home and we'll come back with a fast, suitable and honest assessment. Solar and battery systems for Bunbury and the South West, installed properly by a local team.",
+    "finalcta_points": [
+      { "text": "Local in-house team" },
+      { "text": "Honest, written figures" }
+    ]
+  },
+  "options": {
+    "urgency_bar_text": "No.1 Solar Retailer in Western Australia — SunWiz Award 2025",
+    "phone_number": "1300 168 138",
+    "email_address": "sales@solarnaturally.com.au",
+    "service_area": "Bunbury & the South West, WA",
+    "header_nav_links": [
+      { "label": "Packages", "anchor": "#services" },
+      { "label": "Battery", "anchor": "#services" },
+      { "label": "Projects", "anchor": "#gallery" },
+      { "label": "Why Us", "anchor": "#why" },
+      { "label": "Reviews", "anchor": "#reviews" }
+    ],
+    "footer_links": [
+      { "label": "Packages", "anchor": "#services" },
+      { "label": "Battery storage", "anchor": "#services" },
+      { "label": "Projects", "anchor": "#gallery" },
+      { "label": "Why us", "anchor": "#why" },
+      { "label": "Reviews", "anchor": "#reviews" },
+      { "label": "Free assessment", "anchor": "#assess" }
+    ],
+    "footer_tagline": "\"Working toward a cleaner future.\"",
+    "footer_cta_heading": "Beat the 1 July price rise",
+    "footer_cta_text": "Lock in the current rebate before it's gone.",
+    "modal_eyebrow": "Free assessment",
+    "modal_heading": "Get your solar & battery assessment",
+    "modal_text": "No pressure, no obligation — an honest look at what your roof could save you."
+  }
+}

@@ -8,19 +8,29 @@ if (!defined('ABSPATH')) { exit; }
 $eyebrow  = get_field('gallery_eyebrow') ?: 'Our work';
 $heading  = get_field('gallery_heading') ?: "Real systems, across<br>the South West";
 $lede     = get_field('gallery_lede') ?: 'From architectural homes to working agribusiness and industry — installed and signed off by our own team.';
-$projects = get_field('gallery_projects');
+$defaults = [
+    ['category' => 'Residential', 'title' => 'Coombe Residence',   'meta' => 'Architectural home · solar + battery',   'big' => true],
+    ['category' => 'Residential', 'title' => 'West Coast',         'meta' => 'Two-storey rooftop array',               'big' => false],
+    ['category' => 'Commercial',  'title' => 'Patane Produce',     'meta' => 'Agribusiness · large-scale rooftop',     'big' => true],
+    ['category' => 'Residential', 'title' => 'River Way',          'meta' => 'Modern family home',                     'big' => false],
+    ['category' => 'Residential', 'title' => 'Swan',               'meta' => 'Premium residence',                      'big' => false],
+    ['category' => 'Commercial',  'title' => 'Tyrecycle',          'meta' => 'Industrial facility · full-roof system', 'big' => false],
+    ['category' => 'Commercial',  'title' => 'South West Growers', 'meta' => 'Rural sheds · commercial solar',         'big' => true],
+];
 
-if (!$projects) {
-    $projects = [
-        ['default_img' => 'gallery/residential/coombe.jpg',        'category' => 'Residential', 'title' => 'Coombe Residence',   'meta' => 'Architectural home · solar + battery', 'big' => true],
-        ['default_img' => 'gallery/residential/west-coast.jpg',    'category' => 'Residential', 'title' => 'West Coast',         'meta' => 'Two-storey rooftop array',             'big' => false],
-        ['default_img' => 'gallery/commercial/patane-produce.jpg', 'category' => 'Commercial',  'title' => 'Patane Produce',     'meta' => 'Agribusiness · large-scale rooftop',   'big' => true],
-        ['default_img' => 'gallery/residential/riverway.jpg',      'category' => 'Residential', 'title' => 'River Way',          'meta' => 'Modern family home',                   'big' => false],
-        ['default_img' => 'gallery/residential/swan.jpg',          'category' => 'Residential', 'title' => 'Swan',               'meta' => 'Premium residence',                    'big' => false],
-        ['default_img' => 'gallery/commercial/tyrecycle.jpg',      'category' => 'Commercial',  'title' => 'Tyrecycle',          'meta' => 'Industrial facility · full-roof system', 'big' => false],
-        ['default_img' => 'gallery/commercial/rural-sheds.jpg',    'category' => 'Commercial',  'title' => 'South West Growers', 'meta' => 'Rural sheds · commercial solar',       'big' => true],
-    ];
-}
+// Positional fallback photos, used for any project without its own ACF image
+// so the gallery keeps its imagery even once the text fields are populated.
+$fallback_imgs = [
+    'gallery/residential/coombe.jpg',
+    'gallery/residential/west-coast.jpg',
+    'gallery/commercial/patane-produce.jpg',
+    'gallery/residential/riverway.jpg',
+    'gallery/residential/swan.jpg',
+    'gallery/commercial/tyrecycle.jpg',
+    'gallery/commercial/rural-sheds.jpg',
+];
+
+$projects = get_field('gallery_projects') ?: $defaults;
 
 $counts = ['All' => count($projects), 'Residential' => 0, 'Commercial' => 0];
 foreach ($projects as $p) {
@@ -57,8 +67,10 @@ foreach ($projects as $p) {
                     <button class="gcard<?php echo $big ? ' gcard--big' : ''; ?>" data-cat="<?php echo esc_attr($cat); ?>" data-rise="fade" style="animation-delay:<?php echo (int) (($i % 3) * 90); ?>ms">
                         <?php if (!empty($p['image']['ID'])) : ?>
                             <?php echo sn_render_image($p['image'], 'sn-gallery', '', ['loading' => 'lazy']); ?>
-                        <?php else : ?>
-                            <img src="<?php echo esc_url(SN_THEME_URI . '/assets/img/' . $p['default_img']); ?>" alt="<?php echo esc_attr($title); ?>" loading="lazy" width="1200" height="900">
+                        <?php else :
+                            $rel = $p['default_img'] ?? $fallback_imgs[$i % count($fallback_imgs)];
+                        ?>
+                            <img src="<?php echo esc_url(SN_THEME_URI . '/assets/img/' . $rel); ?>" alt="<?php echo esc_attr($title); ?>" loading="lazy" width="1200" height="900">
                         <?php endif; ?>
                         <span class="gcard__scrim"></span>
                         <span class="gcard__meta">

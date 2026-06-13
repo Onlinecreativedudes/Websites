@@ -311,4 +311,47 @@ if ($slug === 'hvnladvisory' && !$done('gf-created') && class_exists('GFAPI')) {
     echo "Gravity Forms not active yet; HVNL forms will be created once it is\n";
 }
 
+/* 4. Seed ACF fields with the theme's default content (once), so the editing
+      screen mirrors the front end instead of showing empty fields. The theme
+      ships a seed.json with "page" and "options" sections; values are written
+      with update_field so repeaters and all field types populate correctly.
+      Runs once per site (marker), then never overrides the client's edits. */
+if (!$done('seeded')) {
+    if (!function_exists('update_field')) {
+        echo "ACF not loaded yet; seed deferred to next deploy\n";
+    } else {
+        $seed_file = dirname($wp_load) . "/wp-content/themes/$slug/seed.json";
+        if (!is_file($seed_file)) {
+            echo "no seed.json for $slug; skipping seed\n";
+        } else {
+            $seed = json_decode(file_get_contents($seed_file), true);
+
+            $page_id = (int) get_option('page_on_front');
+            if (!$page_id) {
+                $found = get_posts([
+                    'post_type' => 'page', 'post_status' => 'any', 'numberposts' => 1,
+                    'meta_key' => '_wp_page_template', 'meta_value' => 'page-templates/landing-page.php',
+                ]);
+                $page_id = $found ? $found[0]->ID : 0;
+            }
+
+            $n = 0;
+            if ($page_id && !empty($seed['page'])) {
+                foreach ($seed['page'] as $name => $value) {
+                    update_field($name, $value, $page_id);
+                    $n++;
+                }
+            }
+            if (!empty($seed['options'])) {
+                foreach ($seed['options'] as $name => $value) {
+                    update_field($name, $value, 'option');
+                    $n++;
+                }
+            }
+            echo "seeded $n ACF fields from seed.json\n";
+            $mark('seeded');
+        }
+    }
+}
+
 echo "provisioning pass complete\n";
