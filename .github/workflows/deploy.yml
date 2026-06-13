@@ -112,27 +112,41 @@ jobs:
 
       - name: Test cPanel API connection
         env:
+          CPANEL_API_TOKEN: ${{ secrets.CPANEL_API_TOKEN }}
           CPANEL_PASSWORD: ${{ secrets.CPANEL_PASSWORD }}
         run: |
-          if [ -z "$CPANEL_PASSWORD" ]; then
-            echo "::error::Secret CPANEL_PASSWORD is missing — add the cPanel account password as a repository secret."
+          if [ -n "$CPANEL_API_TOKEN" ]; then
+            echo "CP_AUTH_MODE=token" >> "$GITHUB_ENV"
+          elif [ -n "$CPANEL_PASSWORD" ]; then
+            echo "CP_AUTH_MODE=password" >> "$GITHUB_ENV"
+          else
+            echo "::error::Add either CPANEL_API_TOKEN (preferred; cPanel > Security > Manage API Tokens) or CPANEL_PASSWORD as a repository secret."
             exit 1
           fi
           # uapi: Fileman::list_files on the home dir proves auth + reachability
-          resp=$(curl -sS -m 30 -u "$CP_USER:$CPANEL_PASSWORD" \
-            "https://$CP_HOST:2083/execute/Fileman/list_files?dir=%2Fhome%2F$CP_USER" || true)
-          if ! echo "$resp" | jq -e '.status == 1' >/dev/null 2>&1; then
-            echo "::error::cPanel API auth/connection failed: $(echo "$resp" | head -c 300)"
+          if [ -n "$CPANEL_API_TOKEN" ]; then
+            resp=$(curl -sS -m 30 -w '\nHTTP_CODE:%{http_code}' -H "Authorization: cpanel $CP_USER:$CPANEL_API_TOKEN" \
+              "https://$CP_HOST:2083/execute/Fileman/list_files?dir=%2Fhome%2F$CP_USER" || true)
+          else
+            resp=$(curl -sS -m 30 -w '\nHTTP_CODE:%{http_code}' -u "$CP_USER:$CPANEL_PASSWORD" \
+              "https://$CP_HOST:2083/execute/Fileman/list_files?dir=%2Fhome%2F$CP_USER" || true)
+          fi
+          code=$(echo "$resp" | grep -o 'HTTP_CODE:[0-9]*' | cut -d: -f2)
+          body=$(echo "$resp" | sed 's/HTTP_CODE:[0-9]*$//')
+          if ! echo "$body" | jq -e '.status == 1' >/dev/null 2>&1; then
+            echo "::error::cPanel API auth/connection failed (HTTP $code, auth mode: $CP_AUTH_MODE). If using the password and it is correct, the host likely requires an API token: cPanel > Security > Manage API Tokens."
             exit 1
           fi
-          echo "cPanel API connection OK"
+          echo "cPanel API connection OK (auth mode: $CP_AUTH_MODE)"
 
       - name: Confirm WordPress install exists at the target path
         env:
+          CPANEL_API_TOKEN: ${{ secrets.CPANEL_API_TOKEN }}
           CPANEL_PASSWORD: ${{ secrets.CPANEL_PASSWORD }}
         run: |
+          if [ "$CP_AUTH_MODE" = "token" ]; then auth=(-H "Authorization: cpanel $CP_USER:$CPANEL_API_TOKEN"); else auth=(-u "$CP_USER:$CPANEL_PASSWORD"); fi
           enc_path=$(python3 -c "import urllib.parse;print(urllib.parse.quote('/home/$CP_USER/$WP_PATH'))")
-          resp=$(curl -sS -m 30 -u "$CP_USER:$CPANEL_PASSWORD" \
+          resp=$(curl -sS -m 30 "${auth[@]}" \
             "https://$CP_HOST:2083/execute/Fileman/list_files?dir=$enc_path")
           if ! echo "$resp" | jq -e '.data[]? | select(.file == "wp-config.php")' >/dev/null; then
             echo "::error::No wp-config.php found in $WP_PATH — is WordPress installed there?"
@@ -156,10 +170,15 @@ jobs:
       - name: Upload and extract theme via cPanel API
         if: ${{ !(github.event_name == 'workflow_dispatch' && inputs.connection_test) }}
         env:
+          CPANEL_API_TOKEN: ${{ secrets.CPANEL_API_TOKEN }}
           CPANEL_PASSWORD: ${{ secrets.CPANEL_PASSWORD }}
         run: |
           api() {
-            curl -sS -m 60 -u "$CP_USER:$CPANEL_PASSWORD" "$@"
+            if [ "$CP_AUTH_MODE" = "token" ]; then
+              curl -sS -m 60 -H "Authorization: cpanel $CP_USER:$CPANEL_API_TOKEN" "$@"
+            else
+              curl -sS -m 60 -u "$CP_USER:$CPANEL_PASSWORD" "$@"
+            fi
           }
           enc() { python3 -c "import urllib.parse,sys;print(urllib.parse.quote(sys.argv[1]))" "$1"; }
 
@@ -189,10 +208,12 @@ jobs:
       - name: Verify deployed files and site response (evidence)
         if: ${{ !(github.event_name == 'workflow_dispatch' && inputs.connection_test) }}
         env:
+          CPANEL_API_TOKEN: ${{ secrets.CPANEL_API_TOKEN }}
           CPANEL_PASSWORD: ${{ secrets.CPANEL_PASSWORD }}
         run: |
+          if [ "$CP_AUTH_MODE" = "token" ]; then auth=(-H "Authorization: cpanel $CP_USER:$CPANEL_API_TOKEN"); else auth=(-u "$CP_USER:$CPANEL_PASSWORD"); fi
           enc_path=$(python3 -c "import urllib.parse;print(urllib.parse.quote('/home/$CP_USER/$WP_PATH/wp-content/themes/$THEME_SLUG'))")
-          resp=$(curl -sS -m 30 -u "$CP_USER:$CPANEL_PASSWORD" \
+          resp=$(curl -sS -m 30 "${auth[@]}" \
             "https://$CP_HOST:2083/execute/Fileman/list_files?dir=$enc_path")
           echo "Theme directory listing:"
           echo "$resp" | jq -r '.data[]?.file' | sort
