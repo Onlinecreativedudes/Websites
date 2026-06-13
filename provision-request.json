@@ -1,5 +1,5 @@
 {
   "client": "hvnladvisory",
   "site_title": "HVNL Advisory",
-  "note": "Diagnostic run — report where DEPLOY_SSH_KEY is actually stored"
+  "note": "Use Logins environment secrets — verify SSH and report WordPress version"
 }

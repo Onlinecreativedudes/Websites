@@ -53,6 +53,8 @@ concurrency:
 jobs:
   provision:
     runs-on: ubuntu-latest
+    # DEPLOY_SSH_KEY lives in the "Logins" environment, not in repo secrets
+    environment: Logins
     steps:
       - name: Checkout
         uses: actions/checkout@v4

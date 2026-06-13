@@ -79,6 +79,8 @@ jobs:
     needs: detect
     if: needs.detect.outputs.clients != '[]'
     runs-on: ubuntu-latest
+    # DEPLOY_SSH_KEY lives in the "Logins" environment, not in repo secrets
+    environment: Logins
     strategy:
       fail-fast: false
       matrix:
