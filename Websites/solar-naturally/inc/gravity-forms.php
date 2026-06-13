@@ -2,6 +2,19 @@
 if (!defined('ABSPATH')) { exit; }
 
 /**
+ * The theme fully styles its forms (see the .af / .af-wrap rules in main.css),
+ * so switch off Gravity Forms' own front-end CSS — otherwise its default theme
+ * and 2.5+ "orbital" framework paint the fields as boxes, run their own grid,
+ * and colour the submit button, fighting and overriding the design styling.
+ * This is the missing piece that made the form refuse to match the design.
+ */
+add_filter('pre_option_rg_gforms_disable_css', '__return_true');
+add_filter('gform_disable_form_theme_css', '__return_true');
+add_filter('gform_default_styles', function ($styles) {
+    return ''; // no preset GF style tokens; the theme provides all styling
+});
+
+/**
  * Render a Gravity Form by ID retrieved from an ACF field.
  * Returns silently if Gravity Forms isn't active or no ID is set.
  *
