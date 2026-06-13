@@ -841,17 +841,29 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:800;line-height:1.02;letter-s
 .af-wrap .ginput_container textarea::placeholder { color: #b3ac9e; }
 .af-wrap .ginput_container select { cursor: pointer; padding-right: 40px; }
 /* Yes/No segmented control — matches the design's .seg / .seg__btn exactly. */
+/* The radio field renders as a <fieldset> with a <legend>; with GF's CSS off
+   that shows bare browser chrome, so reset it and treat the legend as the
+   field label. */
+.af-wrap fieldset.gfield { border: 0; margin: 0; padding: 0; min-width: 0; }
+.af-wrap fieldset.gfield > legend.gfield_label { float: none; width: auto; padding: 0; margin: 0 0 7px; }
+
+/* Segmented Yes/No. The real radio input is overlaid, full-size and clickable,
+   over each button so a click always registers (no reliance on label[for]). */
 .af-wrap .gfield_radio { display: flex; gap: 0; border: 1px solid var(--ink); width: fit-content; }
+.af-wrap .gfield_radio .gchoice { position: relative; display: flex; margin: 0; }
+.af-wrap .gfield_radio input {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  margin: 0; opacity: 0; cursor: pointer; z-index: 2;
+}
 .af-wrap .gfield_radio label {
-  display: block; text-align: center; padding: 13px 30px; cursor: pointer;
+  position: relative; z-index: 1; display: block; text-align: center;
+  padding: 13px 30px; cursor: pointer;
   font-family: var(--display); font-weight: 700; font-size: 13px;
   letter-spacing: .06em; text-transform: uppercase; color: var(--ink);
   background: #fff; border-right: 1px solid var(--ink); transition: background .15s, color .15s;
 }
 .af-wrap .gfield_radio .gchoice:last-child label { border-right: none; }
-.af-wrap .gfield_radio input { position: absolute; opacity: 0; }
-.af-wrap .gfield_radio input:checked + label,
-.af-wrap .gfield_radio .gchoice:has(input:checked) label { background: var(--green); color: #fff; }
+.af-wrap .gfield_radio input:checked + label { background: var(--green); color: #fff; }
 .af-wrap .gform_footer { margin: 0; padding: 0; }
 .af-wrap .gform_button {
   margin-top: 8px; width: 100%; justify-content: center; font-size: 15px; padding: 18px;
