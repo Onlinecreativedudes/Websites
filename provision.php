@@ -113,6 +113,29 @@ if (wp_get_theme($slug)->exists()) {
     echo "theme '$slug' not found in themes dir yet; will retry next deploy\n";
 }
 
+/* 1b. Seed the theme's content into ACF. The theme's own seeder normally runs
+       on theme activation, but activating from the CLI here does not fire that
+       hook (the new theme's functions are not loaded in this process), which
+       left the ACF fields empty while the front end showed the design copy.
+       Run it directly so the final copy lands in ACF on deploy. Guarded by the
+       theme's own "seed done" option so it runs once and never overwrites
+       later manual edits. */
+if (function_exists('update_field') && get_stylesheet() === $slug) {
+    $theme_dir = get_theme_root() . '/' . $slug;
+    $seed_file = "$theme_dir/inc/seed-content.php";
+    if (is_file($seed_file)) {
+        if (!defined('OCD_THEME_PATH'))    define('OCD_THEME_PATH', $theme_dir);
+        if (!defined('OCD_THEME_URI'))     define('OCD_THEME_URI', get_theme_root_uri() . '/' . $slug);
+        if (!defined('OCD_THEME_VERSION')) define('OCD_THEME_VERSION', '1.0.0');
+        if (!function_exists('ocd_seed_run')) { require_once $seed_file; }
+        if (function_exists('ocd_seed_run') && defined('OCD_SEED_OPTION') && !get_option(OCD_SEED_OPTION)) {
+            echo "seeding content into ACF: " . ocd_seed_run() . "\n";
+        } else {
+            echo "content already seeded; leaving ACF as-is\n";
+        }
+    }
+}
+
 /* 2. Landing page + static front page (once). */
 if (!$done('page-created')) {
     $template = 'page-templates/landing-page.php';
