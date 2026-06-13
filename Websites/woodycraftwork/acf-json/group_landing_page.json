@@ -2233,8 +2233,8 @@
                     "key": "field_wc_contact_lines__link",
                     "label": "Link (optional)",
                     "name": "link",
-                    "type": "url",
-                    "instructions": "Wraps the value in a link, eg tel: or mailto:.",
+                    "type": "text",
+                    "instructions": "Wraps the value in a link, eg tel:0432175483, mailto:hello@example.com or https://...",
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
@@ -2243,7 +2243,10 @@
                         "id": ""
                     },
                     "default_value": "",
-                    "placeholder": ""
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
                 }
             ]
         },
@@ -2449,5 +2452,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1749782400
+    "modified": 1749801600
 }
