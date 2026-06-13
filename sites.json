@@ -8,6 +8,10 @@
     "dentelectrical": {
       "wp_path": "public_html/dentelectrical",
       "theme_slug": "dentelectrical"
+    },
+    "solar-naturally": {
+      "wp_path": "public_html/solar",
+      "theme_slug": "solar-naturally"
     }
   }
 }
