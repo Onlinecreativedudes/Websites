@@ -36,36 +36,38 @@ $legacy = fn($n) => ($slug === 'solar-naturally') ? "$home/.solar-$n" : null;
 $done   = fn($n) => file_exists($marker($n)) || ($legacy($n) && file_exists($legacy($n)));
 $mark   = fn($n) => @touch($marker($n));
 
-/* 0a. Install plugins from the server-side cache (~/plugin-cache/*.zip), if any.
+/* 0a. Install plugins from the server-side cache (~/plugin-cache or ~/plugins).
        Drop the plugin zips into that folder once (cPanel File Manager); they get
        installed here and on every future site, without putting licensed paid
-       binaries in the public repo. Only installs a plugin not already present. */
+       binaries in the public repo.
+
+       Only the plugins the build standard requires are installed. WP Rocket,
+       migration plugins, and anything else left in the folder are deliberately
+       ignored (WP Rocket is the reviewer's to install and configure). */
+$allowed = ['advanced-custom-fields-pro', 'advanced-custom-fields', 'gravityforms', 'wordpress-seo'];
 $cache = null;
 foreach (["$home/plugin-cache", "$home/plugins"] as $cand) {
     if (is_dir($cand)) { $cache = $cand; break; }
 }
 if ($cache) {
     foreach (glob("$cache/*.zip") as $zip) {
-        if (class_exists('ZipArchive')) {
-            $za = new ZipArchive;
-            if ($za->open($zip) === true) {
-                $first = $za->getNameIndex(0);
-                $top   = $first ? explode('/', $first)[0] : '';
-                if ($top && is_dir(WP_PLUGIN_DIR . "/$top")) {
-                    echo "plugin already installed, skipping: $top\n";
-                } else {
-                    $za->extractTo(WP_PLUGIN_DIR);
-                    echo "installed plugin from cache: " . basename($zip) . "\n";
-                }
-                $za->close();
-                continue;
-            }
+        if (!class_exists('ZipArchive')) {
+            echo "cannot read zips (no ZipArchive); skipping " . basename($zip) . "\n";
+            continue;
         }
-        // Fallback when PHP lacks the zip extension.
-        exec('unzip -oq ' . escapeshellarg($zip) . ' -d ' . escapeshellarg(WP_PLUGIN_DIR), $o, $rc);
-        echo $rc === 0
-            ? "installed plugin from cache (unzip): " . basename($zip) . "\n"
-            : "could not install " . basename($zip) . " (no zip support)\n";
+        $za = new ZipArchive;
+        if ($za->open($zip) !== true) { echo "could not open " . basename($zip) . "\n"; continue; }
+        $first = $za->getNameIndex(0);
+        $top   = $first ? explode('/', $first)[0] : '';
+        if (!in_array($top, $allowed, true)) {
+            echo "ignoring non-build plugin: " . ($top ?: basename($zip)) . "\n";
+        } elseif (is_dir(WP_PLUGIN_DIR . "/$top")) {
+            echo "plugin already installed, skipping: $top\n";
+        } else {
+            $za->extractTo(WP_PLUGIN_DIR);
+            echo "installed plugin from cache: $top\n";
+        }
+        $za->close();
     }
 }
 
@@ -95,16 +97,20 @@ foreach ($plugins as $label => $file) {
         : "plugin activated: $label\n";
 }
 
-/* 1. Activate the theme (once). */
-if (!$done('theme-activated')) {
-    $theme = wp_get_theme($slug);
-    if ($theme->exists()) {
+/* 1. Activate the theme. Idempotent and not marker-guarded: activate whenever
+      the theme is present and not already the active one, so it reliably comes
+      on once the files land (and recovers if an earlier deploy used a wrong
+      path). Once active, get_stylesheet() matches and this is a no-op. */
+if (wp_get_theme($slug)->exists()) {
+    if (get_stylesheet() !== $slug) {
         switch_theme($slug);
         echo "theme activated: $slug\n";
         $mark('theme-activated');
     } else {
-        echo "theme '$slug' not found yet; will retry next deploy\n";
+        echo "theme already active: $slug\n";
     }
+} else {
+    echo "theme '$slug' not found in themes dir yet; will retry next deploy\n";
 }
 
 /* 2. Landing page + static front page (once). */
