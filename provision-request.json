@@ -1,5 +1,5 @@
 {
   "client": "hvnladvisory",
   "site_title": "HVNL Advisory",
-  "note": "Use Logins environment secrets — verify SSH and report WordPress version"
+  "note": "Verbose SSH connectivity diagnostics"
 }
