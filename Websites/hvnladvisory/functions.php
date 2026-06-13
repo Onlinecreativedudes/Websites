@@ -1,7 +1,7 @@
 <?php
 if (!defined('ABSPATH')) { exit; }
 
-define('OCD_THEME_VERSION', '1.0.6');
+define('OCD_THEME_VERSION', '1.0.7');
 define('OCD_THEME_PATH', get_template_directory());
 define('OCD_THEME_URI', get_template_directory_uri());
 
