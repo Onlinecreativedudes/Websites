@@ -5,15 +5,37 @@
         {
             "key": "field_hvnl_tab_hero",
             "label": "Hero",
-            "name": "",
+            "name": "tab_hero",
             "type": "tab",
-            "placement": "top"
+            "placement": "top",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "endpoint": 0
         },
         {
             "key": "field_hvnl_hero_kicker",
             "label": "Kicker (small uppercase label)",
             "name": "hero_kicker",
-            "type": "text"
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         },
         {
             "key": "field_hvnl_hero_headline",
@@ -22,14 +44,36 @@
             "type": "textarea",
             "instructions": "To italicise a word in the gold serif style, wrap it like: <span class=\"accent\">liability</span>.",
             "rows": 2,
-            "new_lines": ""
+            "new_lines": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": ""
         },
         {
             "key": "field_hvnl_hero_intro",
             "label": "Intro paragraph",
             "name": "hero_intro",
             "type": "textarea",
-            "rows": 4
+            "rows": 4,
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "new_lines": ""
         },
         {
             "key": "field_hvnl_hero_ticks",
@@ -44,9 +88,33 @@
                     "name": "label",
                     "type": "text",
                     "key": "field_hvnl_hero_ticks_label",
-                    "parent_repeater": "field_hvnl_hero_ticks"
+                    "parent_repeater": "field_hvnl_hero_ticks",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
                 }
-            ]
+            ],
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "",
+            "min": 0,
+            "max": 0
         },
         {
             "key": "field_hvnl_hero_image",
@@ -55,7 +123,22 @@
             "type": "image",
             "return_format": "array",
             "preview_size": "medium",
-            "library": "all"
+            "library": "all",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": ""
         },
         {
             "key": "field_hvnl_hero_mobile_image",
@@ -65,47 +148,134 @@
             "instructions": "Shown above the headline on mobile only (Google Ads conversion optimisation). Hidden on desktop.",
             "return_format": "array",
             "preview_size": "medium",
-            "library": "all"
+            "library": "all",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": ""
         },
         {
             "key": "field_hvnl_hero_form_eyebrow",
             "label": "Form eyebrow",
             "name": "hero_form_eyebrow",
             "type": "text",
-            "instructions": "The italic serif line above the form heading, e.g. \"No cost \u00b7 no obligation\"."
+            "instructions": "The italic serif line above the form heading, e.g. \"No cost \u00b7 no obligation\".",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         },
         {
             "key": "field_hvnl_hero_form_heading",
             "label": "Form heading",
             "name": "hero_form_heading",
-            "type": "text"
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         },
         {
             "key": "field_hvnl_hero_form_subheading",
             "label": "Form subheading",
             "name": "hero_form_subheading",
-            "type": "text"
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         },
         {
             "key": "field_hvnl_hero_form_id",
             "label": "Gravity Form ID",
             "name": "hero_form_id",
             "type": "number",
-            "instructions": "ID of the Exposure Review form (Forms list shows each form's ID)."
+            "instructions": "ID of the Exposure Review form (Forms list shows each form's ID).",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "min": "",
+            "max": "",
+            "step": ""
         },
         {
             "key": "field_hvnl_hero_form_footnote",
             "label": "Form footnote",
             "name": "hero_form_footnote",
             "type": "textarea",
-            "rows": 2
+            "rows": 2,
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "new_lines": ""
         },
         {
             "key": "field_hvnl_tab_trust_bar",
             "label": "Trust Bar",
-            "name": "",
+            "name": "tab_trust_bar",
             "type": "tab",
-            "placement": "top"
+            "placement": "top",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "endpoint": 0
         },
         {
             "key": "field_hvnl_trust_bar_items",
@@ -121,22 +291,67 @@
                     "name": "label",
                     "type": "text",
                     "key": "field_hvnl_trust_bar_items_label",
-                    "parent_repeater": "field_hvnl_trust_bar_items"
+                    "parent_repeater": "field_hvnl_trust_bar_items",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
                 }
-            ]
+            ],
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "",
+            "min": 0,
+            "max": 0
         },
         {
             "key": "field_hvnl_tab_blind_spots",
             "label": "Blind Spots",
-            "name": "",
+            "name": "tab_blind_spots",
             "type": "tab",
-            "placement": "top"
+            "placement": "top",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "endpoint": 0
         },
         {
             "key": "field_hvnl_bs_kicker",
             "label": "Kicker",
             "name": "bs_kicker",
-            "type": "text"
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         },
         {
             "key": "field_hvnl_bs_headline",
@@ -145,14 +360,36 @@
             "type": "textarea",
             "instructions": "To italicise a word in the gold serif style, wrap it like: <span class=\"accent\">liability</span>.",
             "rows": 2,
-            "new_lines": ""
+            "new_lines": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": ""
         },
         {
             "key": "field_hvnl_bs_intro",
             "label": "Intro paragraph",
             "name": "bs_intro",
             "type": "textarea",
-            "rows": 3
+            "rows": 3,
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "new_lines": ""
         },
         {
             "key": "field_hvnl_bs_cards",
@@ -168,7 +405,20 @@
                     "name": "title",
                     "type": "text",
                     "key": "field_hvnl_bs_cards_title",
-                    "parent_repeater": "field_hvnl_bs_cards"
+                    "parent_repeater": "field_hvnl_bs_cards",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
                 },
                 {
                     "label": "Text",
@@ -176,35 +426,104 @@
                     "type": "textarea",
                     "rows": 3,
                     "key": "field_hvnl_bs_cards_text",
-                    "parent_repeater": "field_hvnl_bs_cards"
+                    "parent_repeater": "field_hvnl_bs_cards",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "maxlength": "",
+                    "new_lines": ""
                 }
-            ]
+            ],
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "",
+            "min": 0,
+            "max": 0
         },
         {
             "key": "field_hvnl_bs_cta_text",
             "label": "Closing statement",
             "name": "bs_cta_text",
             "type": "textarea",
-            "rows": 2
+            "rows": 2,
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "new_lines": ""
         },
         {
             "key": "field_hvnl_bs_cta_label",
             "label": "CTA button label",
             "name": "bs_cta_label",
-            "type": "text"
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         },
         {
             "key": "field_hvnl_tab_services",
             "label": "Services",
-            "name": "",
+            "name": "tab_services",
             "type": "tab",
-            "placement": "top"
+            "placement": "top",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "endpoint": 0
         },
         {
             "key": "field_hvnl_services_kicker",
             "label": "Kicker",
             "name": "services_kicker",
-            "type": "text"
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         },
         {
             "key": "field_hvnl_services_headline",
@@ -213,14 +532,36 @@
             "type": "textarea",
             "instructions": "To italicise a word in the gold serif style, wrap it like: <span class=\"accent\">liability</span>.",
             "rows": 2,
-            "new_lines": ""
+            "new_lines": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": ""
         },
         {
             "key": "field_hvnl_services_intro",
             "label": "Intro paragraph",
             "name": "services_intro",
             "type": "textarea",
-            "rows": 3
+            "rows": 3,
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "new_lines": ""
         },
         {
             "key": "field_hvnl_services_items",
@@ -236,7 +577,20 @@
                     "name": "title",
                     "type": "text",
                     "key": "field_hvnl_services_items_title",
-                    "parent_repeater": "field_hvnl_services_items"
+                    "parent_repeater": "field_hvnl_services_items",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
                 },
                 {
                     "label": "Text",
@@ -244,16 +598,47 @@
                     "type": "textarea",
                     "rows": 3,
                     "key": "field_hvnl_services_items_text",
-                    "parent_repeater": "field_hvnl_services_items"
+                    "parent_repeater": "field_hvnl_services_items",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "maxlength": "",
+                    "new_lines": ""
                 }
-            ]
+            ],
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "",
+            "min": 0,
+            "max": 0
         },
         {
             "key": "field_hvnl_tab_offer",
             "label": "Offer Banner",
-            "name": "",
+            "name": "tab_offer_banner",
             "type": "tab",
-            "placement": "top"
+            "placement": "top",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "endpoint": 0
         },
         {
             "key": "field_hvnl_offer_image",
@@ -262,13 +647,41 @@
             "type": "image",
             "return_format": "array",
             "preview_size": "medium",
-            "library": "all"
+            "library": "all",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": ""
         },
         {
             "key": "field_hvnl_offer_kicker",
             "label": "Kicker",
             "name": "offer_kicker",
-            "type": "text"
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         },
         {
             "key": "field_hvnl_offer_headline",
@@ -277,14 +690,36 @@
             "type": "textarea",
             "instructions": "To italicise a word in the gold serif style, wrap it like: <span class=\"accent\">liability</span>.",
             "rows": 2,
-            "new_lines": ""
+            "new_lines": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": ""
         },
         {
             "key": "field_hvnl_offer_intro",
             "label": "Intro paragraph",
             "name": "offer_intro",
             "type": "textarea",
-            "rows": 3
+            "rows": 3,
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "new_lines": ""
         },
         {
             "key": "field_hvnl_offer_ticks",
@@ -299,35 +734,106 @@
                     "name": "label",
                     "type": "text",
                     "key": "field_hvnl_offer_ticks_label",
-                    "parent_repeater": "field_hvnl_offer_ticks"
+                    "parent_repeater": "field_hvnl_offer_ticks",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
                 }
-            ]
+            ],
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "",
+            "min": 0,
+            "max": 0
         },
         {
             "key": "field_hvnl_offer_cta_label",
             "label": "CTA button label",
             "name": "offer_cta_label",
-            "type": "text"
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         },
         {
             "key": "field_hvnl_offer_microcopy",
             "label": "Microcopy under button",
             "name": "offer_microcopy",
             "type": "text",
-            "instructions": "e.g. \"No cost. No obligation. No sales pitch.\""
+            "instructions": "e.g. \"No cost. No obligation. No sales pitch.\"",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         },
         {
             "key": "field_hvnl_tab_about",
             "label": "About",
-            "name": "",
+            "name": "tab_about",
             "type": "tab",
-            "placement": "top"
+            "placement": "top",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "endpoint": 0
         },
         {
             "key": "field_hvnl_about_kicker",
             "label": "Kicker",
             "name": "about_kicker",
-            "type": "text"
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         },
         {
             "key": "field_hvnl_about_headline",
@@ -336,7 +842,17 @@
             "type": "textarea",
             "instructions": "To italicise a word in the gold serif style, wrap it like: <span class=\"accent\">liability</span>.",
             "rows": 2,
-            "new_lines": ""
+            "new_lines": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": ""
         },
         {
             "key": "field_hvnl_about_body",
@@ -346,7 +862,16 @@
             "instructions": "Two short paragraphs in the design.",
             "tabs": "visual",
             "toolbar": "basic",
-            "media_upload": 0
+            "media_upload": 0,
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "delay": 0
         },
         {
             "key": "field_hvnl_about_credentials",
@@ -361,15 +886,52 @@
                     "name": "label",
                     "type": "text",
                     "key": "field_hvnl_about_credentials_label",
-                    "parent_repeater": "field_hvnl_about_credentials"
+                    "parent_repeater": "field_hvnl_about_credentials",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
                 }
-            ]
+            ],
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "",
+            "min": 0,
+            "max": 0
         },
         {
             "key": "field_hvnl_about_cta_label",
             "label": "CTA button label",
             "name": "about_cta_label",
-            "type": "text"
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         },
         {
             "key": "field_hvnl_about_portrait",
@@ -378,40 +940,114 @@
             "type": "image",
             "return_format": "array",
             "preview_size": "medium",
-            "library": "all"
+            "library": "all",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": ""
         },
         {
             "key": "field_hvnl_about_stat_number",
             "label": "Stat number",
             "name": "about_stat_number",
             "type": "text",
-            "instructions": "e.g. \"19+\" \u2014 shown in the dark floating badge."
+            "instructions": "e.g. \"19+\" \u2014 shown in the dark floating badge.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         },
         {
             "key": "field_hvnl_about_stat_label",
             "label": "Stat label",
             "name": "about_stat_label",
             "type": "text",
-            "instructions": "e.g. \"Years experience\"."
+            "instructions": "e.g. \"Years experience\".",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         },
         {
             "key": "field_hvnl_about_badge_name",
             "label": "Name badge \u2014 name",
             "name": "about_badge_name",
-            "type": "text"
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         },
         {
             "key": "field_hvnl_about_badge_role",
             "label": "Name badge \u2014 role",
             "name": "about_badge_role",
-            "type": "text"
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         },
         {
             "key": "field_hvnl_tab_team",
             "label": "Team",
-            "name": "",
+            "name": "tab_team",
             "type": "tab",
-            "placement": "top"
+            "placement": "top",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "endpoint": 0
         },
         {
             "key": "field_hvnl_team_headline",
@@ -420,7 +1056,17 @@
             "type": "textarea",
             "instructions": "To italicise a word in the gold serif style, wrap it like: <span class=\"accent\">liability</span>.",
             "rows": 2,
-            "new_lines": ""
+            "new_lines": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": ""
         },
         {
             "key": "field_hvnl_team_members",
@@ -438,36 +1084,110 @@
                     "preview_size": "medium",
                     "library": "all",
                     "key": "field_hvnl_team_members_photo",
-                    "parent_repeater": "field_hvnl_team_members"
+                    "parent_repeater": "field_hvnl_team_members",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": ""
                 },
                 {
                     "label": "Name",
                     "name": "name",
                     "type": "text",
                     "key": "field_hvnl_team_members_name",
-                    "parent_repeater": "field_hvnl_team_members"
+                    "parent_repeater": "field_hvnl_team_members",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
                 },
                 {
                     "label": "Role",
                     "name": "role",
                     "type": "text",
                     "key": "field_hvnl_team_members_role",
-                    "parent_repeater": "field_hvnl_team_members"
+                    "parent_repeater": "field_hvnl_team_members",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
                 }
-            ]
+            ],
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "",
+            "min": 0,
+            "max": 0
         },
         {
             "key": "field_hvnl_tab_why",
             "label": "Why Us",
-            "name": "",
+            "name": "tab_why_us",
             "type": "tab",
-            "placement": "top"
+            "placement": "top",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "endpoint": 0
         },
         {
             "key": "field_hvnl_why_kicker",
             "label": "Kicker",
             "name": "why_kicker",
-            "type": "text"
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         },
         {
             "key": "field_hvnl_why_headline",
@@ -476,7 +1196,17 @@
             "type": "textarea",
             "instructions": "To italicise a word in the gold serif style, wrap it like: <span class=\"accent\">liability</span>.",
             "rows": 2,
-            "new_lines": ""
+            "new_lines": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": ""
         },
         {
             "key": "field_hvnl_why_cards",
@@ -491,7 +1221,20 @@
                     "name": "title",
                     "type": "text",
                     "key": "field_hvnl_why_cards_title",
-                    "parent_repeater": "field_hvnl_why_cards"
+                    "parent_repeater": "field_hvnl_why_cards",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
                 },
                 {
                     "label": "Text",
@@ -499,16 +1242,48 @@
                     "type": "textarea",
                     "rows": 3,
                     "key": "field_hvnl_why_cards_text",
-                    "parent_repeater": "field_hvnl_why_cards"
+                    "parent_repeater": "field_hvnl_why_cards",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "maxlength": "",
+                    "new_lines": ""
                 }
-            ]
+            ],
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "",
+            "min": 0,
+            "max": 0
         },
         {
             "key": "field_hvnl_tab_industries",
             "label": "Industries",
-            "name": "",
+            "name": "tab_industries",
             "type": "tab",
-            "placement": "top"
+            "placement": "top",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "endpoint": 0
         },
         {
             "key": "field_hvnl_ind_image",
@@ -517,13 +1292,41 @@
             "type": "image",
             "return_format": "array",
             "preview_size": "medium",
-            "library": "all"
+            "library": "all",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": ""
         },
         {
             "key": "field_hvnl_ind_kicker",
             "label": "Kicker",
             "name": "ind_kicker",
-            "type": "text"
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         },
         {
             "key": "field_hvnl_ind_headline",
@@ -532,14 +1335,36 @@
             "type": "textarea",
             "instructions": "To italicise a word in the gold serif style, wrap it like: <span class=\"accent\">liability</span>.",
             "rows": 2,
-            "new_lines": ""
+            "new_lines": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": ""
         },
         {
             "key": "field_hvnl_ind_intro",
             "label": "Intro paragraph",
             "name": "ind_intro",
             "type": "textarea",
-            "rows": 3
+            "rows": 3,
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "new_lines": ""
         },
         {
             "key": "field_hvnl_ind_cards",
@@ -555,7 +1380,20 @@
                     "name": "title",
                     "type": "text",
                     "key": "field_hvnl_ind_cards_title",
-                    "parent_repeater": "field_hvnl_ind_cards"
+                    "parent_repeater": "field_hvnl_ind_cards",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
                 },
                 {
                     "label": "Text",
@@ -563,22 +1401,66 @@
                     "type": "textarea",
                     "rows": 3,
                     "key": "field_hvnl_ind_cards_text",
-                    "parent_repeater": "field_hvnl_ind_cards"
+                    "parent_repeater": "field_hvnl_ind_cards",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "maxlength": "",
+                    "new_lines": ""
                 }
-            ]
+            ],
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "",
+            "min": 0,
+            "max": 0
         },
         {
             "key": "field_hvnl_tab_who",
             "label": "Who We Help",
-            "name": "",
+            "name": "tab_who_we_help",
             "type": "tab",
-            "placement": "top"
+            "placement": "top",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "endpoint": 0
         },
         {
             "key": "field_hvnl_who_kicker",
             "label": "Kicker",
             "name": "who_kicker",
-            "type": "text"
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         },
         {
             "key": "field_hvnl_who_headline",
@@ -587,7 +1469,17 @@
             "type": "textarea",
             "instructions": "To italicise a word in the gold serif style, wrap it like: <span class=\"accent\">liability</span>.",
             "rows": 2,
-            "new_lines": ""
+            "new_lines": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": ""
         },
         {
             "key": "field_hvnl_who_rows",
@@ -604,14 +1496,39 @@
                     "type": "text",
                     "instructions": "e.g. \"Freight owners\".",
                     "key": "field_hvnl_who_rows_label",
-                    "parent_repeater": "field_hvnl_who_rows"
+                    "parent_repeater": "field_hvnl_who_rows",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
                 },
                 {
                     "label": "Heading",
                     "name": "heading",
                     "type": "text",
                     "key": "field_hvnl_who_rows_heading",
-                    "parent_repeater": "field_hvnl_who_rows"
+                    "parent_repeater": "field_hvnl_who_rows",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
                 },
                 {
                     "label": "Paragraph",
@@ -619,7 +1536,19 @@
                     "type": "textarea",
                     "rows": 4,
                     "key": "field_hvnl_who_rows_text",
-                    "parent_repeater": "field_hvnl_who_rows"
+                    "parent_repeater": "field_hvnl_who_rows",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "maxlength": "",
+                    "new_lines": ""
                 },
                 {
                     "label": "Tick points",
@@ -633,18 +1562,55 @@
                             "label": "Point",
                             "name": "label",
                             "type": "text",
-                            "parent_repeater": "field_hvnl_who_rows_ticks"
+                            "parent_repeater": "field_hvnl_who_rows_ticks",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "maxlength": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": ""
                         }
                     ],
                     "key": "field_hvnl_who_rows_ticks",
-                    "parent_repeater": "field_hvnl_who_rows"
+                    "parent_repeater": "field_hvnl_who_rows",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "collapsed": "",
+                    "min": 0,
+                    "max": 0
                 },
                 {
                     "label": "CTA button label",
                     "name": "cta_label",
                     "type": "text",
                     "key": "field_hvnl_who_rows_cta_label",
-                    "parent_repeater": "field_hvnl_who_rows"
+                    "parent_repeater": "field_hvnl_who_rows",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
                 },
                 {
                     "label": "Photo",
@@ -654,22 +1620,69 @@
                     "preview_size": "medium",
                     "library": "all",
                     "key": "field_hvnl_who_rows_image",
-                    "parent_repeater": "field_hvnl_who_rows"
+                    "parent_repeater": "field_hvnl_who_rows",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": ""
                 }
-            ]
+            ],
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "",
+            "min": 0,
+            "max": 0
         },
         {
             "key": "field_hvnl_tab_how",
             "label": "How We Work",
-            "name": "",
+            "name": "tab_how_we_work",
             "type": "tab",
-            "placement": "top"
+            "placement": "top",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "endpoint": 0
         },
         {
             "key": "field_hvnl_how_kicker",
             "label": "Kicker",
             "name": "how_kicker",
-            "type": "text"
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         },
         {
             "key": "field_hvnl_how_headline",
@@ -678,14 +1691,36 @@
             "type": "textarea",
             "instructions": "To italicise a word in the gold serif style, wrap it like: <span class=\"accent\">liability</span>.",
             "rows": 2,
-            "new_lines": ""
+            "new_lines": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": ""
         },
         {
             "key": "field_hvnl_how_intro",
             "label": "Intro paragraph",
             "name": "how_intro",
             "type": "textarea",
-            "rows": 3
+            "rows": 3,
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "new_lines": ""
         },
         {
             "key": "field_hvnl_how_steps",
@@ -701,7 +1736,20 @@
                     "name": "title",
                     "type": "text",
                     "key": "field_hvnl_how_steps_title",
-                    "parent_repeater": "field_hvnl_how_steps"
+                    "parent_repeater": "field_hvnl_how_steps",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
                 },
                 {
                     "label": "Text",
@@ -709,16 +1757,47 @@
                     "type": "textarea",
                     "rows": 3,
                     "key": "field_hvnl_how_steps_text",
-                    "parent_repeater": "field_hvnl_how_steps"
+                    "parent_repeater": "field_hvnl_how_steps",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "maxlength": "",
+                    "new_lines": ""
                 }
-            ]
+            ],
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "",
+            "min": 0,
+            "max": 0
         },
         {
             "key": "field_hvnl_tab_evidence",
             "label": "Evidence Banner",
-            "name": "",
+            "name": "tab_evidence_banner",
             "type": "tab",
-            "placement": "top"
+            "placement": "top",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "endpoint": 0
         },
         {
             "key": "field_hvnl_evidence_headline",
@@ -727,33 +1806,90 @@
             "type": "textarea",
             "instructions": "To italicise a word in the gold serif style, wrap it like: <span class=\"accent\">liability</span>.",
             "rows": 2,
-            "new_lines": ""
+            "new_lines": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": ""
         },
         {
             "key": "field_hvnl_evidence_text",
             "label": "Supporting line",
             "name": "evidence_text",
             "type": "textarea",
-            "rows": 2
+            "rows": 2,
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "new_lines": ""
         },
         {
             "key": "field_hvnl_evidence_cta_label",
             "label": "CTA button label",
             "name": "evidence_cta_label",
-            "type": "text"
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         },
         {
             "key": "field_hvnl_tab_reviews",
             "label": "Reviews",
-            "name": "",
+            "name": "tab_reviews",
             "type": "tab",
-            "placement": "top"
+            "placement": "top",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "endpoint": 0
         },
         {
             "key": "field_hvnl_reviews_kicker",
             "label": "Kicker",
             "name": "reviews_kicker",
-            "type": "text"
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         },
         {
             "key": "field_hvnl_reviews_headline",
@@ -762,7 +1898,17 @@
             "type": "textarea",
             "instructions": "To italicise a word in the gold serif style, wrap it like: <span class=\"accent\">liability</span>.",
             "rows": 2,
-            "new_lines": ""
+            "new_lines": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": ""
         },
         {
             "key": "field_hvnl_reviews_items",
@@ -778,30 +1924,88 @@
                     "type": "textarea",
                     "rows": 4,
                     "key": "field_hvnl_reviews_items_quote",
-                    "parent_repeater": "field_hvnl_reviews_items"
+                    "parent_repeater": "field_hvnl_reviews_items",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "maxlength": "",
+                    "new_lines": ""
                 },
                 {
                     "label": "Reviewer name",
                     "name": "name",
                     "type": "text",
                     "key": "field_hvnl_reviews_items_name",
-                    "parent_repeater": "field_hvnl_reviews_items"
+                    "parent_repeater": "field_hvnl_reviews_items",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
                 },
                 {
                     "label": "Business type",
                     "name": "business",
                     "type": "text",
                     "key": "field_hvnl_reviews_items_business",
-                    "parent_repeater": "field_hvnl_reviews_items"
+                    "parent_repeater": "field_hvnl_reviews_items",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": ""
                 }
-            ]
+            ],
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "",
+            "min": 0,
+            "max": 0
         },
         {
             "key": "field_hvnl_tab_final",
             "label": "Final CTA",
-            "name": "",
+            "name": "tab_final_cta",
             "type": "tab",
-            "placement": "top"
+            "placement": "top",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "endpoint": 0
         },
         {
             "key": "field_hvnl_final_image",
@@ -810,7 +2014,22 @@
             "type": "image",
             "return_format": "array",
             "preview_size": "medium",
-            "library": "all"
+            "library": "all",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": ""
         },
         {
             "key": "field_hvnl_final_headline",
@@ -819,33 +2038,90 @@
             "type": "textarea",
             "instructions": "To italicise a word in the gold serif style, wrap it like: <span class=\"accent\">liability</span>.",
             "rows": 2,
-            "new_lines": ""
+            "new_lines": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": ""
         },
         {
             "key": "field_hvnl_final_text",
             "label": "Supporting line",
             "name": "final_text",
             "type": "textarea",
-            "rows": 2
+            "rows": 2,
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "new_lines": ""
         },
         {
             "key": "field_hvnl_final_cta_label",
             "label": "CTA button label",
             "name": "final_cta_label",
-            "type": "text"
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         },
         {
             "key": "field_hvnl_tab_contact",
             "label": "Contact",
-            "name": "",
+            "name": "tab_contact",
             "type": "tab",
-            "placement": "top"
+            "placement": "top",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "endpoint": 0
         },
         {
             "key": "field_hvnl_contact_kicker",
             "label": "Kicker",
             "name": "contact_kicker",
-            "type": "text"
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         },
         {
             "key": "field_hvnl_contact_headline",
@@ -854,35 +2130,95 @@
             "type": "textarea",
             "instructions": "To italicise a word in the gold serif style, wrap it like: <span class=\"accent\">liability</span>.",
             "rows": 2,
-            "new_lines": ""
+            "new_lines": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": ""
         },
         {
             "key": "field_hvnl_contact_intro",
             "label": "Intro paragraph",
             "name": "contact_intro",
             "type": "textarea",
-            "rows": 3
+            "rows": 3,
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "new_lines": ""
         },
         {
             "key": "field_hvnl_contact_form_eyebrow",
             "label": "Form eyebrow",
             "name": "contact_form_eyebrow",
             "type": "text",
-            "instructions": "The large italic serif line, e.g. \"Send us a note\"."
+            "instructions": "The large italic serif line, e.g. \"Send us a note\".",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         },
         {
             "key": "field_hvnl_contact_form_subheading",
             "label": "Form subheading",
             "name": "contact_form_subheading",
             "type": "text",
-            "instructions": "e.g. \"We reply within one business day.\""
+            "instructions": "e.g. \"We reply within one business day.\"",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         },
         {
             "key": "field_hvnl_contact_form_id",
             "label": "Gravity Form ID",
             "name": "contact_form_id",
             "type": "number",
-            "instructions": "ID of the Contact form. Email, phone and coverage rows come from Site Options."
+            "instructions": "ID of the Contact form. Email, phone and coverage rows come from Site Options.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "min": "",
+            "max": "",
+            "step": ""
         }
     ],
     "location": [
@@ -911,5 +2247,6 @@
     ],
     "active": true,
     "description": "All content for the HVNL Advisory landing page, one tab per section in render order.",
-    "show_in_rest": 0
+    "show_in_rest": 0,
+    "modified": 1781335770
 }

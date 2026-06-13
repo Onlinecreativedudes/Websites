@@ -97,6 +97,32 @@ foreach ($plugins as $label => $file) {
         : "plugin activated: $label\n";
 }
 
+/* 0c. Keep build-excluded plugins deactivated. The build standard says WP
+      Rocket and migration plugins must not be active during the build (the
+      reviewer installs and configures WP Rocket separately). An active caching
+      plugin also breaks the layout here by stripping CSS via its optimisation,
+      so this both follows the standard and self-heals that breakage.
+      Idempotent: only acts when one is actually active. */
+$exclude = [
+    'wp-rocket/wp-rocket.php',
+    'all-in-one-wp-migration/all-in-one-wp-migration.php',
+    'all-in-one-wp-migration-unlimited-extension/all-in-one-wp-migration-unlimited-extension.php',
+];
+foreach ($exclude as $xfile) {
+    if (is_plugin_active($xfile)) {
+        deactivate_plugins($xfile);
+        echo "deactivated build-excluded plugin: $xfile\n";
+    }
+}
+// Drop any optimised/cached CSS WP Rocket may have left behind.
+if (function_exists('rocket_clean_domain')) {
+    rocket_clean_domain();
+    echo "cleared WP Rocket cache\n";
+}
+// Purge the LiteSpeed server cache so updated CSS/JS/templates are served
+// immediately to all visitors (logged-in users already bypass the page cache).
+do_action('litespeed_purge_all');
+
 /* 1. Activate the theme. Idempotent and not marker-guarded: activate whenever
       the theme is present and not already the active one, so it reliably comes
       on once the files land (and recovers if an earlier deploy used a wrong
@@ -549,6 +575,36 @@ if (!$done('seeded')) {
             $mark('seeded');
         }
     }
+}
+
+/* 5. Load ACF field groups from the theme's JSON, not a stale DB copy. If an
+      earlier deploy force-synced a group into the database, that DB copy can
+      flatten the section tabs (tab fields have empty names) and overrides the
+      clean JSON. Delete any DB-resident copy whose key matches a group the
+      theme ships as JSON, so ACF renders the JSON definition (tabs and field
+      widths intact). Field VALUES are post meta and are not affected. */
+if (!$done('acf-json-cleanup') && function_exists('acf_delete_field_group')) {
+    $json_dir = get_theme_root() . "/$slug/acf-json";
+    $cleared = 0;
+    if (is_dir($json_dir)) {
+        foreach (glob("$json_dir/*.json") as $jf) {
+            $g   = json_decode(file_get_contents($jf), true);
+            $key = $g['key'] ?? '';
+            if (!$key) { continue; }
+            $posts = get_posts([
+                'post_type'   => 'acf-field-group',
+                'post_status' => 'any',
+                'name'        => $key,
+                'numberposts' => -1,
+            ]);
+            foreach ($posts as $p) {
+                acf_delete_field_group($p->ID);
+                $cleared++;
+            }
+        }
+    }
+    echo "ACF: cleared $cleared stale DB group(s); rendering from theme JSON\n";
+    $mark('acf-json-cleanup');
 }
 
 echo "provisioning pass complete\n";
