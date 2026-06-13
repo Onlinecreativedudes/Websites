@@ -1,0 +1,22 @@
+---
+# cPanel Git Version Control deployment manifest.
+#
+# Why this exists: the dev host firewalls inbound SSH and the cPanel API from
+# GitHub's runners, so deploys cannot be pushed in from CI. Instead the SERVER
+# pulls this repo (outbound to github.com is allowed) and deploys locally —
+# triggered from cPanel > Git Version Control > Deploy, or from a cron job.
+#
+# cPanel runs these tasks as the cPanel user, from the repository clone dir,
+# so paths like Websites/<client>/ are relative to the repo root and
+# environment variables set with `export` persist across tasks.
+#
+# To onboard another client site, copy the three lines for a client and swap
+# the slug. Source of truth is the repo: the theme dir is mirrored from it.
+
+deployment:
+  tasks:
+    # --- hvnladvisory ---
+    - export HVNL="$HOME/public_html/hvnladvisory/wp-content/themes/hvnladvisory"
+    - /bin/mkdir -p "$HVNL"
+    - /bin/cp -R Websites/hvnladvisory/. "$HVNL/"
+    - /bin/echo "Deployed hvnladvisory theme to $HVNL"
