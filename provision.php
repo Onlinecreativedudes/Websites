@@ -95,16 +95,20 @@ foreach ($plugins as $label => $file) {
         : "plugin activated: $label\n";
 }
 
-/* 1. Activate the theme (once). */
-if (!$done('theme-activated')) {
-    $theme = wp_get_theme($slug);
-    if ($theme->exists()) {
+/* 1. Activate the theme. Idempotent and not marker-guarded: activate whenever
+      the theme is present and not already the active one, so it reliably comes
+      on once the files land (and recovers if an earlier deploy used a wrong
+      path). Once active, get_stylesheet() matches and this is a no-op. */
+if (wp_get_theme($slug)->exists()) {
+    if (get_stylesheet() !== $slug) {
         switch_theme($slug);
         echo "theme activated: $slug\n";
         $mark('theme-activated');
     } else {
-        echo "theme '$slug' not found yet; will retry next deploy\n";
+        echo "theme already active: $slug\n";
     }
+} else {
+    echo "theme '$slug' not found in themes dir yet; will retry next deploy\n";
 }
 
 /* 2. Landing page + static front page (once). */
