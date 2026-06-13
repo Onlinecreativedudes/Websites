@@ -99,10 +99,25 @@ jobs:
             echo "THEME_SLUG=$(jq -rn --argjson s "$site" --arg c "$c" '$s.theme_slug // $c')"
           } >> "$GITHUB_ENV"
 
+      - name: Diagnose credential visibility
+        env:
+          HAS_SECRET_KEY: ${{ secrets.DEPLOY_SSH_KEY != '' }}
+          HAS_VAR_KEY: ${{ vars.DEPLOY_SSH_KEY != '' }}
+          HAS_SECRET_PASS: ${{ secrets.DEPLOY_SSH_KEY_PASSPHRASE != '' }}
+          HAS_VAR_PASS: ${{ vars.DEPLOY_SSH_KEY_PASSPHRASE != '' }}
+        run: |
+          echo "Repository secret DEPLOY_SSH_KEY visible:   $HAS_SECRET_KEY"
+          echo "Repository variable DEPLOY_SSH_KEY visible: $HAS_VAR_KEY"
+          echo "Secret DEPLOY_SSH_KEY_PASSPHRASE visible:   $HAS_SECRET_PASS"
+          echo "Variable DEPLOY_SSH_KEY_PASSPHRASE visible: $HAS_VAR_PASS"
+          echo "Environments configured on this repo (secrets stored in an environment are NOT visible to this workflow):"
+          curl -s -H "Authorization: Bearer ${{ github.token }}" \
+            "https://api.github.com/repos/${{ github.repository }}/environments" | head -c 2000 || true
+
       - name: Configure SSH
         env:
-          SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
-          SSH_KEY_PASSPHRASE: ${{ secrets.DEPLOY_SSH_KEY_PASSPHRASE }}
+          SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY != '' && secrets.DEPLOY_SSH_KEY || vars.DEPLOY_SSH_KEY }}
+          SSH_KEY_PASSPHRASE: ${{ secrets.DEPLOY_SSH_KEY_PASSPHRASE != '' && secrets.DEPLOY_SSH_KEY_PASSPHRASE || vars.DEPLOY_SSH_KEY_PASSPHRASE }}
         run: |
           if [ -z "$SSH_KEY" ]; then
             echo "::error::Secret DEPLOY_SSH_KEY is missing — add the master private key once under Settings > Secrets and variables > Actions."

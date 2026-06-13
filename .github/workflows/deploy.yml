@@ -116,8 +116,10 @@ jobs:
 
       - name: Configure SSH
         env:
-          SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
-          SSH_KEY_PASSPHRASE: ${{ secrets.DEPLOY_SSH_KEY_PASSPHRASE }}
+          # Falls back to a repo *variable* of the same name so a key saved in
+          # the wrong tab still deploys (a warning to move it belongs in chat).
+          SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY != '' && secrets.DEPLOY_SSH_KEY || vars.DEPLOY_SSH_KEY }}
+          SSH_KEY_PASSPHRASE: ${{ secrets.DEPLOY_SSH_KEY_PASSPHRASE != '' && secrets.DEPLOY_SSH_KEY_PASSPHRASE || vars.DEPLOY_SSH_KEY_PASSPHRASE }}
         run: |
           if [ -z "$SSH_KEY" ]; then
             echo "::error::Secret DEPLOY_SSH_KEY is missing — add the master private key once under Settings > Secrets and variables > Actions."
